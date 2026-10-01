@@ -7,16 +7,16 @@ const pill =
 ---
 
 <nav id="site-nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" aria-label="Main">
-  <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-6 py-4 sm:px-9">
+  <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-3 px-5 py-4 sm:gap-6 sm:px-9">
     <div class="hidden items-center gap-2 lg:flex">
       {NAV_LEFT.map(({ href, label }) => <a href={href} class={pill}>{label}</a>)}
     </div>
-    <Logo />
+    <Logo compact />
     <div class="flex items-center gap-2">
       <a href={NAV_RIGHT.href} class={`hidden lg:inline-block ${pill}`}>{NAV_RIGHT.label}</a>
       <a
         href={NAV_CTA.href}
-        class="rounded-full bg-brass px-5 py-2 text-[14px] font-medium text-[#1B1408] transition hover:bg-brass2"
+        class="whitespace-nowrap rounded-full bg-brass px-4 py-2 text-[13px] font-medium text-[#1B1408] transition hover:bg-brass2 sm:px-5 sm:text-[14px]"
         >{NAV_CTA.label}</a
       >
     </div>

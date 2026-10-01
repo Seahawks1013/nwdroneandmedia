@@ -60,10 +60,9 @@ const kit = [
           <div class="aspect-[4/5] overflow-hidden rounded-[18px]">
             <img src={smiling.src} alt={smiling.alt} width={smiling.width} height={smiling.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${smiling.position}`} />
           </div>
-          <div class="rounded-[18px] bg-spruce p-6 text-fog">
-            <p class="font-display text-[1.6rem] font-semibold leading-tight">{SITE.city}, {SITE.region}</p>
-            <p class="mt-2 text-[13px] font-medium leading-relaxed text-fog/80">Founded here. Serving Portland, Vancouver WA and the surrounding areas.</p>
-          </div>
+          <p class="rounded-[18px] bg-spruce px-4 py-4 text-[13px] font-medium leading-snug text-fog sm:p-6 sm:text-[15px]">
+            Founded in <span class="whitespace-nowrap">{SITE.city}, {SITE.region}</span>
+          </p>
         </div>
       </div>
     </div>
