@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../consts';
+import { BOOKING_OPTIONS } from '../data/pricing';
 
 const field =
   'mt-1.5 w-full rounded-lg border border-inkk/15 bg-[#FCFCFA] px-3 py-3 text-[15px] text-inkk placeholder:text-inkk/30';
@@ -9,26 +10,21 @@ const label = 'block text-[13px] text-inkk/50';
 <!-- Static form: set SITE.formEndpoint in src/consts.ts to a Formspree/Basin/Netlify endpoint. -->
 <form action={SITE.formEndpoint} method="POST" class="rounded-[22px] bg-white p-7 ring-1 ring-inkk/10 sm:p-9">
   <div class="grid gap-4 sm:grid-cols-2">
-    <label class={label}>Your names<input name="names" type="text" placeholder="Hannah & Ben" required class={field} /></label>
-    <label class={label}>Wedding date<input name="date" type="date" class={field} /></label>
+    <label class={label}>Your name(s)<input name="names" type="text" placeholder="Jake & Kenna" autocomplete="name" required class={field} /></label>
+    <label class={label}>Date<input name="date" type="date" class={field} /></label>
     <label class={label}>Email<input name="email" type="email" placeholder="you@email.com" autocomplete="email" required class={field} /></label>
-    <label class={label}>Venue or town<input name="venue" type="text" placeholder="Hood River, OR" class={field} /></label>
+    <label class={label}>Venue or town<input name="venue" type="text" placeholder="Woodland, WA" class={field} /></label>
   </div>
   <label class={`mt-4 ${label}`}
-    >Package you're leaning toward<select name="package" class="mt-1.5 w-full rounded-lg border border-inkk/15 bg-[#FCFCFA] px-3 py-3 text-[15px] text-inkk">
-      <option>Not sure yet</option>
-      <option>Ceremony — $1,650</option>
-      <option>Full day — $3,200</option>
-      <option>Full day + feature — $4,750</option>
-      <option>Elopement or something else</option>
-      <option>Commercial / real estate / inspection</option>
+    >What are you booking?<select name="package" class="mt-1.5 w-full rounded-lg border border-inkk/15 bg-[#FCFCFA] px-3 py-3 text-[15px] text-inkk">
+      {BOOKING_OPTIONS.map((o) => <option>{o}</option>)}
     </select></label
   >
   <label class={`mt-4 ${label}`}
     >Anything we should know<textarea
       name="message"
       rows="3"
-      placeholder="Timeline, family coming from out of town, that one shot you want…"
+      placeholder="Timeline, number of guests, drone or vertical videos, that one shot you want…"
       class="mt-1.5 w-full resize-y rounded-lg border border-inkk/15 bg-[#FCFCFA] px-3 py-3 text-[15px] text-inkk"
     ></textarea></label
   >

@@ -1,0 +1,47 @@
+---
+// Click-to-play YouTube embed. Shows the thumbnail and a brass play button,
+// and loads the (privacy-enhanced) player only when clicked, so pages stay fast.
+export interface Props {
+  id: string;
+  title: string;
+  vertical?: boolean;
+  class?: string;
+}
+const { id, title, vertical = false, class: className = '' } = Astro.props;
+const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+---
+
+<div
+  class:list={['yt group relative overflow-hidden rounded-[14px] bg-spruce2', vertical ? 'aspect-[9/16]' : 'aspect-video', className]}
+  data-yt={id}
+  data-title={title}
+>
+  <button type="button" class="absolute inset-0 h-full w-full" aria-label={`Play video: ${title}`}>
+    <img src={thumb} alt="" loading="lazy" decoding="async" class="h-full w-full object-cover opacity-90 transition duration-300 group-hover:opacity-100" />
+    <span class="absolute inset-0 bg-gradient-to-t from-spruce/50 to-transparent"></span>
+    <span class="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-brass transition-transform duration-200 group-hover:scale-110">
+      <svg viewBox="0 0 10 12" class="h-3.5 w-3.5 fill-[#1B1408]" aria-hidden="true"><path d="M0 0l10 6-10 6z"></path></svg>
+    </span>
+  </button>
+  <noscript>
+    <a href={`https://www.youtube.com/watch?v=${id}`} class="absolute inset-0" aria-label={`Watch ${title} on YouTube`}></a>
+  </noscript>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-yt]').forEach((el) => {
+    el.querySelector('button')?.addEventListener(
+      'click',
+      () => {
+        const frame = document.createElement('iframe');
+        frame.src = `https://www.youtube-nocookie.com/embed/${el.dataset.yt}?autoplay=1&rel=0&modestbranding=1`;
+        frame.title = el.dataset.title ?? 'YouTube video';
+        frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        frame.allowFullscreen = true;
+        frame.className = 'absolute inset-0 h-full w-full';
+        el.replaceChildren(frame);
+      },
+      { once: true },
+    );
+  });
+</script>

@@ -10,8 +10,8 @@ const year = new Date().getFullYear();
       <div>
         <Logo />
         <p class="mt-5 max-w-[32ch] text-[14px] font-medium leading-relaxed text-fog/65">
-          Wedding films and licensed drone work out of {SITE.city}, {SITE.region}. Shooting Oregon, Washington, and anywhere
-          the road goes.
+          Wedding films, event videography and licensed drone footage by {SITE.owner}. Founded in {SITE.city}, {SITE.region} —
+          serving Portland, Vancouver WA and the surrounding areas.
         </p>
       </div>
       {
@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
             <ul class="mt-4 space-y-2 text-[14px]">
               {links.map(({ label, href }) => (
                 <li>
-                  <a href={href} class="text-fog/55 transition hover:text-fog">{label}</a>
+                  <a href={href} class="text-fog/55 transition hover:text-fog" rel={href.startsWith('http') ? 'noopener' : undefined}>{label}</a>
                 </li>
               ))}
             </ul>

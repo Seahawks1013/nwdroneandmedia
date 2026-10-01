@@ -7,24 +7,26 @@ import { SITE } from '../consts';
 
 const info = [
   ['Email', SITE.email, `mailto:${SITE.email}`],
-  ['Phone', SITE.phone, `tel:${SITE.phone.replace(/\D/g, '')}`],
-  ['Based in', `${SITE.city}, ${SITE.region}`],
+  ...(SITE.phone ? [['Phone', SITE.phone, `tel:${SITE.phone.replace(/\D/g, '')}`]] : []),
+  ['Founded in', `${SITE.city}, ${SITE.region}`],
   ['Service area', SITE.serviceArea],
+  ['YouTube', '@davidriley-u9u', SITE.social.youtube],
+  ['Instagram', '@nwdroneandmedia', SITE.social.instagram],
 ];
 ---
 
 <BaseLayout
   title="Contact & Booking"
-  description="Check your date for a wedding film or request a quote for aerial, real estate or inspection work in Walla Walla and across the Pacific Northwest."
+  description="Check your date for a wedding film, or request a quote for event videography or drone footage. NW Drone & Media is based in Woodland, WA and serves Portland and Vancouver."
 >
-  <PageHero eyebrow="Contact" title="Check your date" intro="Tell us when and where. You'll hear back within a day with availability and a full price — no call required first." />
+  <PageHero eyebrow="Contact" title="Check your date" intro="Tell us when and where. You'll hear back with availability and a price — no call required first." />
 
   <section id="book" class="bg-fog2 py-24">
     <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 md:grid-cols-2">
       <div>
         <SectionTitle lead="Say" rest="hello" />
         <p class="mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
-          Weddings, elopements, listings, job sites or brand work — send the basics and we'll come back with a plan.
+          Weddings, events, local businesses or drone work — send the basics and DJ will come back with availability and a price.
         </p>
         <dl class="mt-10 max-w-[420px] text-[15px]">
           {

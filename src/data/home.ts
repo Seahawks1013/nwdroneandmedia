@@ -1,93 +1,99 @@
-// Content for the home page, carried over verbatim from the original design.
-// `seed` picks the placeholder landscape; add `image: '/images/...'` and `alt`
-// to any item to show a real footage still instead.
+// Home page copy. `seed` picks a placeholder landscape; add `image` (a
+// "/images/..." path or URL) and `alt` to show a real still instead.
 type Slot = { seed: number; image?: string; alt?: string };
 
+const yt = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+
 export const STATS = [
-  ['60+', 'weddings filmed'],
-  ['Part 107', 'FAA licensed pilot'],
-  ['3 angles', 'on every ceremony'],
-  ['10 days', 'to your highlight film'],
+  ['Part 107', 'FAA licensed drone pilot'],
+  ['Woodland, WA', 'founded and based'],
+  ['PDX · Vancouver', 'and the surrounding areas'],
+  ['From $100', 'drone footage'],
 ];
 
-export const TAGS = ['Full-day coverage', 'Lav + board audio', 'Licensed drone', 'Two shooters', '4K'];
+export const TAGS = ['Weddings', 'Events', 'Local business', 'Licensed drone', 'Horizontal + vertical edits'];
 
 export const MODES = {
   films:
-    'Getting ready through the last dance. Three cameras at the ceremony, lav mics on the vows, a highlight film plus the whole thing uncut.',
+    'From the rehearsal to the last dance. Ceremony coverage, full-day packages, and add-ons for drone, rehearsal and interviews.',
+  events:
+    'Community events, socials and the local businesses behind them, with horizontal films and vertical cuts ready for social.',
   aerial:
-    'Part 107 licensed and insured. Venue establishing shots, the ceremony from above, and the drive-away — flown legally, including inside PDX airspace with authorization.',
+    'Part 107 licensed and insured. Venue establishing shots, the ceremony from above, and aerials of events and properties — flown legally.',
 };
 
 export const PILLARS = [
   {
     t: 'Licensed & insured',
-    d: 'FAA Part 107 certified pilot with $1M liability. Venues ask for it — we already have it.',
+    d: 'FAA Part 107 certified drone pilot. Venues and event organizers ask for it — we already have it.',
     icon: 'M12 2l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V5l7-3z',
   },
   {
-    t: 'Two shooters, three angles',
-    d: 'Nothing important happens off camera, and nothing important gets missed for a battery swap.',
+    t: 'Weddings, events & aerial',
+    d: 'One filmmaker for the ground and the air, so your day or event is covered from every angle that matters.',
     icon: 'M4 7h4l2-2h4l2 2h4v12H4V7zm8 3a4 4 0 100 8 4 4 0 000-8z',
   },
   {
-    t: 'Film in ten days',
-    d: 'Teaser in 72 hours, full film in about ten days. Peak season we say so before you book.',
+    t: 'Clear, simple pricing',
+    d: 'Weddings from $300, events from $400, drone shots from $100. Add-ons are listed up front.',
     icon: 'M12 3a9 9 0 109 9h-9V3z',
   },
 ];
 
-export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string })[] = [
-  { t: 'Wedding films', d: 'Getting ready through the last dance, cut into a highlight film plus the ceremony and speeches in full.', m: '6–10 hrs · two filmmakers', seed: 3 },
-  { t: 'Elopements', d: 'Just the two of you on a ridge or a beach. One filmmaker, light footprint, drone up if the site allows it.', m: '2–4 hrs · one filmmaker', seed: 11 },
-  { t: 'Aerial & venue films', d: 'Drone coverage for venues, builders and listings — flown legally, insured, and cut to length.', m: 'Half day · Part 107', seed: 19 },
-  { t: 'Brand & event', d: 'Rehearsal dinners, anniversaries, and the local businesses that keep the wedding season running.', m: 'By the project', seed: 26 },
-];
-
-export const FILTERS = [
-  ['all', 'Everything'],
-  ['wedding', 'Weddings'],
-  ['elope', 'Elopements'],
-  ['drone', 'Aerial'],
-  ['venue', 'Venues'],
-  ['brand', 'Brand'],
-];
-
-export const FILMS: (Slot & { c: string; t: string; l: string; d: string; href?: string })[] = [
-  { c: 'wedding', t: 'Hannah & Ben', l: 'Columbia Gorge', d: '6:41', seed: 2 },
-  { c: 'elope', t: 'Cannon Beach elopement', l: 'Oregon Coast', d: '3:12', seed: 7 },
-  { c: 'drone', t: 'Ridge ceremony, aerial cut', l: 'Hood River', d: '1:48', seed: 13 },
-  { c: 'wedding', t: 'Maya & Chris', l: 'Willamette Valley', d: '8:03', seed: 5 },
-  { c: 'venue', t: 'Cedar Barn venue tour', l: 'Ridgefield, WA', d: '2:20', seed: 17 },
-  { c: 'brand', t: 'Timber & Co.', l: 'Portland', d: '1:05', seed: 23 },
-];
-
-export const PACKAGES = [
-  { t: 'Ceremony', p: '$1,650', m: '4 hours · one filmmaker', f: ['Ceremony on two cameras', '3–4 minute highlight film', 'Full ceremony, uncut', 'Delivered in 3 weeks'], feature: false },
-  { t: 'Full day', p: '$3,200', m: '8 hours · two filmmakers', f: ['Getting ready through first dances', '6–8 minute highlight film', 'Ceremony and speeches in full', 'Aerial coverage where permitted', '60-second social cut', 'Delivered in 10 days'], feature: true },
-  { t: 'Full day + feature', p: '$4,750', m: '10 hours · two filmmakers + pilot', f: ['Everything in Full day', '20-minute documentary edit', 'Rehearsal dinner coverage', 'Second-location drone session', 'All source footage on a drive'], feature: false },
+export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string; href: string })[] = [
+  {
+    t: 'Wedding films',
+    d: 'Ceremony, rehearsal or the entire day, edited into a film you will actually rewatch.',
+    m: 'From $300 · full day from $1,000',
+    seed: 3,
+    image: yt('8jsxHXfgNUU'),
+    alt: "Still from Jake & Kenna's wedding trailer",
+    href: '/portfolio/#weddings',
+  },
+  {
+    t: 'Events & socials',
+    d: 'Community gatherings, celebrations and company events, cut for YouTube, Instagram and your website.',
+    m: 'Half day from $400 · full day from $800',
+    seed: 11,
+    image: yt('oSLn_6LOOjE'),
+    alt: 'Still from the Port of Woodland End of Summer Social',
+    href: '/portfolio/#events',
+  },
+  {
+    t: 'Local business',
+    d: 'Short films and vertical social clips that show customers who you are and what you do.',
+    m: 'Vertical cuts $50 each',
+    seed: 19,
+    href: '/portfolio/#events',
+  },
+  {
+    t: 'Drone footage',
+    d: 'Aerials of venues, properties and events — flown legally, insured, and cut to length.',
+    m: 'From $100 · Part 107',
+    seed: 26,
+    href: '/services/#drone-shots',
+  },
 ];
 
 export const STEPS = [
-  ['Say hello', "Send your date and venue. You'll hear back within a day with availability and a full price."],
-  ['Walk the timeline', 'A twenty-minute call to plan light, first look, and where a drone can legally go up.'],
-  ['Film day', "We arrive early, mic the officiant, stay out of your photographer's frame, and keep rolling."],
-  ['Your film', 'Teaser in 72 hours. Highlight film and full ceremony in ten days, yours to download forever.'],
+  ['Say hello', "Send your date, location and what you need. You'll hear back with availability and a price."],
+  ['Plan it out', 'A quick call to walk the timeline, the shots that matter, and where a drone can legally go up.'],
+  ['Film day', 'We arrive early, work around your photographer and guests, and keep rolling.'],
+  ['Your film', 'Edited films delivered digitally — horizontal, vertical, or both — yours to download and keep.'],
 ];
 
-export const REVIEWS = [
-  { q: "We watched the ceremony film with my grandmother, who couldn't travel. She heard every word of the vows. That alone was worth it.", n: 'Hannah & Ben', l: 'Hood River', i: 'HB' },
-  { q: "He got the drone up between two rain squalls and somehow that's the shot everyone asks about.", n: 'Maya & Chris', l: 'Dundee', i: 'MC' },
-  { q: 'Never once felt like there was a camera crew at our wedding. The film says otherwise.', n: 'Sam & Lily', l: 'Cannon Beach', i: 'SL' },
-];
+// Real client reviews. The "What couples say" section on the home page only
+// appears once this list has entries. Format:
+// { q: 'Quote text', n: 'Jake & Kenna', l: 'Woodland, WA', i: 'JK' },
+export const REVIEWS: { q: string; n: string; l: string; i: string }[] = [];
 
 export const FAQ = [
-  ['When do we get the film?', "A 60-second teaser lands within 72 hours of the wedding. The full highlight film, ceremony and speeches are delivered in about ten days — three weeks in peak season, and we'll tell you which before you book."],
-  ['Can you fly a drone at our venue?', "Usually. We're Part 107 licensed and insured, which covers most of Oregon and Washington. Venues near PDX, HIO and Troutdale sit in controlled airspace, so we file for authorization ahead of the date. National parks and a few state parks don't allow it at all — we check your venue before you sign anything."],
-  ['What happens if it rains?', "We shoot anyway. Our gear handles Northwest weather, and rain ceremonies tend to make the better films. The drone stays in the case if it's wet or gusting past 25 mph, and we make up for it on the ground."],
-  ['Do you work with our photographer?', 'Every time. We share the timeline in advance, stay behind their line during the ceremony, and split the portrait window so neither of us is waiting around.'],
-  ['Do you travel?', 'Anywhere within two hours of Vancouver, WA is included — Portland, the Gorge, the coast, Olympia. Bend, Seattle and Central Oregon add a flat travel fee. Farther than that, ask.'],
-  ['How do we hold our date?', 'A signed agreement and a 30% retainer. The balance is due two weeks before the wedding, and you can split it into monthly payments at no extra cost.'],
+  ['How much does it cost?', 'Weddings start at $300 for the ceremony, and full-day coverage starts at $1,000 for field work plus $150 per 10 minutes of edited film. Events start at $400 for a half day, and drone shots start at $100. The Pricing page has the full breakdown.'],
+  ['Can you fly a drone at our venue?', "Usually. We're FAA Part 107 licensed and insured. Venues near PDX and other airports sit in controlled airspace, so we file for authorization ahead of the date. National parks and some state parks don't allow drones at all — we check your location before you book."],
+  ['What happens if it rains?', "We shoot anyway — Northwest weather makes for great films. The drone stays in the case if it's wet or too windy, and we make up for it on the ground."],
+  ['Do you film events and businesses too?', 'Yes. Beyond weddings we film community events, socials and local businesses, with horizontal edits from $100 and vertical social cuts at $50 each.'],
+  ['Where do you travel?', 'We\'re based in Woodland, WA and serve Portland, Vancouver WA and the surrounding areas. Farther than that? Ask — we\'re happy to travel.'],
+  ['How do we hold our date?', "Send a request with your date and location. We'll confirm availability, send a quote, and walk you through the agreement and payment schedule."],
 ];
 
 // Hero backdrop: 5 columns of tilted tiles. `owner: true` marks the photo tile.

@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import YouTube from '../components/YouTube.astro';
+import Landscape from '../components/Landscape.astro';
+import { SITE } from '../consts';
+import { CATEGORIES, VIDEOS } from '../data/videos';
+import { PHOTOS } from '../data/media';
+
+const sections = CATEGORIES.map((c) => {
+  const videos = VIDEOS.filter((v) => v.category === c.id);
+  return { ...c, wide: videos.filter((v) => !v.vertical), tall: videos.filter((v) => v.vertical) };
+});
+const photos = [PHOTOS.portrait, PHOTOS.shooting, PHOTOS.packing, PHOTOS.smiling, PHOTOS.gear];
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Wedding films, event videos and drone footage by DJ Riley of NW Drone & Media — Woodland, WA, serving Portland and Vancouver."
+>
+  <PageHero
+    eyebrow="Portfolio"
+    title="Recent work"
+    intro="Weddings, community events and local businesses around Woodland, Portland and Vancouver — filmed on the ground and from the air."
+  />
+
+  <nav aria-label="Portfolio categories" class="sticky top-[72px] z-30 bg-fog/90 py-4 backdrop-blur-md">
+    <ul class="mx-auto flex max-w-[1240px] flex-wrap justify-center gap-2 px-6 sm:px-9">
+      {
+        sections.map((c) => (
+          <li>
+            <a href={`#${c.id}`} class="block rounded-full px-5 py-2.5 text-[14px] text-inkk/70 ring-1 ring-inkk/20 transition hover:bg-spruce hover:text-fog hover:ring-spruce">
+              {c.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a href="#behind-the-scenes" class="block rounded-full px-5 py-2.5 text-[14px] text-inkk/70 ring-1 ring-inkk/20 transition hover:bg-spruce hover:text-fog hover:ring-spruce">Behind the scenes</a>
+      </li>
+    </ul>
+  </nav>
+
+  {
+    sections.map((c, i) => (
+      <section id={c.id} class:list={['scroll-mt-36 py-20', i % 2 === 1 ? 'bg-fog px-2 sm:px-3' : 'bg-fog']}>
+        <div class:list={[i % 2 === 1 && 'rounded-[30px] bg-cream py-20']}>
+          <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+            <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+              <SectionTitle lead={c.label.split(' ')[0]} rest={c.label.split(' ').slice(1).join(' ')} />
+              <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-inkk/70">{c.intro}</p>
+            </div>
+
+            {c.wide.length + c.tall.length === 0 ? (
+              <div class="mt-12 grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
+                <Landscape seed={44} class="aspect-video rounded-[14px]" label="COMING SOON" />
+                <div>
+                  <p class="text-[15px] font-medium leading-relaxed text-inkk/70">
+                    New drone work is on the way. In the meantime, aerial shots appear throughout the wedding and event films, and
+                    there's more on YouTube.
+                  </p>
+                  <div class="mt-6 flex flex-wrap gap-3">
+                    <a href="/services/#drone-shots" class="inline-flex rounded-full bg-spruce px-6 py-3 text-[14px] font-medium text-fog transition hover:bg-spruce2">Drone pricing</a>
+                    <a href={SITE.social.youtube} rel="noopener" class="inline-flex rounded-full px-6 py-3 text-[14px] text-inkk/70 ring-1 ring-inkk/20 transition hover:ring-inkk/50">YouTube</a>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div class:list={['mt-12 grid gap-8', c.tall.length > 0 && 'lg:grid-cols-[minmax(0,1fr)_300px]']}>
+                <div class="grid gap-8">
+                  {c.wide.map((v) => (
+                    <figure>
+                      <YouTube id={v.id} title={`${v.title} — ${v.subtitle}`} />
+                      <figcaption class="mt-3 flex items-baseline justify-between gap-4">
+                        <span class="text-[15px] font-medium">{v.title}</span>
+                        <span class="text-[13px] font-medium text-inkk/55">{v.subtitle}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                {c.tall.length > 0 && (
+                  <div class="grid content-start gap-8 sm:grid-cols-2 lg:grid-cols-1">
+                    {c.tall.map((v) => (
+                      <figure class="mx-auto w-full max-w-[300px]">
+                        <YouTube id={v.id} title={`${v.title} — ${v.subtitle}`} vertical />
+                        <figcaption class="mt-3">
+                          <span class="block text-[15px] font-medium">{v.title}</span>
+                          <span class="text-[13px] font-medium text-inkk/55">{v.subtitle}</span>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <!-- Behind the scenes -->
+  <section id="behind-the-scenes" class="scroll-mt-36 bg-spruce py-24 text-fog">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="Behind" rest="the scenes" class="text-fog" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-fog/65">
+          {SITE.owner} and the kit that goes to every shoot — camera, drone and enough power to last the whole day.
+        </p>
+      </div>
+      <ul class="mt-12 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-3">
+        {
+          photos.map((p, i) => (
+            <li class:list={['overflow-hidden rounded-[18px]', i === 0 && 'sm:col-span-2 sm:row-span-2']}>
+              <img src={p.src} alt={p.alt} width={p.width} height={p.height} loading="lazy" decoding="async" class="h-full w-full object-cover transition duration-700 hover:scale-[1.03]" style={`object-position: ${p.position}`} />
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-14 flex flex-wrap justify-center gap-3">
+        <a href={SITE.social.youtube} rel="noopener" class="inline-flex items-center rounded-full bg-brass px-7 py-3.5 text-[15px] font-medium text-[#1B1408] transition hover:bg-brass2">More on YouTube</a>
+        <a href={SITE.social.instagram} rel="noopener" class="inline-flex items-center rounded-full px-7 py-3.5 text-[15px] text-fog ring-1 ring-fog/25 transition hover:bg-fog/10">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

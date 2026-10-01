@@ -1,23 +1,28 @@
 // Single source of truth for business details used across the site.
 export const SITE = {
   name: 'NW Drone & Media',
-  title: 'NW Drone & Media — Wedding films & aerial, Pacific Northwest',
+  owner: 'DJ Riley',
+  title: 'NW Drone & Media — Wedding films, events & drone footage | Woodland, WA',
   description:
-    'Wedding films and FAA Part 107 licensed drone coverage in the Pacific Northwest. Two filmmakers on the ground, one licensed drone in the air.',
+    'Wedding films, event videography and FAA Part 107 licensed drone footage by DJ Riley. Founded in Woodland, WA, serving Portland, Vancouver WA and the surrounding areas.',
   email: 'hello@nwdroneandmedia.com',
-  phone: '(360) 555-0134', // placeholder carried over from the original design — replace before launch
-  city: 'Walla Walla',
+  phone: '', // e.g. '(360) 555-1234' — shown wherever a phone appears once filled in
+  city: 'Woodland',
   region: 'WA',
-  serviceArea: 'Oregon, Washington & the greater Pacific Northwest',
+  serviceArea: 'Portland (PDX), Vancouver WA & the surrounding areas',
   ogImage: '/og-default.jpg',
   // Static-site form handler (Formspree, Basin, Netlify Forms, etc.). Replace before launch.
   formEndpoint: 'https://formspree.io/f/your-form-id',
+  social: {
+    youtube: 'https://www.youtube.com/@davidriley-u9u',
+    instagram: 'https://www.instagram.com/nwdroneandmedia',
+  },
 };
 
 // Pill links in the top nav (left group shows on large screens only, as in the original).
 export const NAV_LEFT = [
-  { href: '/#work', label: 'Films' },
-  { href: '/services/', label: 'Packages' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/services/', label: 'Pricing' },
   { href: '/about/', label: 'About' },
 ];
 export const NAV_RIGHT = { href: '/#process', label: 'How it works' };
@@ -32,32 +37,29 @@ export const LEGAL_UPDATED = 'October 1, 2026';
 
 export const FOOTER_COLUMNS: [string, { label: string; href: string }[]][] = [
   [
-    'Films',
+    'Work',
     [
-      { label: 'Weddings', href: '/#work' },
-      { label: 'Elopements', href: '/#work' },
-      { label: 'Aerial', href: '/services/' },
-      { label: 'Venue tours', href: '/#work' },
-      { label: 'Brand films', href: '/services/' },
+      { label: 'Portfolio', href: '/portfolio/' },
+      { label: 'Weddings', href: '/portfolio/#weddings' },
+      { label: 'Events & local business', href: '/portfolio/#events' },
+      { label: 'Drone footage', href: '/services/#drone-shots' },
     ],
   ],
   [
     'Booking',
     [
-      { label: 'Packages', href: '/#packages' },
+      { label: 'Pricing', href: '/services/' },
       { label: 'How it works', href: '/#process' },
       { label: 'FAQ', href: '/#faq' },
-      { label: 'About', href: '/about/' },
+      { label: 'About DJ', href: '/about/' },
       { label: 'Contact', href: '/contact/' },
     ],
   ],
   [
     'Follow',
     [
-      { label: 'Instagram', href: '#' },
-      { label: 'YouTube', href: '#' },
-      { label: 'TikTok', href: '#' },
-      { label: 'The Knot', href: '#' },
+      { label: 'YouTube', href: SITE.social.youtube },
+      { label: 'Instagram', href: SITE.social.instagram },
     ],
   ],
 ];

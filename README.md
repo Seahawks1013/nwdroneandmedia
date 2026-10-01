@@ -1,6 +1,6 @@
 # NW Drone & Media
 
-Marketing site for NW Drone & Media: wedding films, aerial coverage and drone services in the Pacific Northwest. It's built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com), and the design is a faithful port of the original single-file site (`_legacy/index.html`).
+Marketing site for NW Drone & Media, DJ Riley's wedding, event and drone videography business. It was founded in Woodland, WA and serves Portland, Vancouver WA and the surrounding areas. It's built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com), and the design is a faithful port of the original single-file site (`_legacy/index.html`).
 
 ## Commands
 
@@ -16,7 +16,7 @@ Marketing site for NW Drone & Media: wedding films, aerial coverage and drone se
 ```
 public/                  Served as-is at the site root
   images/                Photos, referenced as /images/<folder>/<file>
-    about/owner.jpg      Owner photo used in the hero and "How we shoot it"
+    about/               DJ Riley photos (dj-riley-portrait.jpg is the main photo)
     hero/ gallery/ services/   Drop footage stills here
   videos/                Clips, referenced as /videos/<file>.mp4
   og-default.jpg         Default social share image (1200×630)
@@ -31,15 +31,18 @@ src/
     SectionTitle.astro   "*Italic* rest" display headings
     PageHero.astro       Short spruce hero for inner pages
     BookingForm.astro    "Check your date" form
+    PricingCard.astro    One pricing plan card
+    YouTube.astro        Click-to-play YouTube embed (loads the player only on click)
     SEO.astro            Meta, OpenGraph, Twitter and JSON-LD tags
   data/
-    home.ts              All home page copy: stats, films, packages, FAQ, reviews…
-    services.ts          Commercial/aerial services on the Services page
-    media.ts             Image imports and alt text
+    home.ts              Home page copy: stats, what we film, steps, FAQ, reviews
+    pricing.ts           All prices (Pricing page, home summary, booking form options)
+    videos.ts            YouTube videos and portfolio categories
+    media.ts             Photo paths and alt text
   layouts/
     BaseLayout.astro     HTML shell, fonts, nav and footer
     LegalPage.astro      Shared layout for the legal pages
-  pages/                 index, about, services, contact, privacy, terms, flight-safety, 404
+  pages/                 index, about, services (Pricing), portfolio, contact, privacy, terms, flight-safety, 404
   styles/global.css      Theme tokens (spruce, fog, cream, brass, ink) and custom utilities
   consts.ts              Business info, nav/footer/legal links, form endpoint
 ```
@@ -60,6 +63,13 @@ Files in `public/` are served exactly as they are, with no automatic resizing. E
 **Videos.** Astro doesn't transcode video. Export web-ready H.264 MP4s (1080p, around 8–10 Mbps, no audio for background loops) and put them in `public/videos/`. For large libraries, host them on YouTube, Vimeo or a CDN and embed them.
 
 **Social share image.** Replace `public/og-default.jpg` with a 1200×630 photo. A page can use its own image with `<BaseLayout image="/my-image.jpg">`.
+
+## Updating content
+
+- **Prices:** edit `src/data/pricing.ts`. The Pricing page, the home page summary cards and the booking form all read from it.
+- **Videos:** add an entry to `src/data/videos.ts` with the YouTube ID (the part after `watch?v=` or `shorts/`), a category (`weddings`, `events` or `drone`), and `vertical: true` for Shorts. Set `featured: true` to also show it on the home page.
+- **Reviews:** add real quotes to `REVIEWS` in `src/data/home.ts`. The "What couples say" section appears once the list has entries.
+- **Phone:** set `phone` in `src/consts.ts`. It's hidden everywhere while empty.
 
 ## SEO
 
@@ -92,10 +102,10 @@ MSYS_NO_PATHCONV=1 SITE_URL=https://seahawks1013.github.io BASE_PATH=/nwdroneand
 ## Before launch
 
 - [ ] Set `formEndpoint` in `src/consts.ts` (Formspree, Basin, Netlify Forms, …)
-- [ ] Replace the placeholder phone `(360) 555-0134` and the social links in `src/consts.ts`
-- [ ] Replace the placeholder reviews and film titles in `src/data/home.ts`
+- [ ] Add a phone number in `src/consts.ts` (optional) and real reviews in `src/data/home.ts`
+- [ ] Replace DJ's story on the About page with his own words (marked with a comment)
+- [ ] Add drone footage to `src/data/videos.ts` (the Drone section shows "coming soon" until then)
 - [ ] Have the Privacy, Terms and Flight Safety pages reviewed by an attorney, and confirm the certificate and insurance details
-- [ ] Check the Vancouver-area references in the copy (travel FAQ, film locations) against the Walla Walla base
 - [ ] Add real stills to the media slots, and update the copy marked `<!-- Replace ... -->` on the About page
 - [ ] Update the gear list on the About page to match the actual fleet
 - [ ] Confirm the production domain in `astro.config.mjs` and `public/robots.txt`

@@ -1,68 +1,75 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import Landscape from '../components/Landscape.astro';
 import NotchCard from '../components/NotchCard.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import { SITE } from '../consts';
-import { owner } from '../data/media';
+import { PHOTOS } from '../data/media';
 import { PILLARS, TAGS } from '../data/home';
 
-// Update to match the actual kit.
-const gear = [
-  ['Cinema drone', '4/3 sensor, 5.1K video, 10-bit log for grading'],
-  ['Compact drone', 'Sub-250 g for tight venues and lower-risk airspace'],
-  ['Ground cameras', 'Full-frame mirrorless bodies, gimbal and fast primes'],
-  ['Audio', 'Lavs on the officiant and couple, plus a board feed from the DJ'],
-  ['Inspection kit', 'High-zoom camera for roof, tower and solar detail'],
-  ['Post-production', 'DaVinci Resolve Studio on a calibrated grading monitor'],
+const { portrait, smiling, shooting, packing, gear } = PHOTOS;
+
+// What DJ brings to every shoot (visible in the photos). Update as the kit changes.
+const kit = [
+  ['Sony full-frame mirrorless', 'Cinematic 4K video with clean low-light performance for receptions and evening events.'],
+  ['Licensed drone', 'FAA Part 107 aerials: venue establishing shots, the ceremony from above, event overviews.'],
+  ['Portable power station', 'All-day power on location, so batteries are never the reason a moment gets missed.'],
+  ['Weatherproof camera pack', 'Everything packed and protected, rain or shine, from the rehearsal to the last dance.'],
 ];
 ---
 
 <BaseLayout
-  title="About"
-  description="Meet the FAA Part 107 licensed filmmaker behind NW Drone & Media: wedding films and aerial coverage across Oregon, Washington and the Pacific Northwest."
+  title="About DJ Riley"
+  description="DJ Riley founded NW Drone & Media in Woodland, WA. Wedding films, event videography and FAA Part 107 drone footage for Portland, Vancouver WA and the surrounding areas."
 >
   <PageHero
-    eyebrow="About NW Drone & Media"
-    title="One long take"
-    intro="Two filmmakers on the ground, one licensed drone in the air. Oregon, Washington, and wherever the two of you are standing."
+    eyebrow="About"
+    title="Meet DJ Riley"
+    intro="Founder, filmmaker and FAA Part 107 licensed drone pilot. Based in Woodland, WA."
   />
 
   <!-- Story -->
   <section class="bg-fog py-24 sm:py-32">
-    <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 grid-cols-[minmax(0,1fr)] md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
+    <div class="mx-auto grid max-w-[1240px] grid-cols-[minmax(0,1fr)] items-start gap-14 px-6 sm:px-9 md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
       <div>
-        <SectionTitle lead="Our" rest="story" />
-        <!-- Replace with the real company story. -->
+        <SectionTitle lead="DJ's" rest="story" />
+        <!-- Personalize: replace these paragraphs with DJ's story in his own words —
+             how he got started, his first wedding, why he picked up a drone. -->
         <p class="mt-7 max-w-[38ch] text-[17px] font-medium leading-relaxed text-inkk/80">
-          NW Drone &amp; Media started with a simple idea: a wedding is one long take, and it deserves to be filmed that way —
-          vows, toasts and the drive out, in order, with sound.
+          {SITE.owner} founded {SITE.name} in Woodland, Washington, with a simple idea: the biggest days of people's lives
+          deserve to be filmed with care — on the ground and from the air.
         </p>
         <p class="mt-4 max-w-[38ch] text-[15px] font-medium leading-relaxed text-inkk/80">
-          Adding a licensed drone meant we could show the whole place, not just the people in it. The rest of the year we bring the
-          same care to venues, builders, realtors and brands around the Northwest.
+          Today DJ films weddings, community events and local businesses across Portland, Vancouver WA and the surrounding
+          areas. He's the person behind the camera, the licensed pilot flying the drone, and the editor cutting your film —
+          so the vision stays the same from the first call to the final export.
+        </p>
+        <p class="mt-4 max-w-[38ch] text-[15px] font-medium leading-relaxed text-inkk/80">
+          Whether it's Jake and Kenna's wedding day or the Port of Woodland's end-of-summer social, the goal is the same: a film
+          that feels like being there.
         </p>
         <ul class="mt-9 flex flex-wrap gap-2">
           {TAGS.map((t) => <li class="rounded-full px-4 py-2 text-[13px] text-inkk/70 ring-1 ring-inkk/15">{t}</li>)}
         </ul>
       </div>
       <div class="grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-4">
-        <NotchCard notchBg="#E9ECE6" class="aspect-[4/5]" href="/contact/" label="Get in touch">
-          <img src={owner.src} alt={owner.altAlt} width={owner.width} height={owner.height} class="h-full w-full object-cover object-[50%_18%]" />
+        <NotchCard notchBg="#E9ECE6" class="aspect-[4/5]" href="/portfolio/" label="See DJ's work">
+          <img src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} fetchpriority="high" class="h-full w-full object-cover" style={`object-position: ${portrait.position}`} />
         </NotchCard>
         <div class="flex flex-col gap-4">
-          <Landscape seed={16} class="aspect-[4/5] rounded-[18px]" label="FOOTAGE SLOT" />
+          <div class="aspect-[4/5] overflow-hidden rounded-[18px]">
+            <img src={smiling.src} alt={smiling.alt} width={smiling.width} height={smiling.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${smiling.position}`} />
+          </div>
           <div class="rounded-[18px] bg-spruce p-6 text-fog">
             <p class="font-display text-[1.6rem] font-semibold leading-tight">{SITE.city}, {SITE.region}</p>
-            <p class="mt-2 text-[13px] font-medium leading-relaxed text-fog/80">Owner &amp; lead filmmaker. FAA Part 107 licensed pilot.</p>
+            <p class="mt-2 text-[13px] font-medium leading-relaxed text-fog/80">Founded here. Serving Portland, Vancouver WA and the surrounding areas.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pilot / credentials -->
+  <!-- Credentials -->
   <section class="bg-fog pb-24">
     <div class="mx-auto grid max-w-[1100px] gap-5 px-6 sm:px-9 md:grid-cols-3">
       {
@@ -79,37 +86,48 @@ const gear = [
     </div>
   </section>
 
-  <!-- Gear -->
-  <section class="bg-spruce py-24 text-fog">
-    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
-      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
-        <SectionTitle lead="Gear" rest="& capabilities" class="text-fog" />
-        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-fog/65">
-          Cinema-grade capture in the air and on the ground, and a full grading suite back at the desk.
-        </p>
+  <!-- On every shoot -->
+  <section class="bg-fog px-2 pb-24 sm:px-3">
+    <div class="rounded-[30px] bg-cream py-20 sm:py-24">
+      <div class="mx-auto grid max-w-[1240px] grid-cols-[minmax(0,1fr)] items-center gap-12 px-6 sm:px-9 md:grid-cols-2">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2 aspect-[3/2] overflow-hidden rounded-[18px]">
+            <img src={packing.src} alt={packing.alt} width={packing.width} height={packing.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${packing.position}`} />
+          </div>
+          <div class="aspect-square overflow-hidden rounded-[18px]">
+            <img src={shooting.src} alt={shooting.alt} width={shooting.width} height={shooting.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${shooting.position}`} />
+          </div>
+          <div class="aspect-square overflow-hidden rounded-[18px]">
+            <img src={gear.src} alt={gear.alt} width={gear.width} height={gear.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${gear.position}`} />
+          </div>
+        </div>
+        <div>
+          <SectionTitle lead="On" rest="every shoot" />
+          <dl class="mt-8">
+            {
+              kit.map(([name, text]) => (
+                <div class="border-t border-inkk/10 py-5">
+                  <dt class="font-display text-[1.3rem] font-semibold">{name}</dt>
+                  <dd class="mt-1 text-[14px] font-medium leading-relaxed text-inkk/70">{text}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
       </div>
-      <dl class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          gear.map(([name, spec]) => (
-            <div class="border-t border-fog/15 pt-5">
-              <dt class="font-display text-[1.3rem] font-semibold">{name}</dt>
-              <dd class="mt-2 text-[14px] font-medium leading-relaxed text-fog/65">{spec}</dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </section>
 
   <section class="bg-fog2 py-24 text-center">
     <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
-      <SectionTitle lead="Check" rest="your date" />
-      <p class="mx-auto mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
-        Tell us when and where. You'll hear back within a day with availability and a full price.
+      <SectionTitle lead="Work" rest="with DJ" />
+      <p class="mx-auto mt-6 max-w-[44ch] text-[16px] font-medium leading-relaxed text-inkk/80">
+        Weddings, events or drone footage — tell DJ when and where, and you'll hear back with availability and a price.
       </p>
-      <a href="/contact/" class="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-spruce px-7 py-3.5 text-[15px] font-medium text-fog transition-all duration-200 hover:bg-spruce2">
-        Get in touch
-      </a>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-full bg-spruce px-7 py-3.5 text-[15px] font-medium text-fog transition-all duration-200 hover:bg-spruce2">Check your date</a>
+        <a href="/portfolio/" class="inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[15px] text-inkk/70 ring-1 ring-inkk/20 transition hover:ring-inkk/50">See the portfolio</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
