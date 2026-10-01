@@ -39,11 +39,11 @@ export const WEDDING_PLANS: Plan[] = [
     featured: true,
   },
   {
-    id: 'wedding-rehearsal',
+    id: 'wedding-reception',
     kicker: 'Custom package',
-    name: 'Rehearsal',
+    name: 'Reception',
     price: '$400',
-    unit: 'Rehearsal coverage',
+    unit: 'Reception coverage',
     includes: [
       'Bride and groom as the priority, guests as secondary',
       'Minimal editing included',
@@ -100,7 +100,7 @@ export const BOOKING_OPTIONS = [
   'Not sure yet',
   'Wedding — full day (from $1,000)',
   'Wedding — ceremony ($300)',
-  'Wedding — rehearsal ($400)',
+  'Wedding — reception ($400)',
   'Event — half day (from $400)',
   'Event — full day (from $800)',
   'Drone shots (from $100)',
