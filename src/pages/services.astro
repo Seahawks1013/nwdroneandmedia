@@ -20,7 +20,7 @@ const { gear } = PHOTOS;
     intro="Straightforward pricing with add-ons listed up front. Not sure what you need? Send your date and we'll put together a quote."
   />
 
-  <nav aria-label="Pricing sections" class="bg-fog pt-16">
+  <nav aria-label="Pricing sections" class="bg-fog pt-10 sm:pt-16">
     <ul class="mx-auto flex max-w-[1240px] flex-wrap justify-center gap-2 px-6 sm:px-9">
       {
         [
@@ -37,7 +37,7 @@ const { gear } = PHOTOS;
   </nav>
 
   <!-- Weddings -->
-  <section id="weddings" class="scroll-mt-24 bg-fog py-24">
+  <section id="weddings" class="scroll-mt-24 bg-fog pb-8 pt-12 sm:py-24">
     <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
       <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
         <SectionTitle lead="Wedding" rest="pricing" />
@@ -53,8 +53,8 @@ const { gear } = PHOTOS;
   </section>
 
   <!-- Special events + drone -->
-  <section id="events" class="scroll-mt-24 bg-fog px-2 pb-24 sm:px-3">
-    <div class="rounded-[30px] bg-cream py-20 sm:py-24">
+  <section id="events" class="scroll-mt-24 bg-fog px-2 pb-8 sm:px-3 sm:pb-24">
+    <div class="rounded-[30px] bg-cream py-14 sm:py-24">
       <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
         <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
           <SectionTitle lead="Special" rest="events" />
@@ -71,7 +71,7 @@ const { gear } = PHOTOS;
   </section>
 
   <!-- Notes -->
-  <section class="bg-fog pb-24">
+  <section class="bg-fog pb-10 sm:pb-16">
     <div class="mx-auto grid max-w-[1100px] items-center gap-10 px-6 sm:px-9 md:grid-cols-2">
       <div class="aspect-[4/3] overflow-hidden rounded-[22px]">
         <img src={gear.src} alt={gear.alt} width={gear.width} height={gear.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${gear.position}`} />
@@ -99,7 +99,8 @@ const { gear } = PHOTOS;
   </section>
 
   <!-- Process -->
-  <section class="bg-spruce py-24 text-fog">
+  <section class="bg-fog px-2 pb-16 sm:px-3">
+    <div class="rounded-[30px] bg-spruce py-14 text-fog sm:py-24">
     <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
       <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
         <SectionTitle lead="How" rest="it works" class="text-fog" />
@@ -123,6 +124,7 @@ const { gear } = PHOTOS;
           Check your date
         </a>
       </div>
+    </div>
     </div>
   </section>
 </BaseLayout>
