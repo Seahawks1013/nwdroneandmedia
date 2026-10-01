@@ -80,7 +80,7 @@ export const REVIEWS: { q: string; n: string; l: string; i: string }[] = [];
 
 export const FAQ = [
   ['Can you fly a drone at our venue?', "Usually. We're FAA Part 107 licensed and insured. Venues near PDX and other airports sit in controlled airspace, so we file for authorization ahead of the date. National parks and some state parks don't allow drones at all — we check your location before you book."],
-  ['What happens if it rains?', "We shoot anyway — Northwest weather makes for great films. The drone stays in the case if it's wet or too windy, and we make up for it on the ground."],
+  ['What happens if it rains?', "We'll keep an eye on the forecast and assess the weather before and on the day. Depending on conditions, we may need to wait it out or reschedule — and drone flights only happen when it's dry and calm enough to fly safely."],
   ['Do you film events and businesses too?', 'Yes. Beyond weddings we film community events, socials and local businesses, with horizontal edits from $100 and vertical social cuts at $50 each.'],
   ['Where do you travel?', 'We\'re based in Woodland, WA and serve Portland, Vancouver WA and the surrounding areas. Farther than that? Ask — we\'re happy to travel.'],
 ];
