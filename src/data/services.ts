@@ -1,51 +1,65 @@
-import { services as img } from './media';
+import type { ImageMetadata } from 'astro';
 
-export const SERVICES = [
+// Add `image` (imported from src/assets/images) to replace a placeholder slot.
+export const SERVICES: {
+  id: string;
+  title: string;
+  summary: string;
+  meta: string;
+  seed: number;
+  image?: ImageMetadata;
+  alt?: string;
+  details: string[];
+}[] = [
   {
     id: 'real-estate',
-    title: 'Real Estate Media',
+    title: 'Real estate media',
     summary: 'Listing photos and video that show the whole property, not just the front door.',
-    image: img.realEstate,
+    meta: 'Next-day delivery · MLS ready',
+    seed: 19,
     details: [
-      'Aerial and ground photography, HDR-blended and color-corrected',
+      'Aerial and ground photography, color-corrected',
       'Property flyover video with lot lines and neighborhood context',
       'Vineyard, farm and acreage packages',
-      'Next-day delivery, sized for MLS and social',
+      'Sized for MLS, Zillow and social',
     ],
   },
   {
     id: 'commercial',
-    title: 'Commercial Aerial Footage',
+    title: 'Commercial aerial footage',
     summary: 'Cinematic aerials for brands, wineries, tourism and promotional campaigns.',
-    image: img.commercial,
+    meta: 'Half day or full day · Part 107',
+    seed: 26,
     details: [
-      '4K / 5.1K cinematic footage, 10-bit color profiles',
+      '4K footage in 10-bit log profiles',
       'Brand films, event coverage and social cut-downs',
-      'Construction progress documentation on a recurring schedule',
-      'Licensed stock footage of the Pacific Northwest',
+      'Construction progress on a recurring schedule',
+      'Licensed stock footage of the Northwest',
     ],
   },
   {
     id: 'inspections',
-    title: 'Drone Inspections',
-    summary: 'Safe, fast visual inspections without ladders, lifts or shutdowns.',
-    image: img.inspection,
+    title: 'Drone inspections',
+    summary: 'Roofs, towers and solar arrays, inspected without ladders, lifts or shutdowns.',
+    meta: 'Annotated report included',
+    seed: 13,
     details: [
       'Roof, chimney and gutter inspections for contractors and insurers',
-      'Solar array, tower and agricultural structure surveys',
-      'High-resolution zoom imagery with annotated reports',
-      'Orthomosaic maps and site measurements on request',
+      'Solar, tower and agricultural structure surveys',
+      'High-zoom stills with an annotated PDF report',
+      'Orthomosaic maps and measurements on request',
     ],
   },
   {
     id: 'post-production',
-    title: 'Video Editing & Color Grading',
-    summary: 'Polished edits from our footage or yours, finished for any screen.',
-    image: img.postProduction,
+    title: 'Editing & color grading',
+    summary: 'Polished edits from our footage or yours, finished for every screen.',
+    meta: 'By the project',
+    seed: 5,
     details: [
-      'Story-driven editing with licensed music and sound design',
-      'Professional color grading for a consistent, cinematic look',
-      'Vertical, square and widescreen exports for every platform',
+      'Story-first editing with licensed music and sound design',
+      'Color grading for a consistent, filmic look',
+      'Vertical, square and widescreen exports',
       'Titles, lower thirds, maps and motion graphics',
     ],
   },

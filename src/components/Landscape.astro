@@ -1,0 +1,75 @@
+---
+// Media slot. With `image`, shows that photo. Without it, draws the original
+// site's placeholder: a seeded, layered mountain-ridge SVG (same algorithm and
+// seeds as the original, so every slot looks identical to the old design).
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+export interface Props {
+  seed?: number;
+  class?: string;
+  label?: string;
+  duration?: string;
+  play?: boolean;
+  image?: ImageMetadata;
+  alt?: string;
+}
+
+const { seed = 1, class: className = '', label, duration, play, image, alt = '' } = Astro.props;
+
+let state = 9301 * (seed + 3) + 49297;
+const rand = () => (state = (9301 * state + 49297) % 233280) / 233280;
+
+const sky = ['#1E2C2A', '#22302B', '#1B2622', '#26332F'][Math.floor(4 * rand())];
+const sun = { x: 90 + 420 * rand(), y: 44 + 54 * rand(), r: 16 + 16 * rand(), op: 0.1 + 0.16 * rand() };
+const ridges = Array.from({ length: 4 }, (_, i) => {
+  const base = 340 * (0.4 + 0.15 * i);
+  const amp = 28 - 4 * i;
+  let d = `M0,340 L0,${base}`;
+  for (let x = 0; x <= 600; x += 600 / 9) {
+    d += ` L${x.toFixed(0)},${(base - rand() * amp - (i === 0 ? 28 * rand() : 0)).toFixed(1)}`;
+  }
+  d += ' L600,340 Z';
+  return { d, op: 0.3 + 0.2 * i, haze: 0.1 - 0.022 * i };
+});
+---
+
+<div class={`relative overflow-hidden bg-spruce2 ${className}`}>
+  {
+    image ? (
+      <Image src={image} alt={alt} class="absolute inset-0 h-full w-full object-cover" width={1200} />
+    ) : (
+      <svg viewBox="0 0 600 340" preserveAspectRatio="none" class="absolute inset-0 h-full w-full" aria-hidden="true">
+        <defs>
+          <linearGradient id={`sky${seed}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color={sky} />
+            <stop offset="1" stop-color="#0E1613" />
+          </linearGradient>
+        </defs>
+        <rect width="600" height="340" fill={`url(#sky${seed})`} />
+        <circle cx={sun.x} cy={sun.y} r={sun.r} fill="#D2A25E" opacity={sun.op} />
+        {ridges.map((r) => (
+          <g>
+            <path d={r.d} fill="#0E1613" opacity={r.op} />
+            <path d={r.d} fill="#93A7AC" opacity={r.haze} />
+          </g>
+        ))}
+      </svg>
+    )
+  }
+  {
+    play && (
+      <span class="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-brass transition-transform duration-200 group-hover:scale-110">
+        <svg viewBox="0 0 10 12" class="h-3.5 w-3.5 fill-[#1B1408]" aria-hidden="true">
+          <path d="M0 0l10 6-10 6z" />
+        </svg>
+      </span>
+    )
+  }
+  {
+    duration && (
+      <span class="absolute bottom-3 right-3 rounded bg-spruce/60 px-2 py-0.5 text-[11px] tabular-nums text-fog/85">{duration}</span>
+    )
+  }
+  {label && <span class="absolute bottom-3 left-3 text-[10px] tracking-[.18em] text-fog/60">{label}</span>}
+</div>

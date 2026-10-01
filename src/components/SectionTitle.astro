@@ -1,0 +1,14 @@
+---
+// Section heading: italic lead word + roman rest, e.g. "*How* we shoot it".
+export interface Props {
+  lead: string;
+  rest: string;
+  class?: string;
+  as?: 'h1' | 'h2';
+}
+const { lead, rest, class: className = '', as: Tag = 'h2' } = Astro.props;
+---
+
+<Tag class={`font-display font-semibold text-[clamp(2.2rem,4.6vw,3.9rem)] leading-[1.02] tracking-[-.025em] ${className}`}>
+  <em class="italic font-semibold">{lead}</em> {rest}
+</Tag>

@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
+/* Design tokens carried over 1:1 from the original site (_legacy/index.html). */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Poppins", system-ui, sans-serif;
+  --font-display: "Bodoni Moda", "Didot", Georgia, serif;
 
-  /* Brand palette: deep night-sky neutrals with a golden-hour accent */
-  --color-ink-950: #05080f;
-  --color-ink-900: #0b1220;
-  --color-ink-800: #121b2e;
-  --color-ink-700: #1c2740;
-  --color-brand-300: #fcd34d;
-  --color-brand-400: #fbbf24;
-  --color-brand-500: #f59e0b;
-  --color-brand-600: #d97706;
+  --color-spruce: #0e1613;
+  --color-spruce2: #16211c;
+  --color-fog: #e9ece6;
+  --color-fog2: #dde2db;
+  --color-cream: #efede4;
+  --color-brass: #d2a25e;
+  --color-brass2: #e3ba81;
+  --color-inkk: #121a17;
 }
 
 @layer base {
@@ -20,33 +20,60 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-ink-950 text-slate-300 antialiased font-sans;
+    color: #121a17;
+    background: #e9ece6;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
-    @apply font-display text-white tracking-tight;
+  ::selection {
+    color: #1b1408;
+    background: #d2a25e;
+  }
+  /* Tailwind v4 resets buttons to cursor:default; the original (v3) used pointer. */
+  button,
+  [role="button"] {
+    cursor: pointer;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-400;
+    outline: 2px solid var(--color-brass);
+    outline-offset: 2px;
   }
 }
 
-@utility container-x {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+/* Wide letter-spacing used for small caps labels. */
+@utility track {
+  letter-spacing: 0.28em;
 }
 
-@utility eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.25em] text-brand-400;
+/* Fading brass hairline under the hero title. */
+@utility rule {
+  height: 1px;
+  background: linear-gradient(90deg, #d2a25eb3, #d2a25e00);
 }
 
-@utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-ink-950 transition hover:bg-brand-400;
+/* Inverted-radius cutout on the bottom-right corner of image cards. */
+.notch-corner::before,
+.notch-corner::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle at 0 0, transparent 22px, var(--notch-bg) 22px);
 }
-
-@utility btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5;
+.notch-corner::before {
+  top: -22px;
+  right: 0;
+  transform: rotate(90deg);
+}
+.notch-corner::after {
+  bottom: 0;
+  left: -22px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html {
+    scroll-behavior: auto;
+  }
 }

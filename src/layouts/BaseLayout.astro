@@ -20,7 +20,7 @@ const { title, description, image, noindex } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#05080f" />
+    <meta name="theme-color" content="#0e1613" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -29,19 +29,24 @@ const { title, description, image, noindex } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&display=swap"
     />
 
     <SEO title={title} description={description} image={image} noindex={noindex} />
   </head>
-  <body class="flex min-h-screen flex-col">
-    <a href="#main" class="btn-primary sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]">
+  <body>
+    <a
+      href="#main"
+      class="sr-only rounded-full bg-brass px-5 py-2 text-[14px] font-medium text-[#1B1408] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
+    >
       Skip to content
     </a>
-    <Header />
-    <main id="main" class="flex-1 pt-16">
-      <slot />
-    </main>
-    <Footer />
+    <div class="min-h-screen bg-fog">
+      <Header />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>

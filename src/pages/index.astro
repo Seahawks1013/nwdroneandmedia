@@ -1,134 +1,453 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import CallToAction from '../components/CallToAction.astro';
-import { hero, gallery } from '../data/media';
-import { SERVICES } from '../data/services';
+import Landscape from '../components/Landscape.astro';
+import NotchCard from '../components/NotchCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BookingForm from '../components/BookingForm.astro';
+import { SITE } from '../consts';
+import { owner } from '../data/media';
+import {
+  STATS, TAGS, MODES, PILLARS, WHAT_WE_FILM, FILTERS, FILMS, PACKAGES, STEPS, REVIEWS, FAQ, HERO_COLUMNS,
+} from '../data/home';
 
-const stats = [
-  { value: 'Part 107', label: 'FAA certified pilot' },
-  { value: '5.1K', label: 'Cinematic capture' },
-  { value: '48 hr', label: 'Typical photo turnaround' },
-  { value: '100%', label: 'Licensed & insured flights' },
-];
+const chip = 'rounded-full px-5 py-2.5 text-[14px] transition';
+const chipOn = 'bg-spruce text-fog';
+const chipOff = 'text-inkk/70 ring-1 ring-inkk/20 hover:ring-inkk/50';
+const star = 'M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z';
 ---
 
-<BaseLayout
-  title="Aerial Photography & Drone Video in Walla Walla, WA"
-  description="Cinematic aerial photography and drone video across the Pacific Northwest. Real estate media, commercial footage, inspections and post-production from Walla Walla, WA."
->
-  <!-- Hero -->
-  <section class="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden">
-    <Image
-      src={hero.src}
-      alt={hero.alt}
-      layout="full-width"
-      priority
-      class="absolute inset-0 -z-10 h-full w-full object-cover"
-    />
-    <!-- To use a looping hero video instead, add public/videos/hero.mp4 and uncomment:
-    <video class="absolute inset-0 -z-10 h-full w-full object-cover" autoplay muted loop playsinline poster="/og-default.jpg">
-      <source src="/videos/hero.mp4" type="video/mp4" />
-    </video>
-    -->
-    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/60 to-ink-950/10" aria-hidden="true"></div>
-
-    <div class="container-x pb-20 pt-32 sm:pb-28">
-      <p class="eyebrow">Walla Walla · Pacific Northwest</p>
-      <h1 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-        The Northwest, <span class="text-brand-400">from above.</span>
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl">
-        Cinematic aerial photography and video production for real estate, brands and builders —
-        flown by an FAA-certified pilot, finished by a professional editor.
-      </p>
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href="/contact/" class="btn-primary">Book a Flight</a>
-        <a href="#work" class="btn-ghost">See Our Work</a>
+<BaseLayout>
+  <!-- ───────── Hero ───────── -->
+  <header id="top" class="bg-spruce p-2 sm:p-3">
+    <div class="relative isolate flex min-h-[92vh] items-end overflow-hidden rounded-[26px] bg-spruce2">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div
+          class="absolute left-1/2 top-1/2 flex w-[150%] gap-3 sm:gap-4"
+          style="transform: translate(-50%, -50%) rotate(-11deg) scale(1.18);"
+        >
+          {
+            HERO_COLUMNS.map((col, i) => (
+              <div class="flex flex-1 flex-col gap-3 sm:gap-4" style={`margin-top: ${-((i % 3) * 34)}px;`}>
+                {col.map((tile) =>
+                  tile.owner ? (
+                    <div class={`${tile.h} overflow-hidden rounded-md`}>
+                      <Image src={owner.src} alt={owner.alt} width={600} priority class="h-full w-full object-cover object-[50%_20%]" />
+                    </div>
+                  ) : (
+                    <Landscape seed={tile.s} class={`${tile.h} rounded-md`} />
+                  ),
+                )}
+              </div>
+            ))
+          }
+        </div>
+        <div class="absolute inset-0 bg-spruce/55"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_78%,rgba(14,22,19,.92),rgba(14,22,19,.35)_60%,rgba(14,22,19,.55))]"></div>
+        <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-spruce/85 to-transparent"></div>
+      </div>
+      <div class="relative mx-auto w-full max-w-[1240px] px-6 pb-16 pt-40 text-center sm:px-9 sm:pb-24">
+        <p class="mb-3 text-[clamp(.72rem,1.5vw,1rem)] track text-fog/80">Where the whole day lives on in</p>
+        <h1 class="font-display text-[clamp(3.4rem,12.5vw,10.5rem)] font-semibold italic leading-[.86] tracking-[-.035em] text-fog">
+          Wedding Films
+        </h1>
+        <p class="mt-5 text-[clamp(.7rem,1.4vw,.95rem)] track text-brass">&amp; aerial coverage</p>
+        <div class="mx-auto mt-12 h-px w-24 rule"></div>
+        <p class="mx-auto mt-6 max-w-[52ch] text-[16px] font-medium leading-[1.65] tracking-[-.005em] text-fog/85">
+          Two filmmakers on the ground, one licensed drone in the air. Oregon, Washington, and wherever the two of you are standing.
+        </p>
       </div>
     </div>
-  </section>
-
-  <!-- Stats -->
-  <section aria-label="At a glance" class="border-y border-white/10 bg-ink-900">
-    <dl class="container-x grid grid-cols-2 gap-8 py-10 md:grid-cols-4">
+    <dl class="mx-auto grid max-w-[1240px] grid-cols-2 gap-y-8 px-6 py-12 sm:px-9 md:grid-cols-4">
       {
-        stats.map(({ value, label }) => (
-          <div>
-            <dt class="text-sm text-slate-400">{label}</dt>
-            <dd class="mt-1 font-display text-3xl font-semibold text-white">{value}</dd>
+        STATS.map(([value, label]) => (
+          <div class="flex flex-col-reverse">
+            <dt class="mt-2 text-[13px] font-medium text-fog/65">{label}</dt>
+            <dd class="font-display text-[clamp(1.6rem,3vw,2.3rem)] font-semibold leading-none text-fog">{value}</dd>
           </div>
         ))
       }
     </dl>
+  </header>
+
+  <!-- ───────── How we shoot it ───────── -->
+  <section id="philosophy" class="bg-fog py-24 sm:py-32">
+    <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 grid-cols-[minmax(0,1fr)] md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
+      <div>
+        <SectionTitle lead="How" rest="we shoot it" />
+        <p class="mt-7 max-w-[34ch] text-[17px] font-medium leading-relaxed text-inkk/80">
+          A wedding is one long take. We film it that way — vows, toasts and the drive out, in order, with sound.
+        </p>
+        <p class="mt-4 max-w-[34ch] text-[15px] font-medium leading-relaxed text-inkk/80">
+          Photos freeze a day. Film keeps the voices in it: the shake in his voice at the vows, your dad losing it halfway through
+          the toast, the coast wind on the bluff.
+        </p>
+        <ul class="mt-9 flex flex-wrap gap-2">
+          {TAGS.map((t) => <li class="rounded-full px-4 py-2 text-[13px] text-inkk/70 ring-1 ring-inkk/15">{t}</li>)}
+        </ul>
+      </div>
+      <div class="grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-4">
+        <NotchCard notchBg="#E9ECE6" class="aspect-[4/5]">
+          <Image src={owner.src} alt={owner.altAlt} width={800} class="h-full w-full object-cover object-[50%_18%]" />
+        </NotchCard>
+        <div class="flex flex-col gap-4">
+          <Landscape seed={16} class="aspect-[4/5] rounded-[18px]" label="FOOTAGE SLOT" />
+          <div class="rounded-[18px] bg-spruce p-6 text-fog">
+            <p class="font-display text-[1.6rem] font-semibold leading-tight">{SITE.city}, {SITE.region}</p>
+            <p class="mt-2 text-[13px] font-medium leading-relaxed text-fog/80">
+              Owner &amp; lead filmmaker. Shooting the Gorge, the coast, Bend, Portland and the Puget Sound.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Services overview -->
-  <section class="container-x py-24">
-    <SectionHeading
-      eyebrow="What we do"
-      title="Aerial media, start to finish"
-      intro="One team handles flight planning, capture and post-production, so your footage arrives ready to publish."
-    />
-    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <!-- ───────── In motion (films / aerial toggle) ───────── -->
+  <section class="relative overflow-hidden bg-fog pb-28 pt-6 sm:pb-36">
+    <div class="mx-auto grid max-w-[1500px] grid-cols-1 items-center gap-10 px-6 md:grid-cols-[1fr_1.25fr_1fr] md:px-0">
+      <Landscape seed={44} class="hidden h-[420px] rounded-[26px] md:block lg:h-[520px]" label="CEREMONY / GORGE" />
+      <div class="mx-auto max-w-[46ch] text-center" data-modes>
+        <h2 class="font-display text-[clamp(2.1rem,4.4vw,3.6rem)] font-semibold leading-[1.04] tracking-[-.02em]">
+          Keeping the day <em class="italic">in motion</em>, not on a shelf
+        </h2>
+        <p class="mx-auto mt-5 max-w-[40ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+          From ceremony audio to the shot nobody could have gotten from the ground — we cover your day in both.
+        </p>
+        <div class="mt-7 flex justify-center gap-3">
+          <button type="button" data-mode="films" aria-pressed="true" class={`${chip} ${chipOn}`}>Wedding films</button>
+          <button type="button" data-mode="aerial" aria-pressed="false" class={`${chip} ${chipOff}`}>Aerial</button>
+        </div>
+        <p data-mode-text class="mx-auto mt-6 min-h-[3.5rem] max-w-[38ch] text-[14px] font-medium leading-relaxed text-inkk/80" aria-live="polite">
+          {MODES.films}
+        </p>
+        <div class="mx-auto mt-10 h-16 w-px bg-inkk/20"></div>
+      </div>
+      <Landscape seed={52} class="hidden h-[420px] rounded-[26px] md:block lg:h-[520px]" label="AERIAL / COAST" />
+    </div>
+  </section>
+
+  <!-- ───────── Pillars ───────── -->
+  <section class="bg-fog pb-24">
+    <div class="mx-auto grid max-w-[1100px] gap-5 px-6 sm:px-9 md:grid-cols-3">
       {
-        SERVICES.map((s) => (
-          <a
-            href={`/services/#${s.id}`}
-            class="group overflow-hidden rounded-2xl border border-white/10 bg-ink-900 transition hover:border-brand-500/50"
-          >
-            <Image
-              src={s.image.src}
-              alt={s.image.alt}
-              width={600}
-              height={400}
-              class="aspect-[3/2] w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-            <div class="p-6">
-              <h3 class="text-lg font-semibold">{s.title}</h3>
-              <p class="mt-2 text-sm text-slate-400">{s.summary}</p>
-              <span class="mt-4 inline-block text-sm font-semibold text-brand-400">Learn more →</span>
-            </div>
-          </a>
+        PILLARS.map((p) => (
+          <article class="rounded-[20px] bg-white/70 p-8 ring-1 ring-inkk/10 transition duration-200 hover:ring-inkk/25">
+            <span class="mb-6 grid h-12 w-12 place-items-center rounded-full bg-spruce">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 fill-brass" aria-hidden="true"><path d={p.icon} /></svg>
+            </span>
+            <h3 class="font-display text-[1.45rem] font-semibold leading-tight">{p.t}</h3>
+            <p class="mt-3 text-[14px] font-medium leading-relaxed text-inkk/70">{p.d}</p>
+          </article>
         ))
       }
     </div>
   </section>
 
-  <!-- Featured work -->
-  <section id="work" class="scroll-mt-20 bg-ink-900 py-24">
-    <div class="container-x">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <SectionHeading
-          eyebrow="Featured work"
-          title="Recent flights"
-          intro="Wheat fields, vineyards, river canyons and job sites, all shot within a few hours of Walla Walla."
-        />
-        <a href="/contact/" class="btn-ghost">Start your project</a>
+  <!-- ───────── What we film (carousel) ───────── -->
+  <section id="services" class="bg-fog px-2 pb-24 sm:px-3">
+    <div class="rounded-[30px] bg-cream py-20 sm:py-24">
+      <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+        <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+          <SectionTitle lead="What" rest="we film" />
+          <p class="max-w-[46ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+            Weddings are most of the calendar. The rest of the year we fly and film for venues, builders and brands around the
+            Northwest.
+          </p>
+        </div>
+        <div
+          id="services-track"
+          class="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {
+            WHAT_WE_FILM.map((s) => (
+              <article class="w-[78vw] flex-none snap-start sm:w-[46vw] lg:w-[calc(33.333%-14px)]">
+                <NotchCard notchBg="#EFEDE4" class="aspect-[4/3]" href="/services/">
+                  <Landscape seed={s.seed} image={s.image} alt={s.alt} class="h-full w-full" label={s.image ? undefined : 'FOOTAGE SLOT'} />
+                </NotchCard>
+                <h3 class="mt-5 font-display text-[1.5rem] font-semibold leading-tight">{s.t}</h3>
+                <p class="mt-2 max-w-[38ch] text-[14px] font-medium leading-relaxed text-inkk/70">{s.d}</p>
+                <p class="mt-3 text-[12px] tracking-[.1em] text-inkk/40">{s.m}</p>
+              </article>
+            ))
+          }
+        </div>
+        <div class="mt-10 flex justify-center gap-4">
+          {
+            [-1, 1].map((dir) => (
+              <button
+                type="button"
+                data-scroll={dir}
+                aria-label={dir === -1 ? 'Previous services' : 'Next services'}
+                class="grid h-11 w-16 place-items-center rounded-full ring-1 ring-inkk/20 transition hover:bg-inkk/5 hover:ring-inkk/50"
+              >
+                <svg viewBox="0 0 40 12" class="h-3 w-10 fill-none stroke-inkk" stroke-width="1.4" aria-hidden="true">
+                  <path d={dir === -1 ? 'M39 6H1m0 0l6-5M1 6l6 5' : 'M1 6h38m0 0l-6-5m6 5l-6 5'} />
+                </svg>
+              </button>
+            ))
+          }
+        </div>
       </div>
-
-      <ul class="mt-14 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[260px]">
-        {
-          gallery.map((item, i) => (
-            <li class:list={['group relative overflow-hidden rounded-2xl', i === 0 && 'lg:col-span-2 lg:row-span-2']}>
-              <figure class="h-full">
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={i === 0 ? 1200 : 700}
-                  class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-5 text-sm font-medium text-white">
-                  {item.caption}
-                </figcaption>
-              </figure>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
-  <CallToAction />
+  <!-- ───────── Recent films (filterable) ───────── -->
+  <section id="work" class="bg-fog py-24">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="Recent" rest="films" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+          Full films, not fifteen-second teasers. Pick a category to see what a whole day looks like cut together.
+        </p>
+      </div>
+      <div class="mt-9 flex flex-wrap gap-2" role="tablist" aria-label="Filter films" id="film-filters">
+        {
+          FILTERS.map(([key, label], i) => (
+            <button type="button" role="tab" data-filter={key} aria-selected={i === 0 ? 'true' : 'false'} class={`${chip} ${i === 0 ? chipOn : chipOff}`}>
+              {label}
+            </button>
+          ))
+        }
+      </div>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="film-grid">
+        {
+          FILMS.map((f) => (
+            <a href={f.href ?? '#book'} class="group block" data-cat={f.c}>
+              <Landscape seed={f.seed} image={f.image} alt={f.alt} class="aspect-video rounded-[14px]" duration={f.d} play />
+              <div class="mt-3 flex items-baseline justify-between gap-4">
+                <span class="text-[15px] font-medium">{f.t}</span>
+                <span class="text-[13px] font-medium text-inkk/55">{f.l}</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── Packages ───────── -->
+  <section id="packages" class="bg-fog pb-24">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="Wedding" rest="packages" />
+        <p class="max-w-[46ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+          Every package includes clean vow and toast audio, a private gallery, and the raw ceremony in full. Drone is included
+          wherever it's legal to fly.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          PACKAGES.map((pk) => (
+            <article class:list={['flex flex-col rounded-[22px] p-8', pk.feature ? 'bg-spruce text-fog' : 'bg-white/70 text-inkk ring-1 ring-inkk/10']}>
+              {pk.feature && <p class="mb-3 text-[11px] track text-brass">MOST BOOKED</p>}
+              <h3 class="font-display text-[1.6rem] font-semibold leading-tight">{pk.t}</h3>
+              <p class="mt-4 font-display text-[2.6rem] font-semibold leading-none tracking-tight">{pk.p}</p>
+              <p class:list={['mt-2 text-[13px]', pk.feature ? 'text-fog/50' : 'text-inkk/45']}>{pk.m}</p>
+              <ul class="mt-7 space-y-0 text-[14px]">
+                {pk.f.map((item) => (
+                  <li class:list={['flex gap-3 border-t py-3', pk.feature ? 'border-fog/15 text-fog/80' : 'border-inkk/10 text-inkk/70']}>
+                    <span class="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brass" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-8 pt-1">
+                <a
+                  href="#book"
+                  class:list={[
+                    'inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-medium transition-all duration-200',
+                    pk.feature ? 'bg-brass text-[#1B1408] hover:-translate-y-[1px] hover:bg-brass2' : 'bg-spruce text-fog hover:bg-spruce2',
+                  ]}
+                >
+                  Check your date
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── Process ───────── -->
+  <section id="process" class="bg-spruce py-24 text-fog">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="How" rest="the day works" class="text-fog" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-fog/65">
+          Four steps from first email to the film in your inbox. No pressure calls, no packages you have to decode.
+        </p>
+      </div>
+      <ol class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          STEPS.map(([title, text], i) => (
+            <li class="border-t border-fog/15 pt-5">
+              <span class="font-display text-[2rem] font-semibold leading-none text-brass">{i + 1}</span>
+              <h3 class="mt-4 font-display text-[1.3rem] font-semibold">{title}</h3>
+              <p class="mt-2 text-[14px] font-medium leading-relaxed text-fog/65">{text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ───────── Reviews ───────── -->
+  <section class="bg-fog py-24">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="What" rest="couples say" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-inkk/60">
+          Placeholder reviews — swap these for real ones from The Knot or Google before launch.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          REVIEWS.map((r) => (
+            <figure class="flex flex-col rounded-[22px] bg-white/70 p-8 ring-1 ring-inkk/10">
+              <div class="mb-5 flex gap-1 text-brass" role="img" aria-label="Five stars">
+                {Array.from({ length: 5 }).map(() => (
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d={star} /></svg>
+                ))}
+              </div>
+              <blockquote class="font-display text-[1.28rem] font-semibold leading-[1.4] text-inkk/90">“{r.q}”</blockquote>
+              <figcaption class="mt-auto flex items-center gap-3 pt-7 text-[13px] font-medium text-inkk/65">
+                <span class="grid h-9 w-9 place-items-center rounded-full bg-spruce text-[11px] text-fog" aria-hidden="true">{r.i}</span>
+                <span>{r.n} · {r.l}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── FAQ ───────── -->
+  <section id="faq" class="bg-fog px-2 pb-24 sm:px-3">
+    <div class="relative overflow-hidden rounded-[30px] bg-spruce py-24">
+      <Landscape seed={61} class="absolute inset-0 h-full w-full opacity-30" />
+      <div class="relative mx-auto max-w-[1240px] px-6 sm:px-9">
+        <h2 class="text-center font-display text-[clamp(2.1rem,4.4vw,3.6rem)] font-semibold leading-tight text-fog">
+          Questions we get <em class="italic">most</em>
+        </h2>
+        <div class="mx-auto mt-12 max-w-[840px]" id="faq-list">
+          {
+            FAQ.map(([q, a], i) => (
+              <div class="border-t border-fog/15 last:border-b" data-faq>
+                <button
+                  type="button"
+                  aria-expanded={i === 0 ? 'true' : 'false'}
+                  aria-controls={`faq-${i}`}
+                  class="flex w-full items-center justify-between gap-6 py-6 text-left text-[17px] text-fog"
+                >
+                  <span>{q}</span>
+                  <span
+                    data-icon
+                    class:list={[
+                      'grid h-8 w-8 flex-none place-items-center rounded-full ring-1 ring-fog/25 transition-transform duration-300',
+                      i === 0 && 'rotate-45 bg-brass ring-brass',
+                    ]}
+                  >
+                    <svg viewBox="0 0 12 12" class:list={['h-3 w-3', i === 0 ? 'stroke-[#1B1408]' : 'stroke-fog/70']} stroke-width="1.5" aria-hidden="true">
+                      <path d="M6 1v10M1 6h10" />
+                    </svg>
+                  </span>
+                </button>
+                <div id={`faq-${i}`} class="grid transition-all duration-300 ease-out" style={`grid-template-rows: ${i === 0 ? '1fr' : '0fr'};`}>
+                  <div class="overflow-hidden">
+                    <p class="max-w-[62ch] pb-7 pr-10 text-[15px] font-medium leading-relaxed text-fog/65">{a}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── Book ───────── -->
+  <section id="book" class="bg-fog2 py-24">
+    <div class="mx-auto grid max-w-[1240px] items-center gap-14 px-6 sm:px-9 md:grid-cols-2">
+      <div>
+        <SectionTitle lead="Check" rest="your date" />
+        <p class="mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
+          Tell us when and where. You'll hear back within a day with availability and a full price — no call required first.
+        </p>
+        <p class="mt-6 text-[15px] font-medium text-inkk/65">
+          <a href={`mailto:${SITE.email}`} class="hover:text-inkk">{SITE.email}</a><br />
+          <a href={`tel:${SITE.phone.replace(/\D/g, '')}`} class="hover:text-inkk">{SITE.phone}</a>
+        </p>
+      </div>
+      <BookingForm />
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  import { MODES } from '../data/home';
+
+  // Wedding films / Aerial toggle
+  const modes = document.querySelector<HTMLElement>('[data-modes]');
+  modes?.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      modes.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) => {
+        const on = b === btn;
+        b.setAttribute('aria-pressed', String(on));
+        b.classList.toggle('bg-spruce', on);
+        b.classList.toggle('text-fog', on);
+        ['text-inkk/70', 'ring-1', 'ring-inkk/20', 'hover:ring-inkk/50'].forEach((c) => b.classList.toggle(c, !on));
+      });
+      const text = modes.querySelector('[data-mode-text]');
+      if (text) text.textContent = MODES[btn.dataset.mode as keyof typeof MODES];
+    });
+  });
+
+  // Services carousel arrows
+  const track = document.getElementById('services-track');
+  document.querySelectorAll<HTMLButtonElement>('[data-scroll]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (track) track.scrollBy({ left: Number(btn.dataset.scroll) * 0.55 * track.clientWidth, behavior: 'smooth' });
+    });
+  });
+
+  // Recent films filter
+  const filters = document.querySelectorAll<HTMLButtonElement>('#film-filters [data-filter]');
+  const films = document.querySelectorAll<HTMLElement>('#film-grid [data-cat]');
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter;
+      filters.forEach((b) => {
+        const on = b === btn;
+        b.setAttribute('aria-selected', String(on));
+        b.classList.toggle('bg-spruce', on);
+        b.classList.toggle('text-fog', on);
+        ['text-inkk/70', 'ring-1', 'ring-inkk/20', 'hover:ring-inkk/50'].forEach((c) => b.classList.toggle(c, !on));
+      });
+      films.forEach((f) => (f.hidden = key !== 'all' && f.dataset.cat !== key));
+    });
+  });
+
+  // FAQ accordion (one open at a time)
+  const items = document.querySelectorAll<HTMLElement>('[data-faq]');
+  const setOpen = (item: HTMLElement, open: boolean) => {
+    const btn = item.querySelector('button')!;
+    const icon = item.querySelector('[data-icon]')!;
+    const svg = icon.querySelector('svg')!;
+    btn.setAttribute('aria-expanded', String(open));
+    icon.classList.toggle('rotate-45', open);
+    icon.classList.toggle('bg-brass', open);
+    icon.classList.toggle('ring-brass', open);
+    svg.classList.toggle('stroke-[#1B1408]', open);
+    svg.classList.toggle('stroke-fog/70', !open);
+    (item.querySelector('.grid') as HTMLElement).style.gridTemplateRows = open ? '1fr' : '0fr';
+  };
+  items.forEach((item) => {
+    item.querySelector('button')!.addEventListener('click', () => {
+      const wasOpen = item.querySelector('button')!.getAttribute('aria-expanded') === 'true';
+      items.forEach((other) => setOpen(other, false));
+      setOpen(item, !wasOpen);
+    });
+  });
+</script>

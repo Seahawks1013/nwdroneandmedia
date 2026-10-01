@@ -1,102 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BookingForm from '../components/BookingForm.astro';
 import { SITE } from '../consts';
-import { SERVICES } from '../data/services';
 
-const field =
-  'mt-2 block w-full rounded-xl border border-white/10 bg-ink-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-brand-400 focus:outline-none focus:ring-1 focus:ring-brand-400';
-const label = 'block text-sm font-medium text-slate-300';
+const info = [
+  ['Email', SITE.email, `mailto:${SITE.email}`],
+  ['Phone', SITE.phone, `tel:${SITE.phone.replace(/\D/g, '')}`],
+  ['Based in', `${SITE.city}, ${SITE.region}`],
+  ['Service area', SITE.serviceArea],
+];
 ---
 
 <BaseLayout
-  title="Contact & Quotes"
-  description="Request a quote for drone photography, aerial video or inspections in Walla Walla, WA and across the Pacific Northwest."
+  title="Contact & Booking"
+  description="Check your date for a wedding film or request a quote for aerial, real estate or inspection work in Walla Walla and across the Pacific Northwest."
 >
-  <section class="container-x py-20 sm:py-28">
-    <p class="eyebrow">Contact</p>
-    <h1 class="mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">Tell us about your project</h1>
-    <p class="mt-6 max-w-2xl text-lg text-slate-400">
-      Share a few details and we'll reply within one business day with availability and a quote.
-    </p>
+  <PageHero eyebrow="Contact" title="Check your date" intro="Tell us when and where. You'll hear back within a day with availability and a full price — no call required first." />
 
-    <div class="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-      <!-- Static form: set SITE.formEndpoint in src/consts.ts to a Formspree/Basin/Netlify endpoint. -->
-      <form action={SITE.formEndpoint} method="POST" class="grid gap-6 rounded-3xl border border-white/10 bg-ink-900 p-6 sm:grid-cols-2 sm:p-10">
-        <h2 class="text-2xl font-semibold sm:col-span-2">Request a quote</h2>
-        <div>
-          <label for="name" class={label}>Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required class={field} />
-        </div>
-        <div>
-          <label for="email" class={label}>Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required class={field} />
-        </div>
-        <div>
-          <label for="phone" class={label}>Phone <span class="text-slate-500">(optional)</span></label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" class={field} />
-        </div>
-        <div>
-          <label for="service" class={label}>Service</label>
-          <select id="service" name="service" class={field}>
-            {SERVICES.map((s) => <option>{s.title}</option>)}
-            <option>Something else</option>
-          </select>
-        </div>
-        <div class="sm:col-span-2">
-          <label for="location" class={label}>Project location</label>
-          <input id="location" name="location" type="text" placeholder="City or address" class={field} />
-        </div>
-        <div class="sm:col-span-2">
-          <label for="message" class={label}>Project details</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Dates, deliverables, anything we should know…" class={field}></textarea>
-        </div>
-        <!-- Honeypot field to reduce spam (most form services support "_gotcha"). -->
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-        <div class="sm:col-span-2">
-          <button type="submit" class="btn-primary w-full sm:w-auto">Send request</button>
-        </div>
-      </form>
-
-      <aside class="space-y-8">
-        <div class="rounded-3xl border border-white/10 p-8">
-          <h2 class="text-xl font-semibold">Business info</h2>
-          <dl class="mt-6 space-y-5 text-sm">
-            <div>
-              <dt class="text-slate-500">Email</dt>
-              <dd class="mt-1"><a href={`mailto:${SITE.email}`} class="text-white hover:text-brand-400">{SITE.email}</a></dd>
-            </div>
-            {
-              SITE.phone && (
-                <div>
-                  <dt class="text-slate-500">Phone</dt>
-                  <dd class="mt-1"><a href={`tel:${SITE.phone.replace(/\D/g, '')}`} class="text-white hover:text-brand-400">{SITE.phone}</a></dd>
-                </div>
-              )
-            }
-            <div>
-              <dt class="text-slate-500">Based in</dt>
-              <dd class="mt-1 text-white">{SITE.city}, {SITE.region}</dd>
-            </div>
-            <div>
-              <dt class="text-slate-500">Service area</dt>
-              <dd class="mt-1 text-white">{SITE.serviceArea}</dd>
-            </div>
-            <div>
-              <dt class="text-slate-500">Hours</dt>
-              <dd class="mt-1 text-white">Mon–Sat, sunrise to sunset (weather permitting)</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="overflow-hidden rounded-3xl border border-white/10">
+  <section id="book" class="bg-fog2 py-24">
+    <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 md:grid-cols-2">
+      <div>
+        <SectionTitle lead="Say" rest="hello" />
+        <p class="mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
+          Weddings, elopements, listings, job sites or brand work — send the basics and we'll come back with a plan.
+        </p>
+        <dl class="mt-10 max-w-[420px] text-[15px]">
+          {
+            info.map(([label, value, href]) => (
+              <div class="flex justify-between gap-6 border-t border-inkk/10 py-4 last:border-b">
+                <dt class="text-inkk/50">{label}</dt>
+                <dd class="text-right font-medium text-inkk/80">{href ? <a href={href} class="hover:text-inkk">{value}</a> : value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <div class="mt-10 overflow-hidden rounded-[22px] ring-1 ring-inkk/10">
           <iframe
-            title="Map of Walla Walla, Washington"
-            src="https://www.google.com/maps?q=Walla+Walla,+WA&output=embed"
-            class="h-64 w-full grayscale invert-[.9]"
+            title={`Map of ${SITE.city}, ${SITE.region}`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(`${SITE.city}, ${SITE.region}`)}&output=embed`}
+            class="h-64 w-full grayscale"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-      </aside>
+      </div>
+      <BookingForm />
     </div>
   </section>
 </BaseLayout>

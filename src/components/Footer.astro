@@ -1,35 +1,37 @@
 ---
-import { NAV, SITE } from '../consts';
+import Logo from './Logo.astro';
+import { FOOTER_COLUMNS, SITE } from '../consts';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-white/10 bg-ink-950">
-  <div class="container-x grid gap-10 py-14 md:grid-cols-3">
-    <div>
-      <p class="font-display text-lg font-semibold text-white">NW Drone <span class="text-brand-400">&amp;</span> Media</p>
-      <p class="mt-3 max-w-xs text-sm text-slate-400">
-        Aerial photography, cinematic video and drone services from {SITE.city}, {SITE.region}.
-      </p>
-      <p class="mt-4 text-xs uppercase tracking-widest text-slate-500">FAA Part 107 Certified · Fully Insured</p>
+<footer class="bg-spruce pb-8 pt-20 text-fog">
+  <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+    <div class="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <div>
+        <Logo />
+        <p class="mt-5 max-w-[32ch] text-[14px] font-medium leading-relaxed text-fog/65">
+          Wedding films and licensed drone work out of {SITE.city}, {SITE.region}. Shooting Oregon, Washington, and anywhere
+          the road goes.
+        </p>
+      </div>
+      {
+        FOOTER_COLUMNS.map(([heading, links]) => (
+          <div>
+            <h2 class="font-display font-semibold text-[1.15rem]">{heading}</h2>
+            <ul class="mt-4 space-y-2 text-[14px]">
+              {links.map(({ label, href }) => (
+                <li>
+                  <a href={href} class="text-fog/55 transition hover:text-fog">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
-
-    <nav aria-label="Footer">
-      <p class="text-sm font-semibold text-white">Explore</p>
-      <ul class="mt-3 space-y-2 text-sm">
-        {NAV.map(({ href, label }) => <li><a href={href} class="text-slate-400 hover:text-white">{label}</a></li>)}
-      </ul>
-    </nav>
-
-    <div>
-      <p class="text-sm font-semibold text-white">Get in touch</p>
-      <ul class="mt-3 space-y-2 text-sm text-slate-400">
-        <li><a href={`mailto:${SITE.email}`} class="hover:text-white">{SITE.email}</a></li>
-        {SITE.phone && <li><a href={`tel:${SITE.phone.replace(/\D/g, '')}`} class="hover:text-white">{SITE.phone}</a></li>}
-        <li>{SITE.city}, {SITE.region} — serving the Pacific Northwest</li>
-      </ul>
+    <div class="mt-16 flex flex-wrap justify-between gap-4 border-t border-fog/15 pt-6 text-[12px] text-fog/40">
+      <span>© {year} {SITE.name}. All rights reserved.</span>
+      <span>FAA Part 107 certified · Insured · {SITE.city}, {SITE.region}</span>
     </div>
-  </div>
-  <div class="border-t border-white/5 py-6 text-center text-xs text-slate-500">
-    © {year} {SITE.name}. All rights reserved.
   </div>
 </footer>

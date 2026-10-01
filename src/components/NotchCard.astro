@@ -1,0 +1,25 @@
+---
+// Rounded media card with the cut-out corner and circular arrow link.
+export interface Props {
+  notchBg: string;
+  class?: string;
+  href?: string;
+  arrow?: string;
+  label?: string;
+}
+const { notchBg, class: className = '', href = '/#work', arrow = '↗', label = 'View work' } = Astro.props;
+---
+
+<div class={`relative ${className}`} style={`--notch-bg: ${notchBg};`}>
+  <div class="h-full w-full overflow-hidden rounded-[18px]"><slot /></div>
+  <div
+    class="notch-corner absolute bottom-0 right-0 grid h-[74px] w-[74px] place-items-center rounded-tl-[18px]"
+    style={`background: ${notchBg};`}
+  >
+    <a
+      href={href}
+      class="grid h-[46px] w-[46px] place-items-center rounded-full text-[19px] leading-none text-inkk transition-colors duration-200 hover:bg-brass"
+      aria-label={label}>{arrow}</a
+    >
+  </div>
+</div>

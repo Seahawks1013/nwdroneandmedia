@@ -1,104 +1,100 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import CallToAction from '../components/CallToAction.astro';
-import { about } from '../data/media';
+import PageHero from '../components/PageHero.astro';
+import Landscape from '../components/Landscape.astro';
+import NotchCard from '../components/NotchCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { SITE } from '../consts';
+import { owner } from '../data/media';
+import { PILLARS, TAGS } from '../data/home';
 
-// Update with the actual fleet and kit.
+// Update to match the actual kit.
 const gear = [
-  { name: 'Primary cinema drone', spec: 'Hasselblad 4/3 sensor, 5.1K video, 10-bit D-Log' },
-  { name: 'Compact drone', spec: 'Sub-250 g for tight sites and lower-risk airspace' },
-  { name: 'Inspection payload', spec: 'High-zoom camera for roof, tower and solar detail' },
-  { name: 'Ground cameras', spec: 'Mirrorless full-frame bodies, gimbal and prime lenses' },
-  { name: 'Audio', spec: 'Wireless lavaliers and on-camera shotgun mics' },
-  { name: 'Post-production', spec: 'DaVinci Resolve Studio with calibrated grading monitor' },
-];
-
-const credentials = [
-  'FAA Part 107 Remote Pilot Certificate',
-  'Commercial drone liability insurance (certificates on request)',
-  'LAANC authorization for controlled airspace',
-  'Pre-flight risk assessment and weather planning for every job',
+  ['Cinema drone', '4/3 sensor, 5.1K video, 10-bit log for grading'],
+  ['Compact drone', 'Sub-250 g for tight venues and lower-risk airspace'],
+  ['Ground cameras', 'Full-frame mirrorless bodies, gimbal and fast primes'],
+  ['Audio', 'Lavs on the officiant and couple, plus a board feed from the DJ'],
+  ['Inspection kit', 'High-zoom camera for roof, tower and solar detail'],
+  ['Post-production', 'DaVinci Resolve Studio on a calibrated grading monitor'],
 ];
 ---
 
 <BaseLayout
-  title="About Us"
-  description="Meet the FAA-certified pilot behind NW Drone & Media, a Walla Walla aerial photography and video production company serving the Pacific Northwest."
+  title="About"
+  description="Meet the FAA Part 107 licensed filmmaker behind NW Drone & Media: wedding films and aerial coverage across Oregon, Washington and the Pacific Northwest."
 >
-  <section class="container-x py-20 sm:py-28">
-    <p class="eyebrow">About NW Drone &amp; Media</p>
-    <h1 class="mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">Local pilots who know the valley from every angle</h1>
-    <p class="mt-6 max-w-2xl text-lg text-slate-400">
-      We're a Walla Walla production company that pairs licensed drone operations with real filmmaking,
-      so you get footage that's flown safely and cut to tell a story.
-    </p>
-  </section>
+  <PageHero
+    eyebrow="About NW Drone & Media"
+    title="One long take"
+    intro="Two filmmakers on the ground, one licensed drone in the air. Oregon, Washington, and wherever the two of you are standing."
+  />
 
   <!-- Story -->
-  <section class="container-x grid items-center gap-12 pb-24 lg:grid-cols-2">
-    <div>
-      <SectionHeading eyebrow="Our story" title="Started in the wheat fields" />
-      <div class="mt-6 space-y-4 text-slate-400">
-        <!-- Replace with the real company story. -->
-        <p>
-          NW Drone &amp; Media began with a simple idea: the Walla Walla Valley looks completely different from
-          400 feet up, and most people never get to see it. What started as personal flights over harvest season
-          turned into work for local realtors, wineries and contractors.
-        </p>
-        <p>
-          Today we cover the Pacific Northwest, from the Blue Mountains to the Tri-Cities and beyond, with the same
-          approach on every job: plan carefully, fly legally, and deliver media that's ready to use.
-        </p>
-      </div>
-    </div>
-    <Image src={about.pilot.src} alt={about.pilot.alt} width={900} class="aspect-[4/3] w-full rounded-3xl object-cover" />
-  </section>
-
-  <!-- Pilot -->
-  <section class="bg-ink-900 py-24">
-    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.2fr]">
-      <SectionHeading eyebrow="The pilot" title="Certified, insured, and detail-obsessed" />
+  <section class="bg-fog py-24 sm:py-32">
+    <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 grid-cols-[minmax(0,1fr)] md:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
       <div>
-        <!-- Replace with the operator's name and background. -->
-        <p class="text-slate-400">
-          Our lead pilot and editor holds an FAA Part 107 Remote Pilot Certificate and has logged hundreds of
-          commercial flights across agricultural, residential and industrial sites. Every shoot starts with an
-          airspace check, a site risk assessment and a shot list built around your goals.
+        <SectionTitle lead="Our" rest="story" />
+        <!-- Replace with the real company story. -->
+        <p class="mt-7 max-w-[38ch] text-[17px] font-medium leading-relaxed text-inkk/80">
+          NW Drone &amp; Media started with a simple idea: a wedding is one long take, and it deserves to be filmed that way —
+          vows, toasts and the drive out, in order, with sound.
         </p>
-        <h3 class="mt-10 text-xl font-semibold">Credentials</h3>
-        <ul class="mt-4 space-y-3">
-          {
-            credentials.map((c) => (
-              <li class="flex gap-3 text-slate-300">
-                <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-brand-400" aria-hidden="true" />
-                {c}
-              </li>
-            ))
-          }
+        <p class="mt-4 max-w-[38ch] text-[15px] font-medium leading-relaxed text-inkk/80">
+          Adding a licensed drone meant we could show the whole place, not just the people in it. The rest of the year we bring the
+          same care to venues, builders, realtors and brands around the Northwest.
+        </p>
+        <ul class="mt-9 flex flex-wrap gap-2">
+          {TAGS.map((t) => <li class="rounded-full px-4 py-2 text-[13px] text-inkk/70 ring-1 ring-inkk/15">{t}</li>)}
         </ul>
       </div>
+      <div class="grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-4">
+        <NotchCard notchBg="#E9ECE6" class="aspect-[4/5]" href="/contact/" label="Get in touch">
+          <Image src={owner.src} alt={owner.altAlt} width={800} class="h-full w-full object-cover object-[50%_18%]" />
+        </NotchCard>
+        <div class="flex flex-col gap-4">
+          <Landscape seed={16} class="aspect-[4/5] rounded-[18px]" label="FOOTAGE SLOT" />
+          <div class="rounded-[18px] bg-spruce p-6 text-fog">
+            <p class="font-display text-[1.6rem] font-semibold leading-tight">{SITE.city}, {SITE.region}</p>
+            <p class="mt-2 text-[13px] font-medium leading-relaxed text-fog/80">Owner &amp; lead filmmaker. FAA Part 107 licensed pilot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilot / credentials -->
+  <section class="bg-fog pb-24">
+    <div class="mx-auto grid max-w-[1100px] gap-5 px-6 sm:px-9 md:grid-cols-3">
+      {
+        PILLARS.map((p) => (
+          <article class="rounded-[20px] bg-white/70 p-8 ring-1 ring-inkk/10 transition duration-200 hover:ring-inkk/25">
+            <span class="mb-6 grid h-12 w-12 place-items-center rounded-full bg-spruce">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 fill-brass" aria-hidden="true"><path d={p.icon} /></svg>
+            </span>
+            <h3 class="font-display text-[1.45rem] font-semibold leading-tight">{p.t}</h3>
+            <p class="mt-3 text-[14px] font-medium leading-relaxed text-inkk/70">{p.d}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
 
   <!-- Gear -->
-  <section class="container-x py-24">
-    <div class="grid items-start gap-12 lg:grid-cols-2">
-      <div>
-        <SectionHeading
-          eyebrow="Gear & capabilities"
-          title="Professional kit, in the air and on the ground"
-          intro="Cinema-grade capture and a full post-production suite mean one team can take your project from flight to final export."
-        />
-        <Image src={about.gear.src} alt={about.gear.alt} width={900} class="mt-10 aspect-[3/2] w-full rounded-3xl object-cover" />
+  <section class="bg-spruce py-24 text-fog">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="Gear" rest="& capabilities" class="text-fog" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-fog/65">
+          Cinema-grade capture in the air and on the ground, and a full grading suite back at the desk.
+        </p>
       </div>
-      <dl class="grid gap-4 sm:grid-cols-2">
+      <dl class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {
-          gear.map(({ name, spec }) => (
-            <div class="rounded-2xl border border-white/10 bg-ink-900 p-6">
-              <dt class="font-display font-semibold text-white">{name}</dt>
-              <dd class="mt-2 text-sm text-slate-400">{spec}</dd>
+          gear.map(([name, spec]) => (
+            <div class="border-t border-fog/15 pt-5">
+              <dt class="font-display text-[1.3rem] font-semibold">{name}</dt>
+              <dd class="mt-2 text-[14px] font-medium leading-relaxed text-fog/65">{spec}</dd>
             </div>
           ))
         }
@@ -106,5 +102,15 @@ const credentials = [
     </div>
   </section>
 
-  <CallToAction heading="Let's plan your next shoot" />
+  <section class="bg-fog2 py-24 text-center">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <SectionTitle lead="Check" rest="your date" />
+      <p class="mx-auto mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
+        Tell us when and where. You'll hear back within a day with availability and a full price.
+      </p>
+      <a href="/contact/" class="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-spruce px-7 py-3.5 text-[15px] font-medium text-fog transition-all duration-200 hover:bg-spruce2">
+        Get in touch
+      </a>
+    </div>
+  </section>
 </BaseLayout>

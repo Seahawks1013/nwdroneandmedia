@@ -1,79 +1,140 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeading from '../components/SectionHeading.astro';
-import CallToAction from '../components/CallToAction.astro';
+import PageHero from '../components/PageHero.astro';
+import Landscape from '../components/Landscape.astro';
+import NotchCard from '../components/NotchCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
 import { SERVICES } from '../data/services';
-
-const process = [
-  { step: '01', title: 'Consult', text: 'We discuss goals, location and deliverables, then send a fixed quote.' },
-  { step: '02', title: 'Plan', text: 'Airspace authorization, weather windows and a shot list built for your project.' },
-  { step: '03', title: 'Fly & film', text: 'On-site capture with backup batteries, cameras and a safety-first flight plan.' },
-  { step: '04', title: 'Deliver', text: 'Edited, color-graded media delivered through a private download gallery.' },
-];
+import { PACKAGES, STEPS } from '../data/home';
 ---
 
 <BaseLayout
-  title="Drone Services"
-  description="Real estate drone photography, commercial aerial video, drone inspections and video editing & color grading in Walla Walla and the Pacific Northwest."
+  title="Services & Packages"
+  description="Wedding film packages plus real estate drone media, commercial aerial footage, drone inspections and video editing & color grading across the Pacific Northwest."
 >
-  <section class="container-x py-20 sm:py-28">
-    <p class="eyebrow">Services</p>
-    <h1 class="mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">Aerial and video services built around your deliverable</h1>
-    <p class="mt-6 max-w-2xl text-lg text-slate-400">
-      Whether you need listing photos tomorrow or a brand film next quarter, every package includes flight planning,
-      licensed operation and professional post-production.
-    </p>
-    <nav aria-label="Services" class="mt-10 flex flex-wrap gap-2">
-      {SERVICES.map((s) => <a href={`#${s.id}`} class="rounded-full border border-white/15 px-4 py-2 text-sm hover:border-brand-400 hover:text-white">{s.title}</a>)}
-    </nav>
-  </section>
+  <PageHero
+    eyebrow="Services & packages"
+    title="On the ground & in the air"
+    intro="Wedding films are most of the calendar. The rest of the year we fly and film for realtors, builders, wineries and brands."
+  />
 
-  {
-    SERVICES.map((s, i) => (
-      <section id={s.id} class:list={['scroll-mt-20 py-20', i % 2 === 0 && 'bg-ink-900']}>
-        <div class="container-x grid items-center gap-12 lg:grid-cols-2">
-          <Image
-            src={s.image.src}
-            alt={s.image.alt}
-            width={900}
-            class:list={['aspect-[3/2] w-full rounded-3xl object-cover', i % 2 === 1 && 'lg:order-last']}
-          />
-          <div>
-            <h2 class="text-3xl font-semibold">{s.title}</h2>
-            <p class="mt-4 text-lg text-slate-400">{s.summary}</p>
-            <h3 class="mt-8 text-sm font-semibold uppercase tracking-widest text-slate-500">What's included</h3>
-            <ul class="mt-4 space-y-3">
-              {s.details.map((d) => (
-                <li class="flex gap-3">
-                  <svg class="mt-1 h-4 w-4 flex-none text-brand-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd" />
-                  </svg>
-                  {d}
-                </li>
-              ))}
-            </ul>
-            <a href="/contact/" class="btn-primary mt-8">Get a quote</a>
-          </div>
-        </div>
-      </section>
-    ))
-  }
-
-  <section class="container-x py-24">
-    <SectionHeading eyebrow="How it works" title="From first call to final file" center />
-    <ol class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <!-- Quick jump links -->
+  <nav aria-label="Services" class="bg-fog pt-16">
+    <ul class="mx-auto flex max-w-[1240px] flex-wrap justify-center gap-2 px-6 sm:px-9">
+      <li><a href="#packages" class="block rounded-full px-5 py-2.5 text-[14px] text-inkk/70 ring-1 ring-inkk/20 transition hover:ring-inkk/50">Wedding packages</a></li>
       {
-        process.map((p) => (
-          <li class="rounded-2xl border border-white/10 bg-ink-900 p-6">
-            <span class="font-display text-sm font-semibold text-brand-400">{p.step}</span>
-            <h3 class="mt-3 text-lg font-semibold">{p.title}</h3>
-            <p class="mt-2 text-sm text-slate-400">{p.text}</p>
-          </li>
+        SERVICES.map((s) => (
+          <li><a href={`#${s.id}`} class="block rounded-full px-5 py-2.5 text-[14px] text-inkk/70 ring-1 ring-inkk/20 transition hover:ring-inkk/50">{s.title}</a></li>
         ))
       }
-    </ol>
+    </ul>
+  </nav>
+
+  <!-- Wedding packages -->
+  <section id="packages" class="scroll-mt-24 bg-fog py-24">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="Wedding" rest="packages" />
+        <p class="max-w-[46ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+          Every package includes clean vow and toast audio, a private gallery, and the raw ceremony in full. Drone is included
+          wherever it's legal to fly.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          PACKAGES.map((pk) => (
+            <article class:list={['flex flex-col rounded-[22px] p-8', pk.feature ? 'bg-spruce text-fog' : 'bg-white/70 text-inkk ring-1 ring-inkk/10']}>
+              {pk.feature && <p class="mb-3 text-[11px] track text-brass">MOST BOOKED</p>}
+              <h3 class="font-display text-[1.6rem] font-semibold leading-tight">{pk.t}</h3>
+              <p class="mt-4 font-display text-[2.6rem] font-semibold leading-none tracking-tight">{pk.p}</p>
+              <p class:list={['mt-2 text-[13px]', pk.feature ? 'text-fog/50' : 'text-inkk/45']}>{pk.m}</p>
+              <ul class="mt-7 space-y-0 text-[14px]">
+                {pk.f.map((item) => (
+                  <li class:list={['flex gap-3 border-t py-3', pk.feature ? 'border-fog/15 text-fog/80' : 'border-inkk/10 text-inkk/70']}>
+                    <span class="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brass" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-8 pt-1">
+                <a
+                  href="/contact/"
+                  class:list={[
+                    'inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-medium transition-all duration-200',
+                    pk.feature ? 'bg-brass text-[#1B1408] hover:-translate-y-[1px] hover:bg-brass2' : 'bg-spruce text-fog hover:bg-spruce2',
+                  ]}>Check your date</a
+                >
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
   </section>
 
-  <CallToAction />
+  <!-- Commercial & aerial services -->
+  <section class="bg-fog px-2 pb-24 sm:px-3">
+    <div class="rounded-[30px] bg-cream py-20 sm:py-24">
+      <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+        <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+          <SectionTitle lead="Aerial" rest="& commercial" />
+          <p class="max-w-[46ch] text-[15px] font-medium leading-relaxed text-inkk/70">
+            Every flight is planned, authorized and insured. We check airspace before quoting, so there are no surprises on the day.
+          </p>
+        </div>
+        <div class="mt-16 space-y-20">
+          {
+            SERVICES.map((s, i) => (
+              <article id={s.id} class="grid scroll-mt-28 items-center gap-10 md:grid-cols-2">
+                <NotchCard notchBg="#EFEDE4" class:list={['aspect-[4/3]', i % 2 === 1 && 'md:order-last']} href="/contact/" label={`Ask about ${s.title}`}>
+                  <Landscape seed={s.seed} image={s.image} alt={s.alt} class="h-full w-full" label={s.image ? undefined : 'FOOTAGE SLOT'} />
+                </NotchCard>
+                <div>
+                  <p class="text-[12px] tracking-[.1em] text-inkk/40">{s.meta}</p>
+                  <h3 class="mt-3 font-display text-[clamp(1.8rem,3vw,2.4rem)] font-semibold leading-tight">{s.title}</h3>
+                  <p class="mt-3 max-w-[44ch] text-[15px] font-medium leading-relaxed text-inkk/70">{s.summary}</p>
+                  <ul class="mt-6 text-[14px]">
+                    {s.details.map((d) => (
+                      <li class="flex gap-3 border-t border-inkk/10 py-3 text-inkk/70">
+                        <span class="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-brass" aria-hidden="true" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="bg-spruce py-24 text-fog">
+    <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+      <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+        <SectionTitle lead="How" rest="it works" class="text-fog" />
+        <p class="max-w-[44ch] text-[15px] font-medium leading-relaxed text-fog/65">
+          Four steps from first email to the finished files. No pressure calls, no packages you have to decode.
+        </p>
+      </div>
+      <ol class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          STEPS.map(([title, text], i) => (
+            <li class="border-t border-fog/15 pt-5">
+              <span class="font-display text-[2rem] font-semibold leading-none text-brass">{i + 1}</span>
+              <h3 class="mt-4 font-display text-[1.3rem] font-semibold">{title}</h3>
+              <p class="mt-2 text-[14px] font-medium leading-relaxed text-fog/65">{text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-16 text-center">
+        <a href="/contact/" class="inline-flex items-center justify-center gap-2 rounded-full bg-brass px-7 py-3.5 text-[15px] font-medium text-[#1B1408] transition-all duration-200 hover:-translate-y-[1px] hover:bg-brass2">
+          Check your date
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
