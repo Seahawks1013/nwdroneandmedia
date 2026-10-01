@@ -1,9 +1,11 @@
 ---
 import Logo from './Logo.astro';
-import { NAV_LEFT, NAV_RIGHT, NAV_CTA } from '../consts';
+import { NAV_LEFT, NAV_RIGHT, NAV_CTA, NAV_CTA_MOBILE } from '../consts';
 
 const pill =
   'rounded-full px-4 py-2 text-[14px] text-fog/85 ring-1 ring-fog/20 transition hover:bg-fog/10 hover:text-fog';
+const cta =
+  'whitespace-nowrap rounded-full bg-brass px-4 py-2 text-[13px] font-medium text-[#1B1408] transition hover:bg-brass2 sm:px-5 sm:text-[14px]';
 ---
 
 <nav id="site-nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" aria-label="Main">
@@ -14,23 +16,49 @@ const pill =
     <Logo compact />
     <div class="flex items-center gap-2">
       <a href={NAV_RIGHT.href} class={`hidden lg:inline-block ${pill}`}>{NAV_RIGHT.label}</a>
-      <a
-        href={NAV_CTA.href}
-        class="whitespace-nowrap rounded-full bg-brass px-4 py-2 text-[13px] font-medium text-[#1B1408] transition hover:bg-brass2 sm:px-5 sm:text-[14px]"
-        >{NAV_CTA.label}</a
-      >
+      <!-- Phones/tablets (no nav links): Pricing. Desktop: Check your date. -->
+      <a href={NAV_CTA_MOBILE.href} class={`lg:hidden ${cta}`}>{NAV_CTA_MOBILE.label}</a>
+      <a href={NAV_CTA.href} class={`hidden lg:inline-block ${cta}`}>{NAV_CTA.label}</a>
     </div>
   </div>
 </nav>
 
+<!-- Back to top (phones/tablets). Appears after scrolling down a screen. -->
+<button
+  id="to-top"
+  type="button"
+  aria-label="Back to top"
+  tabindex="-1"
+  class="pointer-events-none fixed right-4 z-40 grid h-12 w-12 translate-y-3 place-items-center rounded-full bg-spruce text-fog opacity-0 shadow-[0_8px_24px_rgba(14,22,19,.35)] ring-1 ring-fog/20 transition duration-300 lg:hidden"
+  style="bottom: calc(1rem + env(safe-area-inset-bottom));"
+>
+  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7"></path>
+  </svg>
+</button>
+
 <script>
-  // Nav gets a frosted spruce background once the page scrolls past 60px.
   const nav = document.getElementById('site-nav')!;
+  const toTop = document.getElementById('to-top')!;
+
   const update = () => {
+    // Nav gets a frosted spruce background once the page scrolls past 60px.
     const scrolled = window.scrollY > 60;
     nav.classList.toggle('bg-spruce/92', scrolled);
     nav.classList.toggle('backdrop-blur-md', scrolled);
+
+    // Back-to-top shows after roughly one screen of scrolling.
+    const show = window.scrollY > window.innerHeight * 0.8;
+    toTop.classList.toggle('opacity-0', !show);
+    toTop.classList.toggle('translate-y-3', !show);
+    toTop.classList.toggle('pointer-events-none', !show);
+    toTop.tabIndex = show ? 0 : -1;
   };
   window.addEventListener('scroll', update, { passive: true });
   update();
+
+  toTop.addEventListener('click', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
 </script>
