@@ -9,16 +9,20 @@ const cta =
 ---
 
 <nav id="site-nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" aria-label="Main">
-  <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-3 px-5 py-4 sm:gap-6 sm:px-9">
+  <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-2 px-4 py-4 min-[400px]:gap-3 min-[400px]:px-5 sm:gap-6 sm:px-9">
     <div class="hidden items-center gap-2 lg:flex">
       {NAV_LEFT.map(({ href, label }) => <a href={href} class={pill}>{label}</a>)}
     </div>
     <Logo compact />
     <div class="flex items-center gap-2">
       <a href={NAV_RIGHT.href} class={`hidden lg:inline-block ${pill}`}>{NAV_RIGHT.label}</a>
-      <!-- Phones/tablets (no nav links): Pricing. Desktop: Check your date. -->
-      <a href={NAV_CTA_MOBILE.href} class={`lg:hidden ${cta}`}>{NAV_CTA_MOBILE.label}</a>
-      <a href={NAV_CTA.href} class={`hidden lg:inline-block ${cta}`}>{NAV_CTA.label}</a>
+      <!-- Phones/tablets (nav links hidden): Pricing pill + Book now. -->
+      <a
+        href={NAV_CTA_MOBILE.href}
+        class="whitespace-nowrap rounded-full px-3 py-2 text-[13px] text-fog/90 ring-1 ring-fog/30 transition hover:bg-fog/10 sm:px-4 sm:text-[14px] lg:hidden"
+        >{NAV_CTA_MOBILE.label}</a
+      >
+      <a href={NAV_CTA.href} class={cta}>{NAV_CTA.label}</a>
     </div>
   </div>
 </nav>

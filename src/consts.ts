@@ -26,8 +26,8 @@ export const NAV_LEFT = [
   { href: '/about/', label: 'About' },
 ];
 export const NAV_RIGHT = { href: '/#process', label: 'How it works' };
-export const NAV_CTA = { href: '/contact/', label: 'Check your date' };
-// Shown instead of NAV_CTA on phones and tablets, where the nav links are hidden.
+export const NAV_CTA = { href: '/contact/', label: 'Book now' };
+// Extra header button on phones and tablets, where the nav links are hidden.
 export const NAV_CTA_MOBILE = { href: '/services/', label: 'Pricing' };
 
 export const LEGAL_LINKS = [

@@ -15,7 +15,15 @@ const c = tone === 'light' ? '#E9ECE6' : '#121A17';
     <circle cx="13" cy="13" r="11.3" stroke={c} stroke-opacity=".28" stroke-width="1"></circle>
   </svg>
   <span class="leading-none">
-    <span class:list={['block whitespace-nowrap font-display tracking-tight', compact ? 'text-[16px] sm:text-[19px]' : 'text-[19px]']}>NW Drone &amp; Media</span>
+    <span class:list={['block whitespace-nowrap font-display tracking-tight', compact ? 'text-[15px] leading-[1.05] min-[420px]:text-[16px] sm:text-[19px]' : 'text-[19px]']}
+      >{
+        compact ? (
+          <Fragment>NW Drone<br class="min-[420px]:hidden" /><span class="max-[419px]:hidden">&nbsp;</span>&amp; Media</Fragment>
+        ) : (
+          'NW Drone & Media'
+        )
+      }</span
+    >
     <span class:list={['mt-1 whitespace-nowrap text-[9px] track text-brass', compact ? 'hidden sm:block' : 'block']}>WEDDINGS · EVENTS · AERIAL</span>
   </span>
 </a>
