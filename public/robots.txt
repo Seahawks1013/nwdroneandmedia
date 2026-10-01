@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nwdroneandmedia.com/sitemap-index.xml

@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { SERVICES } from '../data/services';
+
+const process = [
+  { step: '01', title: 'Consult', text: 'We discuss goals, location and deliverables, then send a fixed quote.' },
+  { step: '02', title: 'Plan', text: 'Airspace authorization, weather windows and a shot list built for your project.' },
+  { step: '03', title: 'Fly & film', text: 'On-site capture with backup batteries, cameras and a safety-first flight plan.' },
+  { step: '04', title: 'Deliver', text: 'Edited, color-graded media delivered through a private download gallery.' },
+];
+---
+
+<BaseLayout
+  title="Drone Services"
+  description="Real estate drone photography, commercial aerial video, drone inspections and video editing & color grading in Walla Walla and the Pacific Northwest."
+>
+  <section class="container-x py-20 sm:py-28">
+    <p class="eyebrow">Services</p>
+    <h1 class="mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">Aerial and video services built around your deliverable</h1>
+    <p class="mt-6 max-w-2xl text-lg text-slate-400">
+      Whether you need listing photos tomorrow or a brand film next quarter, every package includes flight planning,
+      licensed operation and professional post-production.
+    </p>
+    <nav aria-label="Services" class="mt-10 flex flex-wrap gap-2">
+      {SERVICES.map((s) => <a href={`#${s.id}`} class="rounded-full border border-white/15 px-4 py-2 text-sm hover:border-brand-400 hover:text-white">{s.title}</a>)}
+    </nav>
+  </section>
+
+  {
+    SERVICES.map((s, i) => (
+      <section id={s.id} class:list={['scroll-mt-20 py-20', i % 2 === 0 && 'bg-ink-900']}>
+        <div class="container-x grid items-center gap-12 lg:grid-cols-2">
+          <Image
+            src={s.image.src}
+            alt={s.image.alt}
+            width={900}
+            class:list={['aspect-[3/2] w-full rounded-3xl object-cover', i % 2 === 1 && 'lg:order-last']}
+          />
+          <div>
+            <h2 class="text-3xl font-semibold">{s.title}</h2>
+            <p class="mt-4 text-lg text-slate-400">{s.summary}</p>
+            <h3 class="mt-8 text-sm font-semibold uppercase tracking-widest text-slate-500">What's included</h3>
+            <ul class="mt-4 space-y-3">
+              {s.details.map((d) => (
+                <li class="flex gap-3">
+                  <svg class="mt-1 h-4 w-4 flex-none text-brand-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd" />
+                  </svg>
+                  {d}
+                </li>
+              ))}
+            </ul>
+            <a href="/contact/" class="btn-primary mt-8">Get a quote</a>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="container-x py-24">
+    <SectionHeading eyebrow="How it works" title="From first call to final file" center />
+    <ol class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        process.map((p) => (
+          <li class="rounded-2xl border border-white/10 bg-ink-900 p-6">
+            <span class="font-display text-sm font-semibold text-brand-400">{p.step}</span>
+            <h3 class="mt-3 text-lg font-semibold">{p.title}</h3>
+            <p class="mt-2 text-sm text-slate-400">{p.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <CallToAction />
+</BaseLayout>

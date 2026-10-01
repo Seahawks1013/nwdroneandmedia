@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { hero, gallery } from '../data/media';
+import { SERVICES } from '../data/services';
+
+const stats = [
+  { value: 'Part 107', label: 'FAA certified pilot' },
+  { value: '5.1K', label: 'Cinematic capture' },
+  { value: '48 hr', label: 'Typical photo turnaround' },
+  { value: '100%', label: 'Licensed & insured flights' },
+];
+---
+
+<BaseLayout
+  title="Aerial Photography & Drone Video in Walla Walla, WA"
+  description="Cinematic aerial photography and drone video across the Pacific Northwest. Real estate media, commercial footage, inspections and post-production from Walla Walla, WA."
+>
+  <!-- Hero -->
+  <section class="relative isolate flex min-h-[calc(100svh-4rem)] items-end overflow-hidden">
+    <Image
+      src={hero.src}
+      alt={hero.alt}
+      layout="full-width"
+      priority
+      class="absolute inset-0 -z-10 h-full w-full object-cover"
+    />
+    <!-- To use a looping hero video instead, add public/videos/hero.mp4 and uncomment:
+    <video class="absolute inset-0 -z-10 h-full w-full object-cover" autoplay muted loop playsinline poster="/og-default.jpg">
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
+    -->
+    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-950 via-ink-950/60 to-ink-950/10" aria-hidden="true"></div>
+
+    <div class="container-x pb-20 pt-32 sm:pb-28">
+      <p class="eyebrow">Walla Walla · Pacific Northwest</p>
+      <h1 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
+        The Northwest, <span class="text-brand-400">from above.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl">
+        Cinematic aerial photography and video production for real estate, brands and builders —
+        flown by an FAA-certified pilot, finished by a professional editor.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/contact/" class="btn-primary">Book a Flight</a>
+        <a href="#work" class="btn-ghost">See Our Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section aria-label="At a glance" class="border-y border-white/10 bg-ink-900">
+    <dl class="container-x grid grid-cols-2 gap-8 py-10 md:grid-cols-4">
+      {
+        stats.map(({ value, label }) => (
+          <div>
+            <dt class="text-sm text-slate-400">{label}</dt>
+            <dd class="mt-1 font-display text-3xl font-semibold text-white">{value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- Services overview -->
+  <section class="container-x py-24">
+    <SectionHeading
+      eyebrow="What we do"
+      title="Aerial media, start to finish"
+      intro="One team handles flight planning, capture and post-production, so your footage arrives ready to publish."
+    />
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        SERVICES.map((s) => (
+          <a
+            href={`/services/#${s.id}`}
+            class="group overflow-hidden rounded-2xl border border-white/10 bg-ink-900 transition hover:border-brand-500/50"
+          >
+            <Image
+              src={s.image.src}
+              alt={s.image.alt}
+              width={600}
+              height={400}
+              class="aspect-[3/2] w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">{s.title}</h3>
+              <p class="mt-2 text-sm text-slate-400">{s.summary}</p>
+              <span class="mt-4 inline-block text-sm font-semibold text-brand-400">Learn more →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Featured work -->
+  <section id="work" class="scroll-mt-20 bg-ink-900 py-24">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <SectionHeading
+          eyebrow="Featured work"
+          title="Recent flights"
+          intro="Wheat fields, vineyards, river canyons and job sites, all shot within a few hours of Walla Walla."
+        />
+        <a href="/contact/" class="btn-ghost">Start your project</a>
+      </div>
+
+      <ul class="mt-14 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[260px]">
+        {
+          gallery.map((item, i) => (
+            <li class:list={['group relative overflow-hidden rounded-2xl', i === 0 && 'lg:col-span-2 lg:row-span-2']}>
+              <figure class="h-full">
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={i === 0 ? 1200 : 700}
+                  class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent p-5 text-sm font-medium text-white">
+                  {item.caption}
+                </figcaption>
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CallToAction />
+</BaseLayout>

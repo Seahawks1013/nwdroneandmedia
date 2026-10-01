@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { about } from '../data/media';
+
+// Update with the actual fleet and kit.
+const gear = [
+  { name: 'Primary cinema drone', spec: 'Hasselblad 4/3 sensor, 5.1K video, 10-bit D-Log' },
+  { name: 'Compact drone', spec: 'Sub-250 g for tight sites and lower-risk airspace' },
+  { name: 'Inspection payload', spec: 'High-zoom camera for roof, tower and solar detail' },
+  { name: 'Ground cameras', spec: 'Mirrorless full-frame bodies, gimbal and prime lenses' },
+  { name: 'Audio', spec: 'Wireless lavaliers and on-camera shotgun mics' },
+  { name: 'Post-production', spec: 'DaVinci Resolve Studio with calibrated grading monitor' },
+];
+
+const credentials = [
+  'FAA Part 107 Remote Pilot Certificate',
+  'Commercial drone liability insurance (certificates on request)',
+  'LAANC authorization for controlled airspace',
+  'Pre-flight risk assessment and weather planning for every job',
+];
+---
+
+<BaseLayout
+  title="About Us"
+  description="Meet the FAA-certified pilot behind NW Drone & Media, a Walla Walla aerial photography and video production company serving the Pacific Northwest."
+>
+  <section class="container-x py-20 sm:py-28">
+    <p class="eyebrow">About NW Drone &amp; Media</p>
+    <h1 class="mt-4 max-w-3xl text-4xl font-bold sm:text-5xl">Local pilots who know the valley from every angle</h1>
+    <p class="mt-6 max-w-2xl text-lg text-slate-400">
+      We're a Walla Walla production company that pairs licensed drone operations with real filmmaking,
+      so you get footage that's flown safely and cut to tell a story.
+    </p>
+  </section>
+
+  <!-- Story -->
+  <section class="container-x grid items-center gap-12 pb-24 lg:grid-cols-2">
+    <div>
+      <SectionHeading eyebrow="Our story" title="Started in the wheat fields" />
+      <div class="mt-6 space-y-4 text-slate-400">
+        <!-- Replace with the real company story. -->
+        <p>
+          NW Drone &amp; Media began with a simple idea: the Walla Walla Valley looks completely different from
+          400 feet up, and most people never get to see it. What started as personal flights over harvest season
+          turned into work for local realtors, wineries and contractors.
+        </p>
+        <p>
+          Today we cover the Pacific Northwest, from the Blue Mountains to the Tri-Cities and beyond, with the same
+          approach on every job: plan carefully, fly legally, and deliver media that's ready to use.
+        </p>
+      </div>
+    </div>
+    <Image src={about.pilot.src} alt={about.pilot.alt} width={900} class="aspect-[4/3] w-full rounded-3xl object-cover" />
+  </section>
+
+  <!-- Pilot -->
+  <section class="bg-ink-900 py-24">
+    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+      <SectionHeading eyebrow="The pilot" title="Certified, insured, and detail-obsessed" />
+      <div>
+        <!-- Replace with the operator's name and background. -->
+        <p class="text-slate-400">
+          Our lead pilot and editor holds an FAA Part 107 Remote Pilot Certificate and has logged hundreds of
+          commercial flights across agricultural, residential and industrial sites. Every shoot starts with an
+          airspace check, a site risk assessment and a shot list built around your goals.
+        </p>
+        <h3 class="mt-10 text-xl font-semibold">Credentials</h3>
+        <ul class="mt-4 space-y-3">
+          {
+            credentials.map((c) => (
+              <li class="flex gap-3 text-slate-300">
+                <span class="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-brand-400" aria-hidden="true" />
+                {c}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gear -->
+  <section class="container-x py-24">
+    <div class="grid items-start gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading
+          eyebrow="Gear & capabilities"
+          title="Professional kit, in the air and on the ground"
+          intro="Cinema-grade capture and a full post-production suite mean one team can take your project from flight to final export."
+        />
+        <Image src={about.gear.src} alt={about.gear.alt} width={900} class="mt-10 aspect-[3/2] w-full rounded-3xl object-cover" />
+      </div>
+      <dl class="grid gap-4 sm:grid-cols-2">
+        {
+          gear.map(({ name, spec }) => (
+            <div class="rounded-2xl border border-white/10 bg-ink-900 p-6">
+              <dt class="font-display font-semibold text-white">{name}</dt>
+              <dd class="mt-2 text-sm text-slate-400">{spec}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <CallToAction heading="Let's plan your next shoot" />
+</BaseLayout>

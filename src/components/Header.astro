@@ -1,0 +1,80 @@
+---
+import { NAV } from '../consts';
+
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink-950/75 backdrop-blur-lg">
+  <nav class="container-x flex h-16 items-center justify-between" aria-label="Main">
+    <a href="/" class="flex items-center gap-2.5 font-display text-lg font-semibold text-white">
+      <img src="/favicon.svg" alt="" width="32" height="32" />
+      <span>NW Drone <span class="text-brand-400">&amp;</span> Media</span>
+    </a>
+
+    <ul class="hidden items-center gap-8 md:flex">
+      {
+        NAV.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class:list={[
+                'text-sm font-medium transition hover:text-white',
+                isActive(href) ? 'text-white' : 'text-slate-400',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+      <li><a href="/contact/" class="btn-primary !py-2">Book a Flight</a></li>
+    </ul>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="rounded-md p-2 text-slate-300 hover:text-white md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Toggle menu</span>
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-ink-950 md:hidden">
+    <ul class="container-x flex flex-col gap-1 py-4">
+      {
+        NAV.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class:list={[
+                'block rounded-lg px-3 py-2.5 text-base font-medium hover:bg-white/5',
+                isActive(href) ? 'text-white' : 'text-slate-400',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="pt-2"><a href="/contact/" class="btn-primary w-full">Book a Flight</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu?.classList.toggle('hidden', open);
+  });
+</script>
