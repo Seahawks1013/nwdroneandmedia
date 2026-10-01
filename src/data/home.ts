@@ -13,15 +13,6 @@ export const STATS = [
 
 export const TAGS = ['Weddings', 'Events', 'Local business', 'Licensed drone', 'Horizontal + vertical edits'];
 
-export const MODES = {
-  films:
-    'From the rehearsal to the last dance. Ceremony coverage, full-day packages, and add-ons for drone, rehearsal and interviews.',
-  events:
-    'Community events, socials and the local businesses behind them, with horizontal films and vertical cuts ready for social.',
-  aerial:
-    'Part 107 licensed and insured. Venue establishing shots, the ceremony from above, and aerials of events and properties — flown legally.',
-};
-
 export const PILLARS = [
   {
     t: 'Licensed & insured',
@@ -88,12 +79,10 @@ export const STEPS = [
 export const REVIEWS: { q: string; n: string; l: string; i: string }[] = [];
 
 export const FAQ = [
-  ['How much does it cost?', 'Weddings start at $300 for the ceremony, and full-day coverage starts at $1,000 for field work plus $150 per 10 minutes of edited film. Events start at $400 for a half day, and drone shots start at $100. The Pricing page has the full breakdown.'],
   ['Can you fly a drone at our venue?', "Usually. We're FAA Part 107 licensed and insured. Venues near PDX and other airports sit in controlled airspace, so we file for authorization ahead of the date. National parks and some state parks don't allow drones at all — we check your location before you book."],
   ['What happens if it rains?', "We shoot anyway — Northwest weather makes for great films. The drone stays in the case if it's wet or too windy, and we make up for it on the ground."],
   ['Do you film events and businesses too?', 'Yes. Beyond weddings we film community events, socials and local businesses, with horizontal edits from $100 and vertical social cuts at $50 each.'],
   ['Where do you travel?', 'We\'re based in Woodland, WA and serve Portland, Vancouver WA and the surrounding areas. Farther than that? Ask — we\'re happy to travel.'],
-  ['How do we hold our date?', "Send a request with your date and location. We'll confirm availability, send a quote, and walk you through the agreement and payment schedule."],
 ];
 
 // Hero backdrop: 5 columns of tilted tiles. `owner: true` marks the photo tile.

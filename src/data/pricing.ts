@@ -95,29 +95,6 @@ export const EVENT_PLANS: Plan[] = [
   },
 ];
 
-// Short summary cards for the home page.
-export const PRICING_SUMMARY = [
-  {
-    name: 'Weddings',
-    price: 'From $300',
-    unit: 'Ceremony only · full day from $1,000',
-    points: ['Ceremony, rehearsal or the entire day', 'Edited film $150 per 10 minutes', 'Drone, rehearsal and interview add-ons'],
-    featured: true,
-  },
-  {
-    name: 'Events & local business',
-    price: 'From $400',
-    unit: 'Half day · full day from $800',
-    points: ['Up to 5 hours, or the whole event', 'Horizontal edits from $100', 'Vertical social cuts $50 each'],
-  },
-  {
-    name: 'Drone footage',
-    price: 'From $100',
-    unit: 'Price varies per hour',
-    points: ['FAA Part 107 licensed and insured', 'Venues, properties and events', 'Add to any wedding or event'],
-  },
-];
-
 // Options for the booking form's "What are you booking?" select.
 export const BOOKING_OPTIONS = [
   'Not sure yet',
