@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Landscape from '../components/Landscape.astro';
 import NotchCard from '../components/NotchCard.astro';
@@ -32,7 +31,7 @@ const star = 'M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9
                 {col.map((tile) =>
                   tile.owner ? (
                     <div class={`${tile.h} overflow-hidden rounded-md`}>
-                      <Image src={owner.src} alt={owner.alt} width={600} priority class="h-full w-full object-cover object-[50%_20%]" />
+                      <img src={owner.src} alt={owner.alt} width={owner.width} height={owner.height} fetchpriority="high" class="h-full w-full object-cover object-[50%_20%]" />
                     </div>
                   ) : (
                     <Landscape seed={tile.s} class={`${tile.h} rounded-md`} />
@@ -88,7 +87,7 @@ const star = 'M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9
       </div>
       <div class="grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-4">
         <NotchCard notchBg="#E9ECE6" class="aspect-[4/5]">
-          <Image src={owner.src} alt={owner.altAlt} width={800} class="h-full w-full object-cover object-[50%_18%]" />
+          <img src={owner.src} alt={owner.altAlt} width={owner.width} height={owner.height} loading="lazy" decoding="async" class="h-full w-full object-cover object-[50%_18%]" />
         </NotchCard>
         <div class="flex flex-col gap-4">
           <Landscape seed={16} class="aspect-[4/5] rounded-[18px]" label="FOOTAGE SLOT" />

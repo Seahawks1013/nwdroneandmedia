@@ -1,0 +1,13 @@
+# Ready for the move to Netlify: builds at the domain root (no BASE_PATH needed).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Long-lived caching for fingerprinted build assets.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

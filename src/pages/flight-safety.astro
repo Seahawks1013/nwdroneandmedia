@@ -1,0 +1,60 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { SITE, LEGAL_UPDATED } from '../consts';
+---
+
+<!-- Template text. Confirm details (certificate, insurance limits) and have it reviewed before launch. -->
+<LegalPage
+  title="Flight Safety & FAA Compliance"
+  description="How NW Drone & Media operates drones safely and legally under FAA Part 107, and what that means for your shoot."
+  updated={LEGAL_UPDATED}
+  intro="Every flight is planned, authorized and insured. Here's what that involves, and its limits."
+>
+  <h2>Certified and insured</h2>
+  <p>
+    Commercial drone flights for {SITE.name} are flown by a remote pilot holding an FAA Part 107 Remote Pilot Certificate. Our
+    aircraft are registered with the FAA, and we carry commercial drone liability insurance. Certificates of insurance are
+    available to venues and clients on request.
+  </p>
+
+  <h2>How we plan every flight</h2>
+  <ul>
+    <li>Airspace check before quoting, including controlled airspace near airports and any Temporary Flight Restrictions (TFRs).</li>
+    <li>LAANC or FAA DroneZone authorization filed in advance where controlled airspace requires it.</li>
+    <li>Site review for obstacles, people, roads, wildlife and takeoff/landing areas.</li>
+    <li>Weather and wind checks on the day, with go/no-go limits set by the pilot.</li>
+    <li>Pre-flight equipment checks and fully charged backup batteries.</li>
+  </ul>
+
+  <h2>Where we can't fly</h2>
+  <p>Some locations are off-limits or need special permission no matter the project, including:</p>
+  <ul>
+    <li>National parks and many wilderness areas, where launching and landing drones is prohibited.</li>
+    <li>Some state parks and public lands, which require a permit or don't allow drones.</li>
+    <li>Areas under active Temporary Flight Restrictions, such as wildfires, VIP visits and large stadium events.</li>
+    <li>Over moving vehicles or crowds, except where Part 107 rules for operations over people are fully met.</li>
+  </ul>
+  <p>We'll tell you before you book if your location has any of these limits.</p>
+
+  <h2>The pilot has the final call</h2>
+  <p>
+    Safety comes first. The remote pilot in command may delay, change or cancel any flight because of weather, wind, airspace
+    changes, equipment issues, people entering the flight area, or any other safety concern, even on the day of the shoot.
+    When aerial coverage isn't possible, we make up for it with ground coverage where we can. Aerial footage is never
+    guaranteed.
+  </p>
+
+  <h2>Privacy and property</h2>
+  <p>
+    We plan flights to avoid capturing private property or people who aren't part of the project, and we respect requests from
+    neighbors and venues. Clients are responsible for permission to take off and land on the property they book us for.
+  </p>
+
+  <h2>Disclaimer</h2>
+  <p>
+    This page describes our general operating practices for information only. It is not legal advice and does not change the
+    terms of any project agreement. FAA rules and local regulations change; flights are always conducted under the rules in
+    effect on the day.
+  </p>
+  <p>Questions about flying at your site? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</LegalPage>

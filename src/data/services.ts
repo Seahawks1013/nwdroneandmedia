@@ -1,13 +1,11 @@
-import type { ImageMetadata } from 'astro';
-
-// Add `image` (imported from src/assets/images) to replace a placeholder slot.
+// Add `image: '/images/services/...'` and `alt` to replace a placeholder slot.
 export const SERVICES: {
   id: string;
   title: string;
   summary: string;
   meta: string;
   seed: number;
-  image?: ImageMetadata;
+  image?: string;
   alt?: string;
   details: string[];
 }[] = [

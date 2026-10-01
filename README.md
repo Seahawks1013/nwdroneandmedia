@@ -14,13 +14,16 @@ Marketing site for NW Drone & Media: wedding films, aerial coverage and drone se
 ## Project structure
 
 ```
-public/                  Served as-is (favicon, robots.txt, OG image, videos)
-  og-default.jpg         Default social share image (1200×630)
-  videos/                Drop .mp4/.webm clips here, reference as /videos/name.mp4
-src/
-  assets/images/         Photos, optimized at build time (WebP + responsive srcset)
+public/                  Served as-is at the site root
+  images/                Photos, referenced as /images/<folder>/<file>
     about/owner.jpg      Owner photo used in the hero and "How we shoot it"
     hero/ gallery/ services/   Drop footage stills here
+  videos/                Clips, referenced as /videos/<file>.mp4
+  og-default.jpg         Default social share image (1200×630)
+.github/workflows/deploy-pages.yml   Builds and deploys the GitHub Pages preview
+integrations/prefix-base.mjs         Adds the sub-path to root URLs on the Pages preview build
+netlify.toml             Build settings for the later move to Netlify
+src/
   components/
     Header, Footer, Logo     Fixed pill nav (darkens on scroll) and footer
     Landscape.astro      Media slot: shows an image, or the seeded mountain placeholder
@@ -33,23 +36,26 @@ src/
     home.ts              All home page copy: stats, films, packages, FAQ, reviews…
     services.ts          Commercial/aerial services on the Services page
     media.ts             Image imports and alt text
-  layouts/BaseLayout.astro   HTML shell, fonts, nav and footer
-  pages/                 index, about, services, contact, 404
+  layouts/
+    BaseLayout.astro     HTML shell, fonts, nav and footer
+    LegalPage.astro      Shared layout for the legal pages
+  pages/                 index, about, services, contact, privacy, terms, flight-safety, 404
   styles/global.css      Theme tokens (spruce, fog, cream, brass, ink) and custom utilities
-  consts.ts              Business info, nav and footer links, form endpoint
+  consts.ts              Business info, nav/footer/legal links, form endpoint
 ```
 
 ## Adding your own media
 
-**Photos.** Every dark mountain tile on the site is a placeholder "media slot". To put a real still in one, drop a full-resolution JPG into `src/assets/images/<folder>/`, import it in `src/data/home.ts` (or `services.ts`), and add `image` and `alt` to that item:
+**Photos.** Put images in `public/images/<folder>/` and always reference them by root path, e.g. `/images/gallery/hannah-ben.jpg`. Never use relative paths; the Pages preview build adds its sub-path automatically.
+
+Every dark mountain tile on the site is a placeholder "media slot". To put a real still in one, add `image` and `alt` to that item in `src/data/home.ts` (or `services.ts`):
 
 ```ts
-import ceremony from '../assets/images/gallery/hannah-ben.jpg';
-// …
-{ c: 'wedding', t: 'Hannah & Ben', l: 'Columbia Gorge', d: '6:41', seed: 2, image: ceremony, alt: 'Ceremony at the Gorge' },
+{ c: 'wedding', t: 'Hannah & Ben', l: 'Columbia Gorge', d: '6:41', seed: 2,
+  image: '/images/gallery/hannah-ben.jpg', alt: 'Ceremony overlooking the Columbia Gorge' },
 ```
 
-Astro resizes and converts images to WebP at build time, so don't pre-shrink them; just keep the originals under about 20 MB.
+Files in `public/` are served exactly as they are, with no automatic resizing. Export stills for the web first: about 2000px on the long edge, JPG quality ~80 or WebP, ideally under 400 KB each.
 
 **Videos.** Astro doesn't transcode video. Export web-ready H.264 MP4s (1080p, around 8–10 Mbps, no audio for background loops) and put them in `public/videos/`. For large libraries, host them on YouTube, Vimeo or a CDN and embed them.
 
@@ -60,13 +66,35 @@ Astro resizes and converts images to WebP at build time, so don't pre-shrink the
 - Per-page `title` and `description` props on `BaseLayout` produce the `<title>`, meta description, canonical URL, OpenGraph and Twitter tags (`src/components/SEO.astro`).
 - LocalBusiness JSON-LD structured data is generated from `src/consts.ts`.
 - `@astrojs/sitemap` writes `sitemap-index.xml` on build. `public/robots.txt` points to it.
-- The production domain is set by `site` in `astro.config.mjs`. Update it if the domain changes.
+- The production domain defaults to `https://nwdroneandmedia.com` in `astro.config.mjs`.
+- Legal pages: `/privacy/`, `/terms/` and `/flight-safety/`, linked in the footer. Their "last updated" date is `LEGAL_UPDATED` in `src/consts.ts`.
+
+## Deployment
+
+**GitHub Pages (preview).** Every push to `main` runs `.github/workflows/deploy-pages.yml` and publishes to https://seahawks1013.github.io/nwdroneandmedia/. That build sets three environment variables:
+
+| Variable          | Value                          | Effect                                              |
+| ----------------- | ------------------------------ | --------------------------------------------------- |
+| `SITE_URL`        | `https://seahawks1013.github.io` | Absolute URLs (canonical, OpenGraph, sitemap)       |
+| `BASE_PATH`       | `/nwdroneandmedia`             | Sub-path; `integrations/prefix-base.mjs` adds it to every root path in the HTML |
+| `PREVIEW_NOINDEX` | `true`                         | Adds `noindex` so search engines skip the preview   |
+
+One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+
+**Netlify (production).** Connect the repo in Netlify; `netlify.toml` already has the build command, output folder and Node version. Don't set any of the variables above, so the site builds for the domain root. Then point the domain at Netlify and disable the Pages workflow (delete the file or turn Pages off).
+
+To test the preview build locally (in Git Bash, `MSYS_NO_PATHCONV=1` stops it from rewriting `/nwdroneandmedia` into a Windows path):
+
+```bash
+MSYS_NO_PATHCONV=1 SITE_URL=https://seahawks1013.github.io BASE_PATH=/nwdroneandmedia npm run build
+```
 
 ## Before launch
 
 - [ ] Set `formEndpoint` in `src/consts.ts` (Formspree, Basin, Netlify Forms, …)
 - [ ] Replace the placeholder phone `(360) 555-0134` and the social links in `src/consts.ts`
 - [ ] Replace the placeholder reviews and film titles in `src/data/home.ts`
+- [ ] Have the Privacy, Terms and Flight Safety pages reviewed by an attorney, and confirm the certificate and insurance details
 - [ ] Check the Vancouver-area references in the copy (travel FAQ, film locations) against the Walla Walla base
 - [ ] Add real stills to the media slots, and update the copy marked `<!-- Replace ... -->` on the About page
 - [ ] Update the gear list on the About page to match the actual fleet

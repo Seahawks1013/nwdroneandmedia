@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { FOOTER_COLUMNS, SITE } from '../consts';
+import { FOOTER_COLUMNS, LEGAL_LINKS, SITE } from '../consts';
 const year = new Date().getFullYear();
 ---
 
@@ -29,8 +29,13 @@ const year = new Date().getFullYear();
         ))
       }
     </div>
-    <div class="mt-16 flex flex-wrap justify-between gap-4 border-t border-fog/15 pt-6 text-[12px] text-fog/40">
+    <div class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-fog/15 pt-6 text-[12px] text-fog/40">
       <span>© {year} {SITE.name}. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          {LEGAL_LINKS.map(({ href, label }) => <li><a href={href} class="transition hover:text-fog">{label}</a></li>)}
+        </ul>
+      </nav>
       <span>FAA Part 107 certified · Insured · {SITE.city}, {SITE.region}</span>
     </div>
   </div>

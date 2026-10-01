@@ -1,0 +1,68 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { SITE, LEGAL_UPDATED } from '../consts';
+---
+
+<!-- Template text. Have it reviewed by an attorney before launch. -->
+<LegalPage
+  title="Terms of Service"
+  description="Terms for using the NW Drone & Media website and booking filming, photography and drone services."
+  updated={LEGAL_UPDATED}
+  intro="The ground rules for using this site and booking our services."
+>
+  <p>
+    These terms cover your use of this website and the general terms for services provided by {SITE.name}. Each booked
+    project is also covered by its own signed agreement; if the two conflict, the signed agreement wins.
+  </p>
+
+  <h2>Using this website</h2>
+  <p>
+    Content on this site, including photos, video, text and design, belongs to {SITE.name} or is used with permission. You may
+    view and share links to it, but you may not copy, download or reuse it without written permission.
+  </p>
+  <p>
+    Prices, packages and availability shown on the site are for general information and may change. A quote or signed
+    agreement is the only binding statement of price and scope.
+  </p>
+
+  <h2>Bookings and payment</h2>
+  <ul>
+    <li>A date is reserved once the agreement is signed and the retainer is paid.</li>
+    <li>Payment schedules, cancellation and rescheduling terms are set out in each project agreement.</li>
+    <li>Travel fees may apply outside our standard service area.</li>
+  </ul>
+
+  <h2>Drone operations</h2>
+  <p>
+    All flights are conducted under FAA Part 107 and are subject to airspace authorization, weather and site conditions. The
+    remote pilot in command has final say on whether, where and when it is safe and legal to fly. See our
+    <a href="/flight-safety/">Flight Safety &amp; FAA Compliance</a> page for details.
+  </p>
+
+  <h2>Deliverables and usage rights</h2>
+  <p>
+    We retain copyright in all footage and images we create. Clients receive a license to use their deliverables for the
+    purposes described in their agreement (for example, personal use for wedding films or marketing use for commercial
+    projects). We may use selected work in our portfolio unless the client opts out in writing.
+  </p>
+
+  <h2>Client responsibilities</h2>
+  <ul>
+    <li>Provide accurate dates, locations and timelines.</li>
+    <li>Obtain any venue or property-owner permission needed for filming and takeoff/landing.</li>
+    <li>Tell us about known hazards, restrictions or sensitive areas at the site.</li>
+  </ul>
+
+  <h2>Limitation of liability</h2>
+  <p>
+    To the extent allowed by law, our total liability for any claim related to a project is limited to the amount paid for
+    that project. We are not liable for indirect or consequential losses, or for coverage missed because of weather, airspace
+    restrictions, venue rules or other circumstances outside our control.
+  </p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of the State of Washington.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+</LegalPage>

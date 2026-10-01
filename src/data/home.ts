@@ -1,9 +1,7 @@
 // Content for the home page, carried over verbatim from the original design.
-// `seed` picks the placeholder landscape; add `image` (an import from
-// src/assets/images) to any item to show real footage stills instead.
-import type { ImageMetadata } from 'astro';
-
-type Slot = { seed: number; image?: ImageMetadata; alt?: string };
+// `seed` picks the placeholder landscape; add `image: '/images/...'` and `alt`
+// to any item to show a real footage still instead.
+type Slot = { seed: number; image?: string; alt?: string };
 
 export const STATS = [
   ['60+', 'weddings filmed'],

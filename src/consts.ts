@@ -23,6 +23,13 @@ export const NAV_LEFT = [
 export const NAV_RIGHT = { href: '/#process', label: 'How it works' };
 export const NAV_CTA = { href: '/contact/', label: 'Check your date' };
 
+export const LEGAL_LINKS = [
+  { href: '/privacy/', label: 'Privacy' },
+  { href: '/terms/', label: 'Terms' },
+  { href: '/flight-safety/', label: 'Flight safety & FAA' },
+];
+export const LEGAL_UPDATED = 'October 1, 2026';
+
 export const FOOTER_COLUMNS: [string, { label: string; href: string }[]][] = [
   [
     'Films',
