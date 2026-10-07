@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import { CSP_META } from '../security.mjs';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -19,6 +20,8 @@ const { title, description, image, noindex } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    {/* Content Security Policy (production only; the dev server needs inline scripts). */}
+    {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={CSP_META} />}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e1613" />
     <meta name="generator" content={Astro.generator} />
@@ -37,7 +40,7 @@ const { title, description, image, noindex } = Astro.props;
   <body>
     <a
       href="#main"
-      class="sr-only rounded-full bg-brass px-5 py-2 text-[14px] font-medium text-[#1B1408] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
+      class="sr-only rounded-full bg-brass px-5 py-2 text-[0.875rem] font-medium text-[#1B1408] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60]"
     >
       Skip to content
     </a>

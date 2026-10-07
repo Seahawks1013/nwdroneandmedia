@@ -17,7 +17,7 @@ const { title, description, updated, intro } = Astro.props;
   <PageHero eyebrow="Legal" title={title} intro={intro} />
   <section class="bg-fog py-20 sm:py-24">
     <article class="legal mx-auto max-w-[760px] px-6 sm:px-9">
-      <p class="text-[13px] tracking-[.1em] text-inkk/45">Last updated {updated}</p>
+      <p class="text-[0.8125rem] tracking-[.1em] text-inkk/70">Last updated {updated}</p>
       <slot />
     </article>
   </section>
@@ -38,7 +38,7 @@ const { title, description, updated, intro } = Astro.props;
   }
   .legal :global(p),
   .legal :global(li) {
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 500;
     line-height: 1.75;
     color: rgb(18 26 23 / 0.75);

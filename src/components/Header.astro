@@ -3,11 +3,12 @@ import Logo from './Logo.astro';
 import { NAV_LEFT, NAV_RIGHT, NAV_CTA, NAV_CTA_MOBILE } from '../consts';
 
 const pill =
-  'rounded-full px-4 py-2 text-[14px] text-fog/85 ring-1 ring-fog/20 transition hover:bg-fog/10 hover:text-fog';
+  'rounded-full px-4 py-2 text-[0.875rem] text-fog/85 ring-1 ring-fog/20 transition hover:bg-fog/10 hover:text-fog';
 const cta =
-  'whitespace-nowrap rounded-full bg-brass px-4 py-2 text-[13px] font-medium text-[#1B1408] transition hover:bg-brass2 sm:px-5 sm:text-[14px]';
+  'whitespace-nowrap rounded-full bg-brass px-4 py-2 text-[0.8125rem] font-medium text-[#1B1408] transition hover:bg-brass2 sm:px-5 sm:text-[0.875rem]';
 ---
 
+<header id="site-header">
 <nav id="site-nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" aria-label="Main">
   <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-2 px-4 py-4 min-[400px]:gap-3 min-[400px]:px-5 sm:gap-6 sm:px-9">
     <div class="hidden items-center gap-2 lg:flex">
@@ -19,13 +20,14 @@ const cta =
       <!-- Phones/tablets (nav links hidden): Pricing pill + Book now. -->
       <a
         href={NAV_CTA_MOBILE.href}
-        class="whitespace-nowrap rounded-full px-3 py-2 text-[13px] text-fog/90 ring-1 ring-fog/30 transition hover:bg-fog/10 sm:px-4 sm:text-[14px] lg:hidden"
+        class="whitespace-nowrap rounded-full px-3 py-2 text-[0.8125rem] text-fog/90 ring-1 ring-fog/30 transition hover:bg-fog/10 sm:px-4 sm:text-[0.875rem] lg:hidden"
         >{NAV_CTA_MOBILE.label}</a
       >
       <a href={NAV_CTA.href} class={cta}>{NAV_CTA.label}</a>
     </div>
   </div>
 </nav>
+</header>
 
 <!-- Back to top (every page, all screen sizes). Appears after scrolling down a screen. -->
 <button

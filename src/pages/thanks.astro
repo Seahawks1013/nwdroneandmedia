@@ -1,0 +1,14 @@
+---
+// Confirmation page after a booking request (used by Netlify Forms).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Request sent" noindex>
+  <PageHero eyebrow="Thank you" title="Request sent" intro="Thanks for reaching out. DJ will get back to you with availability and a price." />
+  <section class="bg-fog py-20 text-center">
+    <a href="/portfolio/" class="inline-flex items-center justify-center rounded-full bg-spruce px-7 py-3.5 text-[0.9375rem] font-medium text-fog transition hover:bg-spruce2">
+      Browse the portfolio
+    </a>
+  </section>
+</BaseLayout>

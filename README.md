@@ -99,9 +99,27 @@ To test the preview build locally (in Git Bash, `MSYS_NO_PATHCONV=1` stops it fr
 MSYS_NO_PATHCONV=1 SITE_URL=https://seahawks1013.github.io BASE_PATH=/nwdroneandmedia npm run build
 ```
 
+## Accessibility (WCAG 2.1 AA)
+
+- **Structure:** every page has one `<h1>`, headings never skip a level, and landmarks are in place: a `<header>` (banner) holding the main `<nav>`, `<main>`, a `<footer>`, and labelled navs. A "Skip to content" link comes first in the tab order.
+- **Contrast:** small text is at least 4.5:1 against its background, and form field borders are at least 3:1. When adding text, use `text-inkk/70` or darker on light sections, and `text-fog/70` or lighter on dark sections. Lighter tints (`/40`–`/60`) fail.
+- **Type:** font sizes use `rem`, so they follow the reader's browser text-size setting.
+- **Images:** every `<img>` has `alt` text. Decorative images use `alt=""`. Set alt text for photos in `src/data/media.ts`.
+- **Keyboard:** everything is reachable with Tab. The two-tone focus ring (brass outline + dark inner ring) shows on both light and dark sections. Closed FAQ answers are `inert`, so screen readers and Tab skip them.
+- **Forms:** every field has a `<label for>`, and required fields are marked visually and with `required`.
+- **Motion:** "reduce motion" turns off smooth scrolling, transitions and animations.
+
+## Security
+
+- **No secrets in the code.** The form endpoint is a public URL by design. Never commit API keys; use the host's environment variables if you ever need one.
+- **Content Security Policy:** defined once in `src/security.mjs`. Production builds add it as a `<meta>` tag, so it also applies on GitHub Pages, and write `dist/_headers` for Netlify. Netlify sends real HTTP headers: the CSP plus `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`. No inline scripts are allowed, because Astro is set to emit every script as a file. **If you embed a new service** (another video host, analytics, a different form provider), add its origin to the matching directive in `src/security.mjs`, or the browser will block it.
+- **Booking form:** submissions go to a hosted provider (`SITE.form` in `src/consts.ts`), which stores and escapes them. The form has a honeypot field for spam, length limits on every field, and `type="email"` validation. Switch `provider` to `'netlify'` after moving to Netlify; it then uses Netlify Forms and the `/thanks/` page.
+- **HTTPS:** Netlify serves the site over HTTPS and redirects HTTP automatically. The HSTS header tells browsers to always use HTTPS.
+- **Dependencies:** `npm audit` reports 0 vulnerabilities. `.github/dependabot.yml` opens weekly pull requests for npm and GitHub Actions updates.
+
 ## Before launch
 
-- [ ] Set `formEndpoint` in `src/consts.ts` (Formspree, Basin, Netlify Forms, …)
+- [ ] Set up the booking form: paste a Formspree endpoint into `SITE.form.endpoint`, or set `provider: 'netlify'` after moving to Netlify. Send a test request either way.
 - [ ] Add a phone number in `src/consts.ts` (optional) and real reviews in `src/data/home.ts`
 - [ ] Replace DJ's story on the About page with his own words (marked with a comment)
 - [ ] Add drone footage to `src/data/videos.ts` (the Drone section shows "coming soon" until then)

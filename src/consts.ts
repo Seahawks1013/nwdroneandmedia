@@ -11,8 +11,13 @@ export const SITE = {
   region: 'WA',
   serviceArea: 'Portland (PDX), Vancouver WA & the surrounding areas',
   ogImage: '/og-default.jpg',
-  // Static-site form handler (Formspree, Basin, Netlify Forms, etc.). Replace before launch.
-  formEndpoint: 'https://formspree.io/f/your-form-id',
+  // Booking form handler. Static site, so a hosted service receives submissions.
+  // - 'formspree': create a form at formspree.io and paste its endpoint below.
+  // - 'netlify':   after moving to Netlify, switch the provider; no endpoint needed.
+  form: {
+    provider: 'formspree' as 'formspree' | 'netlify',
+    endpoint: 'https://formspree.io/f/your-form-id',
+  },
   social: {
     youtube: 'https://www.youtube.com/@davidriley-u9u',
     instagram: 'https://www.instagram.com/nwdroneandmedia',

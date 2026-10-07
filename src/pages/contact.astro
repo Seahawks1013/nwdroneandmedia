@@ -25,14 +25,14 @@ const info = [
     <div class="mx-auto grid max-w-[1240px] items-start gap-14 px-6 sm:px-9 md:grid-cols-2">
       <div>
         <SectionTitle lead="Say" rest="hello" />
-        <p class="mt-6 max-w-[40ch] text-[16px] font-medium leading-relaxed text-inkk/80">
+        <p class="mt-6 max-w-[40ch] text-[1rem] font-medium leading-relaxed text-inkk/80">
           Weddings, events, local businesses or drone work — send the basics and DJ will come back with availability and a price.
         </p>
-        <dl class="mt-10 max-w-[420px] text-[15px]">
+        <dl class="mt-10 max-w-[420px] text-[0.9375rem]">
           {
             info.map(([label, value, href]) => (
               <div class="flex justify-between gap-6 border-t border-inkk/10 py-4 last:border-b">
-                <dt class="text-inkk/50">{label}</dt>
+                <dt class="text-inkk/70">{label}</dt>
                 <dd class="text-right font-medium text-inkk/80">{href ? <a href={href} class="hover:text-inkk">{value}</a> : value}</dd>
               </div>
             ))

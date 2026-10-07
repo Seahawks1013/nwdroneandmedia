@@ -59,4 +59,5 @@ const jsonLd = {
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+{/* "<" is escaped so no value can ever close the script tag early. */}
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, String.fromCharCode(92) + "u003c")} />

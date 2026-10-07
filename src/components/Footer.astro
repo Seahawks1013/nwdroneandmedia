@@ -14,10 +14,10 @@ const year = new Date().getFullYear();
         FOOTER_COLUMNS.map(([heading, links]) => (
           <div>
             <h2 class="font-display font-semibold text-[1.15rem]">{heading}</h2>
-            <ul class="mt-4 space-y-2 text-[14px]">
+            <ul class="mt-4 space-y-2 text-[0.875rem]">
               {links.map(({ label, href }) => (
                 <li>
-                  <a href={href} class="text-fog/55 transition hover:text-fog" rel={href.startsWith('http') ? 'noopener' : undefined}>{label}</a>
+                  <a href={href} class="text-fog/75 transition hover:text-fog" rel={href.startsWith('http') ? 'noopener' : undefined}>{label}</a>
                 </li>
               ))}
             </ul>
@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
         ))
       }
     </div>
-    <div class="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-fog/15 pt-6 text-[12px] text-fog/40 md:mt-16">
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-fog/15 pt-6 text-[0.75rem] text-fog/70 md:mt-16">
       <span>© {year} {SITE.name}. All rights reserved.</span>
       <nav aria-label="Legal">
         <ul class="flex flex-wrap gap-x-5 gap-y-2">

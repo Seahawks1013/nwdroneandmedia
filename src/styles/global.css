@@ -36,9 +36,30 @@
   [role="button"] {
     cursor: pointer;
   }
+  /* Two-tone focus ring: a dark inner ring plus a brass outer ring, so it is
+     clearly visible on light fog/cream sections and on dark spruce sections. */
   :focus-visible {
-    outline: 2px solid var(--color-brass);
-    outline-offset: 2px;
+    outline: 3px solid var(--color-brass);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--color-spruce);
+  }
+  /* Form fields: keep the ring tight to the field edge. */
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline-offset: 1px;
+  }
+}
+
+/* Respect "reduce motion": no smooth scrolling, transitions or animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -72,8 +93,3 @@
   left: -22px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
