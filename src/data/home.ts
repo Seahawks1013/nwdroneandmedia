@@ -8,7 +8,6 @@ export const STATS = [
   ['Part 107', 'FAA licensed drone pilot'],
   ['Woodland, WA', 'founded and based'],
   ['PDX · Vancouver', 'and the surrounding areas'],
-  ['From $100', 'drone footage'],
 ];
 
 export const TAGS = ['Weddings', 'Events', 'Local business', 'Licensed drone', 'Horizontal + vertical edits'];
