@@ -27,6 +27,7 @@ const jsonLd = {
   email: SITE.email,
   ...(SITE.phone && { telephone: SITE.phone }),
   image: ogImage.toString(),
+  logo: new URL(withBase('/icon-512.png'), Astro.site).toString(),
   address: {
     '@type': 'PostalAddress',
     addressLocality: SITE.city,

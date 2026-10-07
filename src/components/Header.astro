@@ -14,7 +14,7 @@ const cta =
     <div class="hidden items-center gap-2 lg:flex">
       {NAV_LEFT.map(({ href, label }) => <a href={href} class={pill}>{label}</a>)}
     </div>
-    <Logo compact />
+    <Logo variant="header" />
     <div class="flex items-center gap-2">
       <a href={NAV_RIGHT.href} class={`hidden lg:inline-block ${pill}`}>{NAV_RIGHT.label}</a>
       <!-- Phones/tablets (nav links hidden): Pricing pill + Book now. -->

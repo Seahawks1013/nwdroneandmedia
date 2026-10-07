@@ -19,13 +19,14 @@ public/                  Served as-is at the site root
     about/               DJ Riley photos (dj-riley-portrait.jpg is the main photo)
     hero/ gallery/ services/   Drop footage stills here
   videos/                Clips, referenced as /videos/<file>.mp4
-  og-default.jpg         Default social share image (1200×630)
+  og-default.jpg         Social share image (1200×630), built by scripts/make-logo-assets.mjs
+  images/brand/          Logo files (generated from brand/logo-original.jpg)
 .github/workflows/deploy-pages.yml   Builds and deploys the GitHub Pages preview
 integrations/prefix-base.mjs         Adds the sub-path to root URLs on the Pages preview build
 netlify.toml             Build settings for the later move to Netlify
 src/
   components/
-    Header, Footer, Logo     Fixed pill nav (darkens on scroll) and footer
+    Header, Footer, Logo     Fixed pill nav (darkens on scroll), footer, brand logo
     Landscape.astro      Media slot: shows an image, or the seeded mountain placeholder
     NotchCard.astro      Rounded card with the cut-out corner + arrow link
     SectionTitle.astro   "*Italic* rest" display headings
@@ -46,6 +47,12 @@ src/
   styles/global.css      Theme tokens (spruce, fog, cream, brass, ink) and custom utilities
   consts.ts              Business info, nav/footer/legal links, form endpoint
 ```
+
+## Logo
+
+The original logo artwork is in `brand/logo-original.jpg`. `node scripts/make-logo-assets.mjs` turns it into transparent gold files in `public/images/brand/`: the full stacked logo (footer), a horizontal version (header), and the diamond mark (header on phones). The same script also builds the browser-tab icons and the social share image. Re-run it whenever the logo changes.
+
+The logo is gold on a transparent background, so only place it on the dark green sections. It disappears on the light fog and cream backgrounds.
 
 ## Adding your own media
 
