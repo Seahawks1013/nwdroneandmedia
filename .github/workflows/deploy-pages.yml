@@ -38,7 +38,7 @@ jobs:
           BASE_PATH: /nwdroneandmedia
           PREVIEW_NOINDEX: 'true'
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
