@@ -274,7 +274,7 @@ const star = 'M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9
               <div class="border-t border-fog/15 last:border-b" data-faq>
                 <button
                   type="button"
-                  aria-expanded={i === 0 ? 'true' : 'false'}
+                  aria-expanded="false"
                   aria-controls={`faq-${i}`}
                   class="flex w-full items-center justify-between gap-6 py-6 text-left text-[1.0625rem] text-fog"
                 >
@@ -283,15 +283,14 @@ const star = 'M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9
                     data-icon
                     class:list={[
                       'grid h-8 w-8 flex-none place-items-center rounded-full ring-1 ring-fog/25 transition-transform duration-300',
-                      i === 0 && 'rotate-45 bg-brass ring-brass',
                     ]}
                   >
-                    <svg viewBox="0 0 12 12" class:list={['h-3 w-3', i === 0 ? 'stroke-[#1B1408]' : 'stroke-fog/70']} stroke-width="1.5" aria-hidden="true">
+                    <svg viewBox="0 0 12 12" class="h-3 w-3 stroke-fog/70" stroke-width="1.5" aria-hidden="true">
                       <path d="M6 1v10M1 6h10" />
                     </svg>
                   </span>
                 </button>
-                <div id={`faq-${i}`} inert={i !== 0} class="grid transition-all duration-300 ease-out" style={`grid-template-rows: ${i === 0 ? '1fr' : '0fr'};`}>
+                <div id={`faq-${i}`} inert class="grid transition-all duration-300 ease-out" style="grid-template-rows: 0fr;">
                   <div class="overflow-hidden">
                     <p class="max-w-[62ch] pb-7 pr-10 text-[0.9375rem] font-medium leading-relaxed text-fog/65">{a}</p>
                   </div>
