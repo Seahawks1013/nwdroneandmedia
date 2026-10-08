@@ -44,8 +44,8 @@ const photos = [PHOTOS.portrait, PHOTOS.shooting, PHOTOS.packing, PHOTOS.smiling
 
   {
     sections.map((c, i) => (
-      <section id={c.id} class:list={['scroll-mt-36 py-20', i % 2 === 1 ? 'bg-fog px-2 sm:px-3' : 'bg-fog']}>
-        <div class:list={[i % 2 === 1 && 'rounded-[30px] bg-cream py-20']}>
+      <section id={c.id} class:list={['scroll-mt-36', i % 2 === 1 ? 'bg-fog px-2 sm:px-3' : 'bg-fog py-12']}>
+        <div class:list={[i % 2 === 1 && 'rounded-[30px] bg-cream py-16 sm:py-20']}>
           <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
             <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
               <SectionTitle lead={c.label.split(' ')[0]} rest={c.label.split(' ').slice(1).join(' ')} />
