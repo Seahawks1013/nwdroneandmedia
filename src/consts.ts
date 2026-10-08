@@ -5,7 +5,7 @@ export const SITE = {
   title: 'NW Drone & Media — Wedding films, events & drone footage | Woodland, WA',
   description:
     'Wedding films, event videography and FAA Part 107 licensed drone footage by DJ Riley. Founded in Woodland, WA, serving Portland, Vancouver WA and the surrounding areas.',
-  email: 'hello@nwdroneandmedia.com',
+  email: 'northwestdroneandmedia@gmail.com',
   phone: '', // e.g. '(360) 555-1234' — shown wherever a phone appears once filled in
   city: 'Woodland',
   region: 'WA',

@@ -33,7 +33,7 @@ const info = [
             info.map(([label, value, href]) => (
               <div class="flex justify-between gap-6 border-t border-inkk/10 py-4 last:border-b">
                 <dt class="text-inkk/70">{label}</dt>
-                <dd class="text-right font-medium text-inkk/80">{href ? <a href={href} class="hover:text-inkk">{value}</a> : value}</dd>
+                <dd class="min-w-0 text-right font-medium text-inkk/80 [overflow-wrap:anywhere]">{href ? <a href={href} class="hover:text-inkk">{value}</a> : value}</dd>
               </div>
             ))
           }
