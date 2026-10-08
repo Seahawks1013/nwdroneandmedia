@@ -45,8 +45,8 @@ export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string; href: stri
     d: 'Community gatherings, celebrations and company events, cut for YouTube, Instagram and your website.',
     m: 'Half day from $400 · full day from $800',
     seed: 11,
-    image: yt('oSLn_6LOOjE'),
-    alt: 'Still from the Port of Woodland End of Summer Social',
+    image: '/images/work/beaver-strength-midnight-lift.webp',
+    alt: 'Beaver Strength "Mid-night Lift" title over the lit Beaver Stadium sign at night',
     href: '/portfolio/#events',
   },
   {
@@ -54,6 +54,8 @@ export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string; href: stri
     d: 'Short films and vertical social clips that show customers who you are and what you do.',
     m: 'Vertical cuts $50 each',
     seed: 19,
+    image: yt('oSLn_6LOOjE'),
+    alt: 'Still from the Port of Woodland End of Summer Social',
     href: '/portfolio/#events',
   },
   {
