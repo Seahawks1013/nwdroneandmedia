@@ -7,7 +7,7 @@ import { SITE } from '../consts';
 import { PHOTOS } from '../data/media';
 import { PILLARS, TAGS } from '../data/home';
 
-const { portrait, smiling, shooting, packing, gear } = PHOTOS;
+const { portrait, viewfinder, shooting, packing, gear } = PHOTOS;
 
 // What DJ brings to every shoot (visible in the photos). Update as the kit changes.
 const kit = [
@@ -58,7 +58,7 @@ const kit = [
         </NotchCard>
         <div class="flex flex-col gap-4">
           <div class="aspect-[4/5] overflow-hidden rounded-[18px]">
-            <img src={smiling.src} alt={smiling.alt} width={smiling.width} height={smiling.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${smiling.position}`} />
+            <img src={viewfinder.src} alt={viewfinder.alt} width={viewfinder.width} height={viewfinder.height} loading="lazy" decoding="async" class="h-full w-full object-cover" style={`object-position: ${viewfinder.position}`} />
           </div>
           <p class="rounded-[18px] bg-spruce px-4 py-4 text-[0.8125rem] font-medium leading-snug text-fog sm:p-6 sm:text-[0.9375rem]">
             Founded in <span class="whitespace-nowrap">{SITE.city}, {SITE.region}</span>

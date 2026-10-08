@@ -21,6 +21,14 @@ export const PHOTOS = {
   // Main photo of the owner.
   portrait: photo('dj-riley-portrait.jpg', 'DJ Riley, owner of NW Drone & Media, standing in a meadow with his camera', '61% 30%'),
   smiling: photo('dj-riley-smiling.jpg', 'DJ Riley smiling and holding his camera at golden hour', '45% 35%'),
+  // About page "DJ's story" — small card beside the portrait (WebP).
+  viewfinder: {
+    src: '/images/about/dj-riley-viewfinder.webp',
+    width: 1400,
+    height: 933,
+    alt: 'DJ Riley looking through the viewfinder of his Sony camera in a sunlit meadow',
+    position: '60% 45%',
+  },
   // Vertical photo (1200×1800) used in the home page "Meet DJ Riley" card.
   cameraShoulder: {
     src: '/images/about/dj-riley-camera-shoulder.jpg',
