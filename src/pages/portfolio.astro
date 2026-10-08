@@ -54,7 +54,7 @@ const photos = [PHOTOS.portrait, PHOTOS.shooting, PHOTOS.packing, PHOTOS.smiling
 
             {c.wide.length + c.tall.length === 0 ? (
               <div class="mt-12 grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
-                <Landscape seed={44} class="aspect-video rounded-[14px]" label="COMING SOON" />
+                <Landscape seed={44} image={c.cover?.src} alt={c.cover?.alt} class="aspect-video rounded-[14px]" label={c.cover ? undefined : 'COMING SOON'} />
                 <div>
                   <p class="text-[0.9375rem] font-medium leading-relaxed text-inkk/70">
                     New drone work is on the way. In the meantime, aerial shots appear throughout the wedding and event films, and

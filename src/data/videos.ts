@@ -13,10 +13,16 @@ export type Video = {
   featured?: boolean;
 };
 
-export const CATEGORIES: { id: Category; label: string; intro: string }[] = [
+// `cover`: photo shown in a category that has no videos yet.
+export const CATEGORIES: { id: Category; label: string; intro: string; cover?: { src: string; alt: string } }[] = [
   { id: 'weddings', label: 'Weddings', intro: 'Wedding days, cut into trailers and full-length films.' },
   { id: 'events', label: 'Events & local business', intro: 'Community events, socials and the local businesses behind them.' },
-  { id: 'drone', label: 'Drone footage', intro: 'FAA Part 107 aerials of venues, properties and events.' },
+  {
+    id: 'drone',
+    label: 'Drone footage',
+    intro: 'FAA Part 107 aerials of venues, properties and events.',
+    cover: { src: '/images/work/dji-air-3s-drone.webp', alt: 'DJI Air 3S drone and its controller ready for a flight' },
+  },
 ];
 
 export const VIDEOS: Video[] = [

@@ -63,6 +63,8 @@ export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string; href: stri
     d: 'Aerials of venues, properties and events — flown legally, insured, and cut to length.',
     m: 'From $100 · Part 107',
     seed: 26,
+    image: '/images/work/dji-air-3s-drone.webp',
+    alt: 'DJI Air 3S drone and its controller ready for a flight',
     href: '/services/#drone-shots',
   },
 ];
