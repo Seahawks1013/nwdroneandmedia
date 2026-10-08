@@ -84,11 +84,29 @@ export const FAQ = [
   ['Where do you travel?', 'We\'re based in Woodland, WA and serve Portland, Vancouver WA and the surrounding areas. Farther than that? Ask — we\'re happy to travel.'],
 ];
 
-// Hero backdrop: 5 columns of tilted tiles. `owner: true` marks the photo tile.
-export const HERO_COLUMNS: { s: number; h: string; owner?: boolean }[][] = [
+// Hero backdrop: 5 columns of tilted tiles. Only the middle three columns are
+// on screen (the grid is rotated and wider than the viewport), so photos go there;
+// the edge columns keep the landscape placeholder art.
+// `photo` is a file prefix in public/images/hero/ (-640.webp and -1200.webp exist,
+// built by scripts/make-hero-images.mjs); `pos` is the CSS object-position.
+// `owner: true` marks DJ's portrait tile.
+type HeroTile = { s: number; h: string; owner?: boolean; photo?: string; pos?: string };
+export const HERO_COLUMNS: HeroTile[][] = [
   [{ s: 4, h: 'h-[30vh]' }, { s: 9, h: 'h-[44vh]' }, { s: 14, h: 'h-[26vh]' }],
-  [{ s: 21, h: 'h-[42vh]' }, { s: 6, h: 'h-[30vh]' }, { s: 31, h: 'h-[28vh]' }],
-  [{ s: 12, h: 'h-[26vh]' }, { s: 2, h: 'h-[46vh]' }, { s: 27, h: 'h-[28vh]' }],
-  [{ s: 18, h: 'h-[34vh]' }, { s: 41, h: 'h-[36vh]', owner: true }, { s: 7, h: 'h-[30vh]' }],
+  [
+    { s: 21, h: 'h-[42vh]', photo: 'night-ceremony-kiss', pos: '40% 35%' },
+    { s: 6, h: 'h-[30vh]', photo: 'church-exit-applause', pos: '50% 45%' },
+    { s: 31, h: 'h-[28vh]', photo: 'couple-on-stairs', pos: '45% 35%' },
+  ],
+  [
+    { s: 12, h: 'h-[26vh]', photo: 'camera-gimbal-wedding', pos: '45% 50%' },
+    { s: 2, h: 'h-[46vh]', photo: 'aerial-couple-on-grass', pos: '55% 50%' },
+    { s: 27, h: 'h-[28vh]', photo: 'aerial-reception-tables', pos: '50% 50%' },
+  ],
+  [
+    { s: 18, h: 'h-[34vh]', photo: 'dj-riley-shooting', pos: '46% 40%' },
+    { s: 41, h: 'h-[36vh]', owner: true },
+    { s: 7, h: 'h-[30vh]', photo: 'gear-sony-camera', pos: '50% 60%' },
+  ],
   [{ s: 33, h: 'h-[28vh]' }, { s: 11, h: 'h-[40vh]' }, { s: 24, h: 'h-[32vh]' }],
 ];
