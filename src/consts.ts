@@ -20,7 +20,7 @@ export const SITE = {
   },
   // Calendly scheduling link, e.g. 'https://calendly.com/your-name/consultation'.
   // When set, the Contact page shows a "Book a call" section with the calendar.
-  calendly: '',
+  calendly: 'https://calendly.com/northwestdroneandmedia/30min',
   social: {
     youtube: 'https://www.youtube.com/@davidriley-u9u',
     instagram: 'https://www.instagram.com/nwdroneandmedia',
