@@ -46,7 +46,7 @@ export const WHAT_WE_FILM: (Slot & { t: string; d: string; m: string; href: stri
     m: 'Half day from $400 · full day from $800',
     seed: 11,
     image: '/images/work/beaver-strength-midnight-lift.webp',
-    alt: 'Beaver Strength "Mid-night Lift" title over the lit Beaver Stadium sign at night',
+    alt: 'Beaver Strength - Midnight Lift title over the lit Beaver Stadium sign at night',
     href: '/portfolio/#events',
   },
   {

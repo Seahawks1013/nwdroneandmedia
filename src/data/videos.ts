@@ -29,5 +29,5 @@ export const VIDEOS: Video[] = [
   { id: '8jsxHXfgNUU', title: "Jake & Kenna's Wedding", subtitle: 'Wedding trailer', category: 'weddings', featured: true },
   { id: 'oSLn_6LOOjE', title: 'Port of Woodland', subtitle: 'End of Summer Social', category: 'events', featured: true },
   { id: 'FCHUmoTD9RE', title: 'Port of Woodland', subtitle: 'End of Summer Social · vertical cut', category: 'events', vertical: true },
-  { id: 'cHxO-4dL3to', title: 'Beaver Strength', subtitle: 'Mid-night Lift', category: 'events' },
+  { id: 'cHxO-4dL3to', title: 'Beaver Strength - Midnight Lift', subtitle: '', category: 'events' },
 ];
