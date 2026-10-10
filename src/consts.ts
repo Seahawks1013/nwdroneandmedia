@@ -15,9 +15,12 @@ export const SITE = {
   // - 'formspree': create a form at formspree.io and paste its endpoint below.
   // - 'netlify':   after moving to Netlify, switch the provider; no endpoint needed.
   form: {
-    provider: 'formspree' as 'formspree' | 'netlify',
+    provider: 'netlify' as 'formspree' | 'netlify',
     endpoint: 'https://formspree.io/f/your-form-id',
   },
+  // Calendly scheduling link, e.g. 'https://calendly.com/your-name/consultation'.
+  // When set, the Contact page shows a "Book a call" section with the calendar.
+  calendly: '',
   social: {
     youtube: 'https://www.youtube.com/@davidriley-u9u',
     instagram: 'https://www.instagram.com/nwdroneandmedia',

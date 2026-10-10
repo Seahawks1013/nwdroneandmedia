@@ -17,7 +17,7 @@ export const CSP_DIRECTIVES = {
   'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
   'font-src': ["'self'", 'https://fonts.gstatic.com'],
   'img-src': ["'self'", 'data:', 'https://i.ytimg.com'],
-  'frame-src': ['https://www.youtube-nocookie.com', 'https://www.google.com'],
+  'frame-src': ['https://www.youtube-nocookie.com', 'https://www.google.com', 'https://calendly.com'],
   'connect-src': ["'self'"],
   'form-action': ["'self'", 'https://formspree.io'],
   'base-uri': ["'self'"],

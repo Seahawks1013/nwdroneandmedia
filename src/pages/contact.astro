@@ -50,4 +50,29 @@ const info = [
       <BookingForm />
     </div>
   </section>
+  {
+    SITE.calendly && (
+      <section id="call" class="scroll-mt-24 bg-fog py-20 sm:py-24">
+        <div class="mx-auto max-w-[1240px] px-6 sm:px-9">
+          <div class="grid items-end gap-8 md:grid-cols-[1fr_.9fr]">
+            <SectionTitle lead="Book" rest="a call" />
+            <p class="max-w-[44ch] text-[0.9375rem] font-medium leading-relaxed text-inkk/70">
+              Prefer to talk it through? Pick a time that works for you and DJ will call to plan your wedding, event or drone shoot.
+            </p>
+          </div>
+          <div class="mt-10 overflow-hidden rounded-[22px] bg-white ring-1 ring-inkk/10">
+            <iframe
+              src={`${SITE.calendly}${SITE.calendly.includes('?') ? '&' : '?'}hide_gdpr_banner=1`}
+              title="Book a call with DJ Riley on Calendly"
+              class="block h-[720px] w-full"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <p class="mt-4 text-[0.8125rem] text-inkk/70">
+            Calendar not loading? <a href={SITE.calendly} class="text-inkk underline decoration-brass underline-offset-4" rel="noopener">Open it on Calendly</a>.
+          </p>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
