@@ -21,8 +21,7 @@ public/                  Served as-is at the site root
   videos/                Clips, referenced as /videos/<file>.mp4
   og-default.jpg         Social share image (1200×630), built by scripts/make-logo-assets.mjs
   images/brand/          Logo files (generated from brand/logo-original.jpg)
-.github/workflows/deploy-pages.yml   Builds and deploys the GitHub Pages preview
-integrations/prefix-base.mjs         Adds the sub-path to root URLs on the Pages preview build
+integrations/prefix-base.mjs         Adds a sub-path to root URLs when BASE_PATH is set (optional)
 netlify.toml             Build settings for the later move to Netlify
 src/
   components/
