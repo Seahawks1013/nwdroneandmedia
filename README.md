@@ -90,23 +90,13 @@ Files in `public/` are served exactly as they are, with no automatic resizing.
 
 ## Deployment
 
-**GitHub Pages (preview).** Every push to `main` runs `.github/workflows/deploy-pages.yml` and publishes to https://seahawks1013.github.io/nwdroneandmedia/. That build sets three environment variables:
+**Netlify** hosts the live site at https://nwdroneandmedia.com. Every push to `main` deploys automatically (usually within a minute). `netlify.toml` holds the build command, output folder and Node version, and the build writes `dist/_headers` with the security and caching headers.
 
-| Variable          | Value                          | Effect                                              |
-| ----------------- | ------------------------------ | --------------------------------------------------- |
-| `SITE_URL`        | `https://seahawks1013.github.io` | Absolute URLs (canonical, OpenGraph, sitemap)       |
-| `BASE_PATH`       | `/nwdroneandmedia`             | Sub-path; `integrations/prefix-base.mjs` adds it to every root path in the HTML |
-| `PREVIEW_NOINDEX` | `true`                         | Adds `noindex` so search engines skip the preview   |
+Each deploy uses Netlify credits, so batch several changes into one push where you can.
 
-One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+**Booking form:** Netlify Forms (form detection must stay enabled under Site configuration → Forms). Submissions appear under **Forms → booking**; set up email alerts in Site configuration → Notifications.
 
-**Netlify (production).** Connect the repo in Netlify; `netlify.toml` already has the build command, output folder and Node version. Don't set any of the variables above, so the site builds for the domain root. Then point the domain at Netlify and disable the Pages workflow (delete the file or turn Pages off).
-
-To test the preview build locally (in Git Bash, `MSYS_NO_PATHCONV=1` stops it from rewriting `/nwdroneandmedia` into a Windows path):
-
-```bash
-MSYS_NO_PATHCONV=1 SITE_URL=https://seahawks1013.github.io BASE_PATH=/nwdroneandmedia npm run build
-```
+**Hosting under a sub-path (optional).** The site can also be built for a sub-folder host such as GitHub Pages by setting `SITE_URL` and `BASE_PATH` (and `PREVIEW_NOINDEX=true` to hide it from search engines); `integrations/prefix-base.mjs` then adds the sub-path to every root URL. GitHub Pages was used as a preview before launch and has since been turned off.
 
 ## Accessibility (WCAG 2.1 AA)
 
@@ -121,8 +111,8 @@ MSYS_NO_PATHCONV=1 SITE_URL=https://seahawks1013.github.io BASE_PATH=/nwdroneand
 ## Security
 
 - **No secrets in the code.** The form endpoint is a public URL by design. Never commit API keys; use the host's environment variables if you ever need one.
-- **Content Security Policy:** defined once in `src/security.mjs`. Production builds add it as a `<meta>` tag, so it also applies on GitHub Pages, and write `dist/_headers` for Netlify. Netlify sends real HTTP headers: the CSP plus `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`. No inline scripts are allowed, because Astro is set to emit every script as a file. **If you embed a new service** (another video host, analytics, a different form provider), add its origin to the matching directive in `src/security.mjs`, or the browser will block it.
-- **Booking form:** submissions go to a hosted provider (`SITE.form` in `src/consts.ts`), which stores and escapes them. The form has a honeypot field for spam, length limits on every field, and `type="email"` validation. Switch `provider` to `'netlify'` after moving to Netlify; it then uses Netlify Forms and the `/thanks/` page.
+- **Content Security Policy:** defined once in `src/security.mjs`. Production builds add it as a `<meta>` tag and write `dist/_headers` for Netlify. Netlify sends real HTTP headers: the CSP plus `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`. No inline scripts are allowed, because Astro is set to emit every script as a file. **If you embed a new service** (another video host, analytics, a different form provider), add its origin to the matching directive in `src/security.mjs`, or the browser will block it.
+- **Booking form:** submissions go to a hosted provider (`SITE.form` in `src/consts.ts`), which stores and escapes them. The form has a honeypot field for spam, length limits on every field, and `type="email"` validation. It uses Netlify Forms and sends people to the `/thanks/` page.
 - **HTTPS:** Netlify serves the site over HTTPS and redirects HTTP automatically. The HSTS header tells browsers to always use HTTPS.
 - **Dependencies:** `npm audit` reports 0 vulnerabilities. `.github/dependabot.yml` opens weekly pull requests for npm and GitHub Actions updates.
 
