@@ -19,7 +19,7 @@ export const CSP_DIRECTIVES = {
   'img-src': ["'self'", 'data:', 'https://i.ytimg.com'],
   'frame-src': ['https://www.youtube-nocookie.com', 'https://www.google.com', 'https://calendly.com'],
   'connect-src': ["'self'"],
-  'form-action': ["'self'", 'https://formspree.io'],
+  'form-action': ["'self'"], // Netlify Forms posts to this site
   'base-uri': ["'self'"],
   'object-src': ["'none'"],
   'upgrade-insecure-requests': [],
