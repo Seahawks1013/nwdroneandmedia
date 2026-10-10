@@ -16,6 +16,10 @@ export default function securityHeaders() {
         const lines = ['/*', ...Object.entries(SECURITY_HEADERS).map(([k, v]) => `  ${k}: ${v}`), ''];
         // Fingerprinted build assets never change, so they can be cached for a year.
         lines.push(`${base}_astro/*`, '  Cache-Control: public, max-age=31536000, immutable', '');
+        // Photos and logos: browsers reuse their copy for 7 days instead of re-checking on
+        // every visit. When replacing a photo, give the new file a new name so it shows
+        // immediately (same-name replacements can take up to 7 days for repeat visitors).
+        lines.push(`${base}images/*`, '  Cache-Control: public, max-age=604800', '');
         await writeFile(new URL('_headers', dir), lines.join('\n'));
         logger.info(`Wrote ${fileURLToPath(new URL('_headers', dir))}`);
       },

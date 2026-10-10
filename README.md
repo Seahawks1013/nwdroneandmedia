@@ -65,7 +65,9 @@ Every dark mountain tile on the site is a placeholder "media slot". To put a rea
   image: '/images/gallery/hannah-ben.jpg', alt: 'Ceremony overlooking the Columbia Gorge' },
 ```
 
-Files in `public/` are served exactly as they are, with no automatic resizing. Export stills for the web first: about 2000px on the long edge, JPG quality ~80 or WebP, ideally under 400 KB each.
+Files in `public/` are served exactly as they are, with no automatic resizing.
+
+**Replacing a photo? Give it a new filename** (e.g. `dj-riley-portrait-2.jpg`) and update the reference. Images are cached by browsers for 7 days, so a same-name replacement can take up to a week to show for returning visitors. Export stills for the web first: about 2000px on the long edge, JPG quality ~80 or WebP, ideally under 400 KB each.
 
 **Videos.** Astro doesn't transcode video. Export web-ready H.264 MP4s (1080p, around 8–10 Mbps, no audio for background loops) and put them in `public/videos/`. For large libraries, host them on YouTube, Vimeo or a CDN and embed them.
 
