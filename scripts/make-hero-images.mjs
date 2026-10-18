@@ -17,9 +17,21 @@ const MAP = {
   '34.jpg': 'reception-family-string-lights',
   '35.jpg': ['aerial-circle-ceremony', 62], // drone shot; grass compresses poorly
   '36.jpg': 'forest-ceremony-floral-arches',
+  // About page backdrop (DJ's own footage stills and photos)
+  'dj 1.png': 'drone-chase-forest-road',
+  'dj 2.png': 'aerial-ridge-road',
+  'dj 3.png': ['dj-riley-sunset-silhouette', 66], // smooth sky gradients stay clean at 66
+  '46.jpg': 'dj-riley-camera-treeline',
+  // Portfolio backdrop
+  '40.webp': 'band-on-stage',
+  '41.webp': 'concert-crowd-on-lawn',
+  '42.jpg': 'beaver-stadium-night',
+  '43.webp': ['aerial-car-show', 62], // busy aerial; compresses poorly
+  '44.webp': 'snowy-ridge-aerial',
+  '45.webp': ['aerial-ceremony-overhead', 62],
   // DJ's own photos, reused as hero tiles
-  '../../../public/images/about/dj-riley-shooting.jpg': 'dj-riley-shooting',
-  '../../../public/images/about/gear-sony-camera.jpg': 'gear-sony-camera',
+  '../../../public/images/about/dj-riley-shooting.webp': 'dj-riley-shooting',
+  '../../../public/images/about/gear-sony-camera.webp': 'gear-sony-camera',
 };
 
 const OUT = 'public/images/hero';
