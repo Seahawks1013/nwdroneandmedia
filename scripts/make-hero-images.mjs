@@ -1,4 +1,4 @@
-// Converts photos for the home page hero backdrop into WebP at two sizes.
+// Converts photos for the hero backdrops (home page + page headers) into WebP at two sizes.
 // Usage: node scripts/make-hero-images.mjs <source-folder>
 // Files are matched by the names in the MAP below; output goes to public/images/hero/.
 import sharp from 'sharp';
@@ -10,12 +10,13 @@ if (!src) throw new Error('Pass the folder that contains the source photos.');
 
 // source file -> output name (or [name, quality] for photos that need stronger compression)
 const MAP = {
-  '15.jpg': 'camera-gimbal-wedding',
-  '16.jpg': 'church-exit-applause',
-  '17.jpg': 'night-ceremony-kiss',
-  '18.jpg': 'couple-on-stairs',
-  '19.jpg': ['aerial-couple-on-grass', 58], // grass texture compresses poorly
-  '20.jpg': ['aerial-reception-tables', 58],
+  // DJ's wedding work
+  '31.jpg': 'sunset-kiss-backlit',
+  '32.jpg': 'golden-hour-embrace',
+  '33.jpg': 'ceremony-kiss-oak-tree',
+  '34.jpg': 'reception-family-string-lights',
+  '35.jpg': ['aerial-circle-ceremony', 62], // drone shot; grass compresses poorly
+  '36.jpg': 'forest-ceremony-floral-arches',
   // DJ's own photos, reused as hero tiles
   '../../../public/images/about/dj-riley-shooting.jpg': 'dj-riley-shooting',
   '../../../public/images/about/gear-sony-camera.jpg': 'gear-sony-camera',

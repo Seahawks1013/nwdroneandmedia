@@ -2,13 +2,23 @@
 // Shorter version of the home hero for inner pages: same spruce frame,
 // tilted landscape backdrop and centered display title.
 import Landscape from './Landscape.astro';
+import HeroPhoto from './HeroPhoto.astro';
 
+type Photo = { photo: string; pos?: string };
 export interface Props {
   eyebrow: string;
   title: string;
   intro?: string;
+  /**
+   * Optional photos for the backdrop. Only the middle three columns are on screen,
+   * so up to 6 photos fill those tiles in order (top then bottom, column by column);
+   * the rest keep the landscape placeholder art.
+   */
+  photos?: Photo[];
 }
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro, photos = [] } = Astro.props;
+// Map visible tiles (columns 1–3, two tiles each) to photos.
+const photoAt = (col: number, row: number) => (col >= 1 && col <= 3 ? photos[(col - 1) * 2 + row] : undefined);
 ---
 
 <header class="bg-spruce p-2 sm:p-3">
@@ -21,8 +31,11 @@ const { eyebrow, title, intro } = Astro.props;
         {
           [[3, 19], [8, 29], [15, 36], [22, 47], [38, 55]].map(([a, b], i) => (
             <div class="flex flex-1 flex-col gap-3 sm:gap-4" style={`margin-top: ${-((i % 3) * 34)}px;`}>
-              <Landscape seed={a} class="h-[30vh] rounded-md" />
-              <Landscape seed={b} class="h-[36vh] rounded-md" />
+              {[a, b].map((seed, row) => {
+                const h = row === 0 ? 'h-[30vh]' : 'h-[36vh]';
+                const p = photoAt(i, row);
+                return p ? <HeroPhoto photo={p.photo} pos={p.pos} class={h} /> : <Landscape seed={seed} class={`${h} rounded-md`} />;
+              })}
             </div>
           ))
         }

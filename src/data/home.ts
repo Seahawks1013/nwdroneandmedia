@@ -98,14 +98,14 @@ type HeroTile = { s: number; h: string; owner?: boolean; photo?: string; pos?: s
 export const HERO_COLUMNS: HeroTile[][] = [
   [{ s: 4, h: 'h-[30vh]' }, { s: 9, h: 'h-[44vh]' }, { s: 14, h: 'h-[26vh]' }],
   [
-    { s: 21, h: 'h-[42vh]', photo: 'night-ceremony-kiss', pos: '40% 35%' },
-    { s: 6, h: 'h-[30vh]', photo: 'church-exit-applause', pos: '50% 45%' },
-    { s: 31, h: 'h-[28vh]', photo: 'couple-on-stairs', pos: '45% 35%' },
+    { s: 21, h: 'h-[42vh]', photo: 'sunset-kiss-backlit', pos: '48% 30%' },
+    { s: 6, h: 'h-[30vh]', photo: 'ceremony-kiss-oak-tree', pos: '46% 40%' },
+    { s: 31, h: 'h-[28vh]', photo: 'forest-ceremony-floral-arches', pos: '52% 55%' },
   ],
   [
-    { s: 12, h: 'h-[26vh]', photo: 'camera-gimbal-wedding', pos: '45% 50%' },
-    { s: 2, h: 'h-[46vh]', photo: 'aerial-couple-on-grass', pos: '55% 50%' },
-    { s: 27, h: 'h-[28vh]', photo: 'aerial-reception-tables', pos: '50% 50%' },
+    { s: 12, h: 'h-[26vh]', photo: 'golden-hour-embrace', pos: '55% 30%' },
+    { s: 2, h: 'h-[46vh]', photo: 'aerial-circle-ceremony', pos: '52% 50%' },
+    { s: 27, h: 'h-[28vh]', photo: 'reception-family-string-lights', pos: '50% 35%' },
   ],
   [
     { s: 18, h: 'h-[34vh]', photo: 'dj-riley-shooting', pos: '46% 40%' },
