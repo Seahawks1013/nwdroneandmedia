@@ -8,12 +8,13 @@ import { join } from 'node:path';
 const src = process.argv[2];
 if (!src) throw new Error('Pass the folder that contains the source photos.');
 
-// source file -> output name (or [name, quality] for photos that need stronger compression)
+// source file -> output name, or [name, quality, blur] for photos that need stronger
+// compression (a light blur removes film grain; invisible behind the dark overlay)
 const MAP = {
   // DJ's wedding work
   '31.jpg': 'sunset-kiss-backlit',
   '32.jpg': 'golden-hour-embrace',
-  '33.jpg': 'ceremony-kiss-oak-tree',
+  '33.jpg': ['ceremony-kiss-oak-tree', 60, 0.6], // grainy foliage; was 137KB
   '34.jpg': 'reception-family-string-lights',
   '35.jpg': ['aerial-circle-ceremony', 62], // drone shot; grass compresses poorly
   '36.jpg': 'forest-ceremony-floral-arches',
@@ -38,11 +39,13 @@ const OUT = 'public/images/hero';
 mkdirSync(OUT, { recursive: true });
 
 for (const [file, entry] of Object.entries(MAP)) {
-  const [name, quality] = Array.isArray(entry) ? entry : [entry, 72];
+  const [name, quality, blur] = Array.isArray(entry) ? entry : [entry, 72];
   const input = file.startsWith('../') ? file.replace(/^(\.\.\/)+/, '') : join(src, file);
   for (const width of [640, 1200]) {
     const out = `${OUT}/${name}-${width}.webp`;
-    await sharp(input).rotate().resize({ width, withoutEnlargement: true }).webp({ quality, effort: 6 }).toFile(out);
+    let img = sharp(input).rotate().resize({ width, withoutEnlargement: true });
+    if (blur) img = img.blur(blur);
+    await img.webp({ quality, effort: 6 }).toFile(out);
     console.log(out, Math.round(statSync(out).size / 1024) + 'KB');
   }
 }

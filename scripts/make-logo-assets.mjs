@@ -41,23 +41,27 @@ const WORD = crop(184, 663, 1099, 789);
 const FULL = crop(184, 222, 1099, 789);
 
 const png = (s) => s.png({ compressionLevel: 9 });
+// Site logos ship as WebP (transparent, ~70% smaller than PNG), sized ~2x their largest
+// on-screen size. Icons below stay PNG: browsers and iOS require PNG there.
+const webp = (s, width) => s.resize({ width }).webp({ quality: 80, alphaQuality: 75, effort: 6 });
 
 // 1) Full stacked logo (footer).
-await png(transparent().extract(FULL)).toFile(`${OUT}/logo-full.png`);
-// 2) Diamond mark only (header on small phones).
-await png(transparent().extract(MARK)).toFile(`${OUT}/logo-mark.png`);
+await webp(transparent().extract(FULL), 480).toFile(`${OUT}/logo-full.webp`); // shown 200px wide
+// 2) Diamond mark only (header on small phones, shown 36px tall).
+await webp(transparent().extract(MARK), 160).toFile(`${OUT}/logo-mark.webp`);
 // 3) Horizontal lockup: mark beside the wordmark (header).
 const wordBuf = await png(transparent().extract(WORD)).toBuffer();
 const markH = Math.round(WORD.height * 1.25);
 const markBuf = await png(transparent().extract(MARK).resize({ height: markH })).toBuffer();
 const markW = (await sharp(markBuf).metadata()).width;
 const gap = 40;
-await png(
+const horizontal = await png(
   sharp({ create: { width: markW + gap + WORD.width, height: markH, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite([
     { input: markBuf, left: 0, top: 0 },
     { input: wordBuf, left: markW + gap, top: Math.round((markH - WORD.height) / 2) },
   ]),
-).toFile(`${OUT}/logo-horizontal.png`);
+).toBuffer();
+await webp(sharp(horizontal), 720).toFile(`${OUT}/logo-horizontal.webp`); // shown up to ~320px wide
 
 // 4) Favicons and app icons: gold mark on the site's dark spruce, rounded.
 const spruce = { r: 14, g: 22, b: 19, alpha: 1 };
@@ -81,10 +85,10 @@ const fade = Buffer.from(`<svg width="1200" height="630"><defs><linearGradient i
 </linearGradient></defs><rect width="1200" height="630" fill="url(#g)"/></svg>`);
 const ogLogo = await png(transparent().extract(FULL).resize({ width: 480 })).toBuffer();
 const ogLogoH = (await sharp(ogLogo).metadata()).height;
-await sharp('public/images/about/dj-riley-portrait.jpg')
+await sharp('public/images/about/dj-riley-portrait.webp')
   .resize(1200, 630, { fit: 'cover', position: 'right' })
   .composite([{ input: fade }, { input: ogLogo, left: 70, top: Math.round((630 - ogLogoH) / 2) }])
   .jpeg({ quality: 82, mozjpeg: true })
   .toFile('public/og-default.jpg');
 
-console.log('gold', gold, 'bg', bg, '→ wrote logo-full, logo-mark, logo-horizontal, favicons, og-default.jpg');
+console.log('gold', gold, 'bg', bg, '→ wrote logo-full/mark/horizontal.webp, favicons, og-default.jpg');

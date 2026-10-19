@@ -1,5 +1,5 @@
 ---
-// Brand logo (gold, transparent PNGs built from brand/logo-original.jpg by
+// Brand logo (gold, transparent WebPs built from brand/logo-original.jpg by
 // scripts/make-logo-assets.mjs). Only use on dark backgrounds: the gold has too
 // little contrast on the light fog/cream sections.
 //
@@ -16,11 +16,11 @@ const name = 'Northwest Drone and Media';
   {
     variant === 'header' ? (
       <picture>
-        <source media="(min-width: 480px)" srcset="/images/brand/logo-horizontal.png" width="1142" height="178" />
+        <source media="(min-width: 480px)" srcset="/images/brand/logo-horizontal.webp" width="720" height="112" />
         <img
-          src="/images/brand/logo-mark.png"
-          width="378"
-          height="393"
+          src="/images/brand/logo-mark.webp"
+          width="160"
+          height="166"
           alt={name}
           class="h-[36px] w-auto min-[480px]:h-[30px] sm:h-[38px] lg:h-[50px]"
           decoding="async"
@@ -28,7 +28,7 @@ const name = 'Northwest Drone and Media';
         />
       </picture>
     ) : (
-      <img src="/images/brand/logo-full.png" width="931" height="583" alt={name} class="h-auto w-[200px]" loading="lazy" decoding="async" />
+      <img src="/images/brand/logo-full.webp" width="480" height="301" alt={name} class="h-auto w-[200px]" loading="lazy" decoding="async" />
     )
   }
 </a>
