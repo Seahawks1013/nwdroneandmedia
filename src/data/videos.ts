@@ -30,4 +30,5 @@ export const VIDEOS: Video[] = [
   { id: 'oSLn_6LOOjE', title: 'Port of Woodland', subtitle: 'End of Summer Social', category: 'events', featured: true },
   { id: 'FCHUmoTD9RE', title: 'Port of Woodland', subtitle: 'End of Summer Social · vertical cut', category: 'events', vertical: true },
   { id: 'cHxO-4dL3to', title: 'Beaver Strength - Midnight Lift', subtitle: '', category: 'events' },
+  { id: 'k3a9QG_sTjc', title: 'North Cedar Car and Air Show', subtitle: '', category: 'events' },
 ];
