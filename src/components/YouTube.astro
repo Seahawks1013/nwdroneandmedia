@@ -34,7 +34,7 @@ const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
       'click',
       () => {
         const frame = document.createElement('iframe');
-        frame.src = `https://www.youtube-nocookie.com/embed/${el.dataset.yt}?autoplay=1&rel=0&modestbranding=1`;
+        frame.src = `https://www.youtube-nocookie.com/embed/${el.dataset.yt}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
         frame.title = el.dataset.title ?? 'YouTube video';
         frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         frame.allowFullscreen = true;

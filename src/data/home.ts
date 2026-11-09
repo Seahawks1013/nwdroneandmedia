@@ -76,10 +76,13 @@ export const STEPS = [
   ['Your film', 'Edited films delivered digitally — horizontal, vertical, or both — yours to download and keep.'],
 ];
 
-// Real client reviews. The "What couples say" section on the home page only
-// appears once this list has entries. Format:
-// { q: 'Quote text', n: 'Jake & Kenna', l: 'Woodland, WA', i: 'JK' },
-export const REVIEWS: { q: string; n: string; l: string; i: string }[] = [];
+// Client testimonials, shown one at a time with arrows on the home page.
+// To add one, copy a line: q = the quote, n = who said it, l = optional detail
+// (e.g. 'Wedding · Woodland, WA'). The section hides itself if this list is empty.
+export const REVIEWS: { q: string; n: string; l?: string }[] = [
+  { q: 'Huge thank you to @nwdroneandmedia for this amazing video and capturing our day so beautifully.', n: 'Mr. & Mrs. DeVore-Wright', l: 'Wedding' },
+  { q: 'Extremely talented and was able to fit within our timeline. Highly recommend.', n: 'Caleb O.' },
+];
 
 export const FAQ = [
   ['Can you fly a drone at our venue?', "Usually. We're FAA Part 107 licensed and insured. Venues near PDX and other airports sit in controlled airspace, so we file for authorization ahead of the date. National parks and some state parks don't allow drones at all — we check your location before you book."],

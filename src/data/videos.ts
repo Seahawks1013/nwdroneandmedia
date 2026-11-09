@@ -1,5 +1,7 @@
 // YouTube videos shown on the site. To add one, copy an entry and paste the
 // video ID (the part after "watch?v=" or "shorts/").
+// On the Portfolio page, a category with 2+ horizontal videos becomes a slider
+// with left/right arrows, in the order listed here.
 
 export type Category = 'weddings' | 'events' | 'drone';
 
@@ -27,6 +29,7 @@ export const CATEGORIES: { id: Category; label: string; intro: string; cover?: {
 
 export const VIDEOS: Video[] = [
   { id: '8jsxHXfgNUU', title: "Jake & Kenna's Wedding", subtitle: 'Wedding trailer', category: 'weddings', featured: true },
+  { id: 'b5m7l4K21Jw', title: "Jonathan & Hillary's Wedding", subtitle: 'Wedding film', category: 'weddings' },
   { id: 'oSLn_6LOOjE', title: 'Port of Woodland', subtitle: 'End of Summer Social', category: 'events', featured: true },
   { id: 'FCHUmoTD9RE', title: 'Port of Woodland', subtitle: 'End of Summer Social · vertical cut', category: 'events', vertical: true },
   { id: 'cHxO-4dL3to', title: 'Beaver Strength - Midnight Lift', subtitle: '', category: 'events' },

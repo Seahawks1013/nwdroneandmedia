@@ -76,17 +76,54 @@ const photos = [PHOTOS.portrait, PHOTOS.shooting, PHOTOS.packing, PHOTOS.smiling
               </div>
             ) : (
               <div class:list={['mt-12 grid gap-8', c.tall.length > 0 && 'lg:grid-cols-[minmax(0,1fr)_300px]']}>
-                <div class="grid gap-8">
-                  {c.wide.map((v) => (
-                    <figure>
-                      <YouTube id={v.id} title={v.subtitle ? `${v.title} — ${v.subtitle}` : v.title} />
-                      <figcaption class="mt-3 flex items-baseline justify-between gap-4">
-                        <span class="text-[0.9375rem] font-medium">{v.title}</span>
-                        <span class="text-[0.8125rem] font-medium text-inkk/70">{v.subtitle}</span>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                {c.wide.length > 1 ? (
+                  <div class="relative min-w-0" data-video-slider>
+                    <div
+                      class="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                      data-video-track
+                      role="region"
+                      aria-label={`${c.label} videos`}
+                    >
+                      {c.wide.map((v, n) => (
+                        <figure class="w-full shrink-0 snap-center" aria-label={`Video ${n + 1} of ${c.wide.length}`}>
+                          <YouTube id={v.id} title={v.subtitle ? `${v.title} — ${v.subtitle}` : v.title} />
+                          <figcaption class="mt-3 flex items-baseline justify-between gap-4">
+                            <span class="text-[0.9375rem] font-medium">{v.title}</span>
+                            <span class="text-[0.8125rem] font-medium text-inkk/70">{v.subtitle}</span>
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                    {[-1, 1].map((dir) => (
+                      <button
+                        type="button"
+                        data-video-step={dir}
+                        aria-label={dir === -1 ? 'Previous video' : 'Next video'}
+                        class:list={[
+                          'absolute top-[calc(50%-1.25rem)] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-fog text-inkk shadow-[0_6px_24px_rgba(0,0,0,.35)] ring-2 ring-white/70 transition hover:scale-105 hover:bg-brass sm:h-14 sm:w-14',
+                          dir === -1 ? 'left-3 sm:left-5' : 'right-3 sm:right-5',
+                        ]}
+                      >
+                        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-none stroke-current" stroke-width="2" aria-hidden="true"><path d={dir === -1 ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'} /></svg>
+                      </button>
+                    ))}
+                    <p class="mt-4 text-center text-[0.8125rem] font-medium tabular-nums text-inkk/70" aria-live="polite">
+                      <span data-video-index>1</span> / {c.wide.length}
+                    </p>
+                  </div>
+                ) : (
+                  <div class="grid gap-8">
+                    {c.wide.map((v) => (
+                      <figure>
+                        <YouTube id={v.id} title={v.subtitle ? `${v.title} — ${v.subtitle}` : v.title} />
+                        <figcaption class="mt-3 flex items-baseline justify-between gap-4">
+                          <span class="text-[0.9375rem] font-medium">{v.title}</span>
+                          <span class="text-[0.8125rem] font-medium text-inkk/70">{v.subtitle}</span>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
                 {c.tall.length > 0 && (
                   <div class="grid content-start gap-8 sm:grid-cols-2 lg:grid-cols-1">
                     {c.tall.map((v) => (
@@ -133,3 +170,38 @@ const photos = [PHOTOS.portrait, PHOTOS.shooting, PHOTOS.packing, PHOTOS.smiling
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Video sliders: arrows step one video (looping); swiping works too. A playing video
+  // is paused when you slide away from it.
+  document.querySelectorAll<HTMLElement>('[data-video-slider]').forEach((slider) => {
+    const track = slider.querySelector<HTMLElement>('[data-video-track]')!;
+    const slides = [...track.children] as HTMLElement[];
+    const index = slider.querySelector('[data-video-index]')!;
+    let i = 0;
+    const show = (n: number) => {
+      i = n;
+      index.textContent = String(i + 1);
+      // Pause any video that's no longer on screen.
+      slides.forEach((slide, k) => {
+        if (k !== i) slide.querySelector('iframe')?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      });
+    };
+    slider.querySelectorAll<HTMLButtonElement>('[data-video-step]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        // Wraps around: next on the last video goes back to the first.
+        show((i + Number(btn.dataset.videoStep) + slides.length) % slides.length);
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      }),
+    );
+    // Swiping on touch screens: pick up the new position once scrolling settles.
+    let t: number | undefined;
+    track.addEventListener('scroll', () => {
+      clearTimeout(t);
+      t = window.setTimeout(() => {
+        const n = Math.round(track.scrollLeft / track.clientWidth);
+        if (n !== i) show(n);
+      }, 120);
+    });
+  });
+</script>

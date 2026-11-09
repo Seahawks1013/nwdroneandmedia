@@ -22,7 +22,7 @@ export const SITE = {
   // When set, the Contact page shows a "Book a call" section with the calendar.
   calendly: 'https://calendly.com/northwestdroneandmedia/30min',
   social: {
-    youtube: 'https://www.youtube.com/@davidriley-u9u',
+    youtube: 'https://www.youtube.com/@NWDroneandmedia',
     instagram: 'https://www.instagram.com/nwdroneandmedia',
   },
 };
